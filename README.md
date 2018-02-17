@@ -9,7 +9,7 @@ Nexus minimal is an implementation of nexus repo in golang. Decision to implemen
 ## How to use it ?
 
 ```
-docker run -d atsman/nexus-minimal -p 8080:8080
+docker run -d -v /etc/nexus-minimal:/etc/nexus-minimal -p 8080:8080 astma/nexus-minimal
 ```
 
 ## Configuration 
