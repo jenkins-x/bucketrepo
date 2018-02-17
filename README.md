@@ -1,6 +1,6 @@
 [![MIT License][license-image]][license-url]
 [![Build Status](https://travis-ci.org/Atsman/nexus-minimal.svg?branch=master)](https://travis-ci.org/Atsman/nexus-minimal)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Atsman/nexus-minimal)]
+[![Go Report Card](https://goreportcard.com/badge/github.com/Atsman/nexus-minimal)](https://goreportcard.com/report/github.com/Atsman/nexus-minimal)
 
 # Nexus Minimal (aka Lil Nexus)
 
