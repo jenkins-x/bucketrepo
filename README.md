@@ -14,6 +14,8 @@ docker run -d -v /etc/nexus-minimal:/etc/nexus-minimal -p 8080:8080 astma/nexus-
 
 ## Configuration 
 
+Create config.yml in /etc/nexus-minimal or in the same directory where you run binary.
+
 For s3:
 ```yml
 ---
