@@ -8,5 +8,5 @@ run:
 	./out/nexus-minimal
 
 registry:
-	docker build . -t atsma/nexus-minimal
-	docker push astma/nexus-minimal
+	docker build . -t astma/nexus-minimal:latest
+	docker push astma/nexus-minimal:latest
