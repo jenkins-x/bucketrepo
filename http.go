@@ -30,8 +30,9 @@ func InitHttp(controller *FileController) {
 	router.PUT("/*filepath", BasicAuth(controller.PutFile, username, password))
 
 	httpAddr := viper.GetString("http.addr")
+	isHttps := viper.GetBool("http.https")
 	log.Infof("Start http server on %s", httpAddr)
-	if httpAddr == ":443" {
+	if isHttps {
 		crt := viper.GetString("http.crt")
 		key := viper.GetString("http.key")
 		log.Fatal(http.ListenAndServeTLS(httpAddr, crt, key, router))
