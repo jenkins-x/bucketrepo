@@ -20,9 +20,12 @@ For s3:
 ```yml
 ---
 http:
-  addr: ":8080"
+  addr: ":443"
   username: "myuser"
   password: "mypassword"
+  https: true
+  crt: "/certs/domain.crt"
+  key: "/certs/domain.key"
 
 storage:
   type: "s3"
