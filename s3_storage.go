@@ -41,7 +41,7 @@ func NewS3Storage(bucket, accessKey, secretKey string) *S3Storage {
 func (s *S3Storage) ReadFile(path string) (io.ReadCloser, error) {
 	ctx := context.Background()
 	result, err := s.S3Client.GetObjectWithContext(ctx, &s3.GetObjectInput{
-		Bucket: aws.String("futurum-test"),
+		Bucket: aws.String(s.Bucket),
 		Key:    aws.String(path),
 	})
 	if err != nil {
@@ -52,7 +52,7 @@ func (s *S3Storage) ReadFile(path string) (io.ReadCloser, error) {
 
 func (s *S3Storage) WriteFile(path string, file io.ReadCloser) error {
 	upParams := &s3manager.UploadInput{
-		Bucket: aws.String("futurum-test"),
+		Bucket: aws.String(s.Bucket),
 		Key:    aws.String(path),
 		Body:   file,
 	}
