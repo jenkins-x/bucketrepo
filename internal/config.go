@@ -10,6 +10,7 @@ func initConfig() {
 	viper.AddConfigPath("/etc/nexus-minimal/")
 	viper.AddConfigPath("$HOME/.nexus-minimal")
 	viper.AddConfigPath(".")
+	viper.AddConfigPath("./config")
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.Warn("error during reading config file")
