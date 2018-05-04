@@ -5,14 +5,13 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	log "github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 )
 
-func BasicAuth(h httprouter.Handle, requiredUser, requiredPassword string) httprouter.Handle {
+func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		user, password, hasAuth := r.BasicAuth()
 
-		if hasAuth && user == requiredUser && password == requiredPassword {
+		if hasAuth && user == config.Username && password == config.Password {
 			h(w, r, ps)
 		} else {
 			w.Header().Set("WWW-Authenticate", "Basic realm=Restricted")
@@ -21,22 +20,15 @@ func BasicAuth(h httprouter.Handle, requiredUser, requiredPassword string) httpr
 	}
 }
 
-func InitHttp(controller *FileController) {
-	username := viper.GetString("http.username")
-	password := viper.GetString("http.password")
-
+func InitHttp(config HttpConfig, controller *FileController) {
 	router := httprouter.New()
-	router.GET("/*filepath", BasicAuth(controller.GetFile, username, password))
-	router.PUT("/*filepath", BasicAuth(controller.PutFile, username, password))
+	router.GET("/*filepath", BasicAuth(controller.GetFile, config))
+	router.PUT("/*filepath", BasicAuth(controller.PutFile, config))
 
-	httpAddr := viper.GetString("http.addr")
-	isHttps := viper.GetBool("http.https")
-	log.Infof("Start http server on %s", httpAddr)
-	if isHttps {
-		crt := viper.GetString("http.crt")
-		key := viper.GetString("http.key")
-		log.Fatal(http.ListenAndServeTLS(httpAddr, crt, key, router))
+	log.Infof("Start http server on %s", config.Address)
+	if config.HTTPS {
+		log.Fatal(http.ListenAndServeTLS(config.Address, config.Certificate, config.Key, router))
 		return
 	}
-	log.Fatal(http.ListenAndServe(httpAddr, router))
+	log.Fatal(http.ListenAndServe(config.Address, router))
 }

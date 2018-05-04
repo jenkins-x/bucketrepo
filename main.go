@@ -1,16 +1,11 @@
 package main
 
-import (
-	"github.com/spf13/viper"
-)
-
 func main() {
-	InitConfig()
 	InitLogger()
+	config := NewConfig()
 
-	storageType := viper.GetString("storage.type")
-	storage := NewStorage(storageType)
+	storage := NewStorage(config.Storage)
 	controller := NewFileController(storage)
 
-	InitHttp(controller)
+	InitHttp(config.HTTP, controller)
 }

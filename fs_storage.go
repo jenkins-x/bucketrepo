@@ -8,25 +8,22 @@ import (
 )
 
 type FileSystemStorage struct {
-	BaseDir string
+	Config StorageConfig
 }
 
-func NewFileSystemStorage(baseDir string) *FileSystemStorage {
-	if baseDir == "" {
-		baseDir = "./.nexus"
-	}
+func NewFileSystemStorage(config StorageConfig) *FileSystemStorage {
 	return &FileSystemStorage{
-		BaseDir: baseDir,
+		Config: config,
 	}
 }
 
 func (fs *FileSystemStorage) ReadFile(path string) (io.ReadCloser, error) {
-	fullPath := resolvePath(fs.BaseDir, path)
+	fullPath := resolvePath(fs.Config.BaseDir, path)
 	return os.Open(fullPath)
 }
 
 func (fs *FileSystemStorage) WriteFile(path string, file io.ReadCloser) error {
-	fullPath := resolvePath(fs.BaseDir, path)
+	fullPath := resolvePath(fs.Config.BaseDir, path)
 	directoryPath, _ := parseFilepath(fullPath)
 	os.MkdirAll(directoryPath, os.ModePerm)
 	outFile, err := os.Create(fullPath)

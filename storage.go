@@ -2,8 +2,6 @@ package main
 
 import (
 	"io"
-
-	"github.com/spf13/viper"
 )
 
 type Storage interface {
@@ -11,16 +9,12 @@ type Storage interface {
 	WriteFile(path string, file io.ReadCloser) error
 }
 
-func NewStorage(storageType string) Storage {
-	switch storageType {
+func NewStorage(config StorageConfig) Storage {
+	switch config.Type {
 	case "s3":
-		bucket := viper.GetString("storage.bucket")
-		accessKey := viper.GetString("storage.access_key")
-		secretKey := viper.GetString("storage.secret_key")
-		return NewS3Storage(bucket, accessKey, secretKey)
+		return NewS3Storage(config)
 	case "fs":
-		baseDir := viper.GetString("storage.base_dir")
-		return NewFileSystemStorage(baseDir)
+		return NewFileSystemStorage(config)
 	default:
 		panic("Unknown storage type")
 	}
