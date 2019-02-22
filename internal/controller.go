@@ -51,3 +51,6 @@ func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps h
 	}
 	w.WriteHeader(200)
 }
+
+func (ctrl *FileController) DownloadFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+}

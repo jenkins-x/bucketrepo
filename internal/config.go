@@ -13,7 +13,7 @@ func initConfig() {
 	viper.AddConfigPath("./config")
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Warn("error during reading config file")
+		log.WithError(err).Warn("Reading config file")
 	}
 }
 
