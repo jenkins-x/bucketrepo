@@ -13,3 +13,4 @@
 out/
 config.yml
 vendor/
+bin/
