@@ -20,10 +20,21 @@ func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 	}
 }
 
+func NoAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		h(w, r, ps)
+	}
+}
+
 func InitHttp(config HttpConfig, controller *FileController) {
 	router := httprouter.New()
-	router.GET("/deploy/*filepath", BasicAuth(controller.GetFile, config))
-	router.PUT("/deploy/*filepath", BasicAuth(controller.PutFile, config))
+	// Enable basic auth only for https
+	auth := NoAuth
+	if config.HTTPS {
+		auth = BasicAuth
+	}
+	router.GET("/deploy/*filepath", auth(controller.GetFile, config))
+	router.PUT("/deploy/*filepath", auth(controller.PutFile, config))
 	router.GET("/mirror/*filepath", controller.DownloadFile)
 
 	log.Infof("Start http server on %s", config.Address)
