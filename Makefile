@@ -29,7 +29,7 @@ fmt:
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
 clean:
-	rm -rf build release $(VENDOR_DIR)
+	rm -rf bin release $(VENDOR_DIR)
 
 GOLINT := $(GOPATH)/bin/golint
 $(GOLINT):
