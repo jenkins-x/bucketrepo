@@ -5,7 +5,9 @@ func main() {
 	config := NewConfig()
 
 	storage := NewStorage(config.Storage)
-	controller := NewFileController(storage)
+	repository := NewRepository(config.Repository)
+
+	controller := NewFileController(storage, repository)
 
 	InitHttp(config.HTTP, controller)
 }

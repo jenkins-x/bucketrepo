@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -36,9 +38,15 @@ type StorageConfig struct {
 	BaseDir string
 }
 
+type RepositoryConfig struct {
+	URL     string
+	Timeout time.Duration
+}
+
 type Config struct {
-	HTTP    HttpConfig
-	Storage StorageConfig
+	HTTP       HttpConfig
+	Storage    StorageConfig
+	Repository RepositoryConfig
 }
 
 func NewConfig() Config {
@@ -60,6 +68,15 @@ func NewConfig() Config {
 	config.Storage.BaseDir = viper.GetString("storage.base_dir")
 	if config.Storage.BaseDir == "" {
 		config.Storage.BaseDir = "./.nexus"
+	}
+
+	config.Repository.URL = viper.GetString("repository.url")
+	if config.Repository.URL == "" {
+		config.Repository.URL = "https://repo1.maven.org/maven2"
+	}
+	config.Repository.Timeout = viper.GetDuration("repository.timeout")
+	if config.Repository.Timeout == 0 {
+		config.Repository.Timeout = 1 * time.Minute
 	}
 
 	return config
