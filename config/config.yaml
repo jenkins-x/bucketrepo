@@ -1,0 +1,6 @@
+http:
+    addr: ":8080"
+
+storage:
+    type: "fs"
+    base_dir: "/tmp/nexus-minimal"
