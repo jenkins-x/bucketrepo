@@ -1,12 +1,30 @@
 package main
 
+import (
+	"flag"
+	"fmt"
+	"os"
+)
+
+type flags struct {
+	LogLevel string
+}
+
 func main() {
-	InitLogger()
+	flags := flags{}
+	flag.StringVar(&flags.LogLevel, "log-level", "warning", "Defines the logs level (debug, info, warning, error, fatal, panic)")
+	flag.Parse()
+
+	err := InitLogger(flags.LogLevel)
+	if err != nil {
+		fmt.Printf("Invalid log-level option: %s", err)
+		os.Exit(2)
+	}
+
 	config := NewConfig()
 
 	storage := NewStorage(config.Storage)
 	repository := NewRepository(config.Repository)
-
 	controller := NewFileController(storage, repository)
 
 	InitHttp(config.HTTP, controller)
