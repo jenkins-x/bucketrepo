@@ -3,7 +3,7 @@ kind: Config
 build:
   tagPolicy:
     envTemplate:
-      template: "{{.DOCKER_REGISTRY}}/jenkinsxio/nexus-minimal:{{.VERSION}}"
+      template: "{{.DOCKER_REGISTRY}}/jenkinsxio/bucketrepo:{{.VERSION}}"
   artifacts:
   - imageName: changeme
     workspace: .
@@ -17,7 +17,7 @@ profiles:
   build:
     tagPolicy:
       envTemplate:
-        template: "{{.DOCKER_REGISTRY}}/jenkinsxio/nexus-minimal:{{.VERSION}}"
+        template: "{{.DOCKER_REGISTRY}}/jenkinsxio/bucketrepo:{{.VERSION}}"
     artifacts:
     - docker: {}
     local: {}

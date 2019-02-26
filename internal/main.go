@@ -7,21 +7,23 @@ import (
 )
 
 type flags struct {
-	LogLevel string
+	logLevel   string
+	configPath string
 }
 
 func main() {
 	flags := flags{}
-	flag.StringVar(&flags.LogLevel, "log-level", "warning", "Defines the logs level (debug, info, warning, error, fatal, panic)")
+	flag.StringVar(&flags.logLevel, "log-level", "warning", "Defines the logs level (debug, info, warning, error, fatal, panic)")
+	flag.StringVar(&flags.configPath, "config-path", ".", "Define the absolute path to the config.yaml file")
 	flag.Parse()
 
-	err := InitLogger(flags.LogLevel)
+	err := InitLogger(flags.logLevel)
 	if err != nil {
 		fmt.Printf("Invalid log-level option: %s", err)
 		os.Exit(2)
 	}
 
-	config := NewConfig()
+	config := NewConfig(flags.configPath)
 
 	storage := NewStorage(config.Storage)
 	cache := NewFileSystemStorage(config.Cache)

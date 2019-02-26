@@ -1,4 +1,4 @@
-module github.com/atsman/nexus-minimal
+module github.com/jenkins-x/bucketrepo
 
 require (
 	github.com/aws/aws-sdk-go v1.16.23

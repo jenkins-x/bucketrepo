@@ -1,5 +1,5 @@
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
-COPY ./config/config.yaml /etc/nexus-minimal/
+COPY ./config/config.yaml /
 COPY ./bin/ /
-ENTRYPOINT ["/nexus-minimal"]
+ENTRYPOINT ["/bucketrepo"]

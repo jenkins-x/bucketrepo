@@ -7,12 +7,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-func initConfig() {
+func initConfig(configPath string) {
 	viper.SetConfigName("config")
-	viper.AddConfigPath("/etc/nexus-minimal/")
-	viper.AddConfigPath("$HOME/.nexus-minimal")
-	viper.AddConfigPath(".")
-	viper.AddConfigPath("./config")
+	viper.AddConfigPath(configPath)
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.WithError(err).Warn("Reading config file")
@@ -56,8 +53,8 @@ type Config struct {
 }
 
 // NewConfig parse the configuration from file and returns a configuration object
-func NewConfig() Config {
-	initConfig()
+func NewConfig(configPath string) Config {
+	initConfig(configPath)
 
 	config := Config{}
 	config.HTTP.Address = viper.GetString("http.addr")
@@ -75,7 +72,7 @@ func NewConfig() Config {
 	}
 	config.Cache.BaseDir = viper.GetString("cache.base_dir")
 	if config.Cache.BaseDir == "" {
-		config.Cache.BaseDir = "./.nexus"
+		config.Cache.BaseDir = "./.bucketrepo"
 	}
 
 	config.Repository.URL = viper.GetString("repository.url")

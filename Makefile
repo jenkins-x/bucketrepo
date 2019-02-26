@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 GO := GO15VENDOREXPERIMENT=1 go
-NAME := nexus-minimal
+NAME := bucketrepo
 OS := $(shell uname)
 MAIN_GO := ./internal
 ROOT_PACKAGE := $(GIT_PROVIDER)/$(ORG)/$(NAME)

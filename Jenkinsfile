@@ -3,7 +3,7 @@ pipeline {
     environment {
       DOCKER_REGISTRY   = 'docker.io'
       ORG               = 'jenkinsxio'
-      APP_NAME          = 'nexus-minimal'
+      APP_NAME          = 'bucketrepo'
       GIT_PROVIDER      = 'github.com'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }
@@ -18,7 +18,7 @@ pipeline {
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
         }
         steps {
-          dir ('/home/jenkins/go/src/github.com/jenkins-x/nexus-minimal') {
+          dir ('/home/jenkins/go/src/github.com/jenkins-x/bucketrepo') {
             checkout scm
             sh "make all"
             sh 'export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml'
@@ -36,8 +36,8 @@ pipeline {
           branch 'master'
         }
         steps {
-          dir ('/home/jenkins/go/src/github.com/jenkins-x/nexus-minimal') {
-            git "https://github.com/jenkins-x/nexus-minimal"
+          dir ('/home/jenkins/go/src/github.com/jenkins-x/bucketrepo') {
+            git "https://github.com/jenkins-x/bucketrepo"
             // ensure we're not on a detached head
             sh "git checkout master"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store

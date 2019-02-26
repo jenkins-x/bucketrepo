@@ -3,10 +3,10 @@ http:
 
 storage:
     enabled: false
-    bucket_url: "gs://mini-nexus"
+    bucket_url: "gs://bucketrepo"
 
 cache:
-    base_dir: "/tmp/nexus-minimal"
+    base_dir: "/tmp/bucketrepo"
 
 repository:
     url: "https://repo1.maven.org/maven2"
