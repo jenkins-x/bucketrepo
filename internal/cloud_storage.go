@@ -30,17 +30,19 @@ func (s *CloudStorage) key(path string) string {
 
 // ReadFile reads a file from the cloud storage
 func (s *CloudStorage) ReadFile(path string) (io.ReadCloser, error) {
-	ctx, _ := context.WithTimeout(context.Background(), s.config.Timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), s.config.Timeout)
+	defer cancel()
 	blob, err := blob.OpenBucket(ctx, s.config.BucketURL)
 	if err != nil {
 		return nil, err
 	}
-	return blob.NewReader(ctx, s.key(path), nil)
+	return blob.NewReader(context.Background(), s.key(path), nil)
 }
 
 // WriteFile writes a file into the cloud cloud storage
 func (s *CloudStorage) WriteFile(path string, file io.ReadCloser) error {
-	ctx, _ := context.WithTimeout(context.Background(), s.config.Timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), s.config.Timeout)
+	defer cancel()
 	blob, err := blob.OpenBucket(ctx, s.config.BucketURL)
 	if err != nil {
 		return err

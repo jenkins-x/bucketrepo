@@ -5,27 +5,23 @@ OS := $(shell uname)
 MAIN_GO := ./internal
 ROOT_PACKAGE := $(GIT_PROVIDER)/$(ORG)/$(NAME)
 GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
-PACKAGE_DIRS := $(shell $(GO) list ./... | grep -v /vendor/)
-PKGS := $(shell go list ./... | grep -v /vendor | grep -v generated)
-PKGS := $(subst  :,_,$(PKGS))
 BUILDFLAGS := ''
 CGO_ENABLED = 0
-VENDOR_DIR=vendor
 
-all: fmt build test 
+all: fmt lint sec  build test 
 
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
 test: 
-	CGO_ENABLED=$(CGO_ENABLED) $(GO) test $(PACKAGE_DIRS) -test.v
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test ./... -test.v
 
 install:
 	GOBIN=${GOPATH}/bin $(GO) install -ldflags $(BUILDFLAGS) $(MAIN_GO)
 
 fmt:
 	@echo "FORMATTING"
-	@FORMATTED=`$(GO) fmt $(PACKAGE_DIRS)`
+	@FORMATTED=`$(GO) fmt ./...`
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
 clean:
@@ -38,9 +34,9 @@ $(GOLINT):
 .PHONY: lint
 lint: $(GOLINT)
 	@echo "VETTING"
-	go vet $(go list ./... | grep -v /vendor/)
+	go vet ./... 
 	@echo "LINTING"
-	$(GOLINT) -set_exit_status $(shell go list ./... | grep -v vendor)
+	$(GOLINT) -set_exit_status ./... 
 
 GOSEC := $(GOPATH)/bin/gosec
 $(GOSEC):
@@ -50,10 +46,6 @@ $(GOSEC):
 sec: $(GOSEC)
 	@echo "SECURITY SCANNING"
 	$(GOSEC) -fmt=csv ./...
-
-codegen:
-	@echo "GENERATING KUBERNETES CRDs"
-	hack/update-codegen.sh
 
 linux:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)

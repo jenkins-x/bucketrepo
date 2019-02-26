@@ -16,8 +16,8 @@ func initConfig(configPath string) {
 	}
 }
 
-// HttpConfig keeps the configuration for HTTP server
-type HttpConfig struct {
+// HTTPConfig keeps the configuration for HTTP server
+type HTTPConfig struct {
 	Address     string
 	HTTPS       bool
 	Certificate string
@@ -46,7 +46,7 @@ type RepositoryConfig struct {
 
 // Config keeps the entire configuration
 type Config struct {
-	HTTP       HttpConfig
+	HTTP       HTTPConfig
 	Storage    StorageConfig
 	Cache      CacheConfig
 	Repository RepositoryConfig

@@ -22,14 +22,17 @@ func NewFileSystemStorage(config CacheConfig) *FileSystemStorage {
 // ReadFile reads a file from the local file system
 func (fs *FileSystemStorage) ReadFile(path string) (io.ReadCloser, error) {
 	fullPath := resolvePath(fs.config.BaseDir, path)
-	return os.Open(fullPath)
+	return os.Open(fullPath) // #nosec
 }
 
 // WriteFile writes a file into the local file system
 func (fs *FileSystemStorage) WriteFile(path string, file io.ReadCloser) error {
 	fullPath := resolvePath(fs.config.BaseDir, path)
 	directoryPath, _ := parseFilepath(fullPath)
-	os.MkdirAll(directoryPath, os.ModePerm)
+	err := os.MkdirAll(directoryPath, 0750)
+	if err != nil {
+		return err
+	}
 	outFile, err := os.Create(fullPath)
 	if err != nil {
 		return err

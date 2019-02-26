@@ -8,7 +8,7 @@ import (
 )
 
 // BasicAuth creates a wrapper for basic authentication
-func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
+func BasicAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		user, password, hasAuth := r.BasicAuth()
 
@@ -22,14 +22,14 @@ func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 }
 
 // NoAuth creates a wrapper without any authentication
-func NoAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
+func NoAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		h(w, r, ps)
 	}
 }
 
-// InitHttp initializes the HTTP server routes
-func InitHttp(config HttpConfig, controller *FileController) {
+// InitHTTP initializes the HTTP server routes
+func InitHTTP(config HTTPConfig, controller *FileController) {
 	router := httprouter.New()
 	// Enable basic auth only for https
 	auth := NoAuth

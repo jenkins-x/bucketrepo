@@ -30,5 +30,5 @@ func main() {
 	repository := NewRepository(config.Repository)
 	controller := NewFileController(cache, storage, repository)
 
-	InitHttp(config.HTTP, controller)
+	InitHTTP(config.HTTP, controller)
 }

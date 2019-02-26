@@ -13,27 +13,27 @@ type Repository interface {
 	DownloadFile(path string) (io.ReadCloser, error)
 }
 
-// HttpRepository HTTP based artifacts repository
-type HttpRepository struct {
+// HTTPRepository HTTP based artifacts repository
+type HTTPRepository struct {
 	client  *http.Client
 	baseURL string
 }
 
-var _ Repository = (*HttpRepository)(nil)
+var _ Repository = (*HTTPRepository)(nil)
 
 // NewRepository creates a new artifacts repository
-func NewRepository(config RepositoryConfig) *HttpRepository {
+func NewRepository(config RepositoryConfig) *HTTPRepository {
 	client := &http.Client{
 		Timeout: config.Timeout,
 	}
-	return &HttpRepository{
+	return &HTTPRepository{
 		client:  client,
 		baseURL: config.URL,
 	}
 }
 
 // DownloadFile retrieves a file form the remote artifacts repository over HTTP
-func (r *HttpRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
+func (r *HTTPRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 	u, err := url.Parse(r.baseURL)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,10 @@ func (r *HttpRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		resp.Body.Close()
+		err := resp.Body.Close()
+		if err != nil {
+			return nil, fmt.Errorf("status: %s, closing body err: %s", resp.Status, err)
+		}
 		return nil, fmt.Errorf("status: %s", resp.Status)
 	}
 	return resp.Body, nil
