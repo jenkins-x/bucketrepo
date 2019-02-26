@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// BasicAuth creates a wrapper for basic authentication
 func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		user, password, hasAuth := r.BasicAuth()
@@ -20,12 +21,14 @@ func BasicAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 	}
 }
 
+// NoAuth creates a wrapper without any authentication
 func NoAuth(h httprouter.Handle, config HttpConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		h(w, r, ps)
 	}
 }
 
+// InitHttp initializes the HTTP server routes
 func InitHttp(config HttpConfig, controller *FileController) {
 	router := httprouter.New()
 	// Enable basic auth only for https
@@ -33,9 +36,8 @@ func InitHttp(config HttpConfig, controller *FileController) {
 	if config.HTTPS {
 		auth = BasicAuth
 	}
-	router.GET("/deploy/*filepath", auth(controller.GetFile, config))
-	router.PUT("/deploy/*filepath", auth(controller.PutFile, config))
-	router.GET("/mirror/*filepath", controller.DownloadFile)
+	router.GET("/*filepath", auth(controller.GetFile, config))
+	router.PUT("/*filepath", auth(controller.PutFile, config))
 
 	log.Infof("Start http server on %s", config.Address)
 	if config.HTTPS {

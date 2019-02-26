@@ -2,5 +2,11 @@ http:
     addr: ":8080"
 
 storage:
-    type: "fs"
+    enabled: false
+    bucket_url: "gs://mini-nexus"
+
+cache:
     base_dir: "/tmp/nexus-minimal"
+
+repository:
+    url: "https://repo1.maven.org/maven2"

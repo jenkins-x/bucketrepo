@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// InitLogger initializes the logger
 func InitLogger(level string) error {
 	logLevel, err := log.ParseLevel(level)
 	if err != nil {

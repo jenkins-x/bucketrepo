@@ -19,6 +19,7 @@ func initConfig() {
 	}
 }
 
+// HttpConfig keeps the configuration for HTTP server
 type HttpConfig struct {
 	Address     string
 	HTTPS       bool
@@ -28,27 +29,33 @@ type HttpConfig struct {
 	Password    string
 }
 
+// StorageConfig keeps configuration for cloud storage backend
 type StorageConfig struct {
-	Type string
+	Enabled   bool
+	BucketURL string
+	Timeout   time.Duration
+}
 
-	Bucket    string
-	AccessKey string
-	SecretKey string
-
+// CacheConfig keeps the configuration for local file system cache
+type CacheConfig struct {
 	BaseDir string
 }
 
+// RepositoryConfig keeps the configuration for remote artifacts repository
 type RepositoryConfig struct {
 	URL     string
 	Timeout time.Duration
 }
 
+// Config keeps the entire configuration
 type Config struct {
 	HTTP       HttpConfig
 	Storage    StorageConfig
+	Cache      CacheConfig
 	Repository RepositoryConfig
 }
 
+// NewConfig parse the configuration from file and returns a configuration object
 func NewConfig() Config {
 	initConfig()
 
@@ -60,14 +67,15 @@ func NewConfig() Config {
 	config.HTTP.Username = viper.GetString("http.username")
 	config.HTTP.Password = viper.GetString("http.password")
 
-	config.Storage.Type = viper.GetString("storage.type")
-	config.Storage.Bucket = viper.GetString("storage.bucket")
-	config.Storage.AccessKey = viper.GetString("storage.access_key")
-	config.Storage.SecretKey = viper.GetString("storage.secret_key")
-
-	config.Storage.BaseDir = viper.GetString("storage.base_dir")
-	if config.Storage.BaseDir == "" {
-		config.Storage.BaseDir = "./.nexus"
+	config.Storage.Enabled = viper.GetBool("storage.enabled")
+	config.Storage.BucketURL = viper.GetString("storage.bucket_url")
+	config.Storage.Timeout = viper.GetDuration("storage.timeout")
+	if config.Storage.Timeout == 0 {
+		config.Storage.Timeout = 5 * time.Minute
+	}
+	config.Cache.BaseDir = viper.GetString("cache.base_dir")
+	if config.Cache.BaseDir == "" {
+		config.Cache.BaseDir = "./.nexus"
 	}
 
 	config.Repository.URL = viper.GetString("repository.url")

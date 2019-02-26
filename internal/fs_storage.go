@@ -7,23 +7,27 @@ import (
 	"strings"
 )
 
+// FileSystemStorage file storage backend
 type FileSystemStorage struct {
-	Config StorageConfig
+	config CacheConfig
 }
 
-func NewFileSystemStorage(config StorageConfig) *FileSystemStorage {
+// NewFileSystemStorage creates a new file system file storage
+func NewFileSystemStorage(config CacheConfig) *FileSystemStorage {
 	return &FileSystemStorage{
-		Config: config,
+		config: config,
 	}
 }
 
+// ReadFile reads a file from the local file system
 func (fs *FileSystemStorage) ReadFile(path string) (io.ReadCloser, error) {
-	fullPath := resolvePath(fs.Config.BaseDir, path)
+	fullPath := resolvePath(fs.config.BaseDir, path)
 	return os.Open(fullPath)
 }
 
+// WriteFile writes a file into the local file system
 func (fs *FileSystemStorage) WriteFile(path string, file io.ReadCloser) error {
-	fullPath := resolvePath(fs.Config.BaseDir, path)
+	fullPath := resolvePath(fs.config.BaseDir, path)
 	directoryPath, _ := parseFilepath(fullPath)
 	os.MkdirAll(directoryPath, os.ModePerm)
 	outFile, err := os.Create(fullPath)

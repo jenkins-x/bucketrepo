@@ -24,8 +24,9 @@ func main() {
 	config := NewConfig()
 
 	storage := NewStorage(config.Storage)
+	cache := NewFileSystemStorage(config.Cache)
 	repository := NewRepository(config.Repository)
-	controller := NewFileController(storage, repository)
+	controller := NewFileController(cache, storage, repository)
 
 	InitHttp(config.HTTP, controller)
 }
