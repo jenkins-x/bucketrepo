@@ -25,7 +25,7 @@ fmt:
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
 clean:
-	rm -rf bin release $(VENDOR_DIR)
+	rm -rf bin release
 
 GOLINT := $(GOPATH)/bin/golint
 $(GOLINT):
@@ -49,4 +49,7 @@ sec: $(GOSEC)
 
 linux:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
+
+docker: linux
+	docker build -t jenkinsxio/bucketrepo:latest .
 
