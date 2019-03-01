@@ -8,5 +8,6 @@ storage:
 cache:
     base_dir: "/tmp/bucketrepo"
 
-repository:
-    url: "https://repo1.maven.org/maven2"
+repositories:
+    - url: "https://repo1.maven.org/maven2"
+    - url: "http://uk.maven.org/maven2/"

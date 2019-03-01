@@ -11,6 +11,7 @@ import (
 // Repository artifacts repository
 type Repository interface {
 	DownloadFile(path string) (io.ReadCloser, error)
+	BaseURL() string
 }
 
 // HTTPRepository HTTP based artifacts repository
@@ -52,4 +53,9 @@ func (r *HTTPRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 		return nil, fmt.Errorf("status: %s", resp.Status)
 	}
 	return resp.Body, nil
+}
+
+// BaseURL returns the base URL of the repository
+func (r *HTTPRepository) BaseURL() string {
+	return r.baseURL
 }

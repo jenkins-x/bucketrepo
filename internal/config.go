@@ -5,6 +5,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	yaml "gopkg.in/yaml.v2"
 )
 
 func initConfig(configPath string) {
@@ -18,70 +19,72 @@ func initConfig(configPath string) {
 
 // HTTPConfig keeps the configuration for HTTP server
 type HTTPConfig struct {
-	Address     string
-	HTTPS       bool
-	Certificate string
-	Key         string
-	Username    string
-	Password    string
+	Address     string `mapstructure:"addr"`
+	HTTPS       bool   `mapstructure:"https"`
+	Certificate string `mapstructure:"crt"`
+	Key         string `mapstructure:"key"`
+	Username    string `mapstructure:"username"`
+	Password    string `mapstructure:"password"`
 }
 
 // StorageConfig keeps configuration for cloud storage backend
 type StorageConfig struct {
-	Enabled   bool
-	BucketURL string
-	Timeout   time.Duration
+	Enabled   bool          `mapstructure:"enabled"`
+	BucketURL string        `mapstructure:"bucket_url"`
+	Timeout   time.Duration `mapstructure:"timeout"`
 }
 
 // CacheConfig keeps the configuration for local file system cache
 type CacheConfig struct {
-	BaseDir string
+	BaseDir string `mapstructure:"base_dir"`
 }
 
 // RepositoryConfig keeps the configuration for remote artifacts repository
 type RepositoryConfig struct {
-	URL     string
-	Timeout time.Duration
+	URL     string        `mapstructure:"url"`
+	Timeout time.Duration `mapstructure:"timeout"`
 }
 
 // Config keeps the entire configuration
 type Config struct {
-	HTTP       HTTPConfig
-	Storage    StorageConfig
-	Cache      CacheConfig
-	Repository RepositoryConfig
+	HTTP         HTTPConfig         `mapstructure:"http"`
+	Storage      StorageConfig      `mapstructure:"storage"`
+	Cache        CacheConfig        `mapstructure:"cache"`
+	Repositories []RepositoryConfig `mapstructure:"repositories"`
 }
 
 // NewConfig parse the configuration from file and returns a configuration object
 func NewConfig(configPath string) Config {
 	initConfig(configPath)
 
-	config := Config{}
-	config.HTTP.Address = viper.GetString("http.addr")
-	config.HTTP.HTTPS = viper.GetBool("http.https")
-	config.HTTP.Certificate = viper.GetString("http.crt")
-	config.HTTP.Key = viper.GetString("http.key")
-	config.HTTP.Username = viper.GetString("http.username")
-	config.HTTP.Password = viper.GetString("http.password")
+	var config Config
+	err := viper.Unmarshal(&config)
+	if err != nil {
+		log.Fatalf("unable determine configuration, %v", err)
+	}
 
-	config.Storage.Enabled = viper.GetBool("storage.enabled")
-	config.Storage.BucketURL = viper.GetString("storage.bucket_url")
-	config.Storage.Timeout = viper.GetDuration("storage.timeout")
 	if config.Storage.Timeout == 0 {
 		config.Storage.Timeout = 5 * time.Minute
 	}
-	config.Cache.BaseDir = viper.GetString("cache.base_dir")
+
 	if config.Cache.BaseDir == "" {
 		config.Cache.BaseDir = "./.bucketrepo"
 	}
 
-	config.Repository.URL = viper.GetString("repository.url")
-	if config.Repository.URL == "" {
-		config.Repository.URL = "https://repo1.maven.org/maven2"
+	if len(config.Repositories) == 0 {
+		config.Repositories = []RepositoryConfig{RepositoryConfig{"https://repo1.maven.org/maven2", 1 * time.Minute}}
 	}
-	config.Repository.Timeout = viper.GetDuration("repository.timeout")
-	if config.Repository.Timeout == 0 {
-		config.Repository.Timeout = 1 * time.Minute
+	for i := range config.Repositories {
+		if config.Repositories[i].Timeout == 0 {
+			config.Repositories[i].Timeout = 1 * time.Minute
+		}
+	}
+
+	if log.IsLevelEnabled(log.InfoLevel) {
+		b, err := yaml.Marshal(config)
+		if err == nil {
+			log.Infof("Configuration: %s", string(b))
+		}
 	}
 
 	return config
