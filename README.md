@@ -34,6 +34,8 @@ The cloud storage can be enabled by providing a bucket URL:
 storage:
     enabled: true
     bucket_url: "gs://mybucket"
+    # if necessary is possible to use Path prefix
+    prefix: "myfolder" 
 ```
 
 Also the TLS and basic authentication can be configured with:
