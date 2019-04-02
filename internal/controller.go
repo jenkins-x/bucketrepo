@@ -82,10 +82,11 @@ func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps h
 }
 
 func (ctrl *FileController) updateCache(filepath string) error {
-	file, err := ctrl.readFileFromCloudStorage(filepath)
+	file, err := ctrl.downloadFile(filepath)
 	updateCloud := false
 	if err != nil {
-		file, err = ctrl.downloadFile(filepath)
+
+		file, err = ctrl.readFileFromCloudStorage(filepath)
 		if err != nil {
 			return err
 		}

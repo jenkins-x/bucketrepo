@@ -30,6 +30,7 @@ type HTTPConfig struct {
 type StorageConfig struct {
 	Enabled   bool
 	BucketURL string
+	Prefix    string
 	Timeout   time.Duration
 }
 
