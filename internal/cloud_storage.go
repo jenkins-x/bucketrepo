@@ -30,7 +30,7 @@ func (s *CloudStorage) key(path string) string {
 
 func (s *CloudStorage) prefix(path string) string {
 	if len(s.config.Prefix) > 0 {
-		path += s.config.Prefix + path
+		path = s.config.Prefix + path
 	}
 	return path
 }
