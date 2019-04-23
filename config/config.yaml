@@ -2,12 +2,11 @@ http:
     addr: ":8080"
 
 storage:
-    enabled: true
-    bucket_url: "s3://private-repository.cuebiq.com/releases/"
-    prefix: "releases"
+    enabled: false
+    bucket_url: "gs://bucketrepo"
 
 cache:
-    base_dir: "/Users/apilo/bucketcb"
+    base_dir: "/tmp/bucketrepo"
 
 repository:
     url: "https://repo1.maven.org/maven2"
