@@ -9,7 +9,7 @@ GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 BUILDFLAGS := ''
 CGO_ENABLED = 0
 
-all: build fmt lint sec test 
+all: build fmt lint test 
 
 .PHONY: build
 build:
