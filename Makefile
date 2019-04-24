@@ -39,10 +39,10 @@ $(GOLINT):
 
 .PHONY: lint
 lint: $(GOLINT)
-	@echo "VETTING"
-	go vet ./... 
 	@echo "LINTING"
 	$(GOLINT) -set_exit_status ./... 
+	@echo "VETTING"
+	$(GO) vet ./... 
 
 GOSEC := $(GOPATH)/bin/gosec
 $(GOSEC):
