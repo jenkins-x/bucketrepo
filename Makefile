@@ -1,5 +1,6 @@
 SHELL := /bin/bash
-GO := GO15VENDOREXPERIMENT=1 go
+GO := GO111MODULE=on go
+GO_NOMOD :=GO111MODULE=off go
 NAME := bucketrepo
 OS := $(shell uname)
 MAIN_GO := ./internal
@@ -29,7 +30,7 @@ clean:
 
 GOLINT := $(GOPATH)/bin/golint
 $(GOLINT):
-	go get -u golang.org/x/lint/golint
+	$(GO_NOMOD) get -u golang.org/x/lint/golint
 
 .PHONY: lint
 lint: $(GOLINT)
@@ -40,7 +41,7 @@ lint: $(GOLINT)
 
 GOSEC := $(GOPATH)/bin/gosec
 $(GOSEC):
-	go get -u github.com/securego/gosec/cmd/gosec/...
+	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec/...
 
 .PHONY: sec
 sec: $(GOSEC)
