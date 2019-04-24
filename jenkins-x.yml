@@ -150,7 +150,7 @@ pipelineConfig:
           - name: BASE_WORKSPACE
             value: /workspace/source
           - name: GOPROXY
-            value: http://jenkins-x-athens-proxy:80
+            value: http://jx-app-athens-athens-proxy
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /builder/home/kaniko-secret.json
           - name: GOPATH
