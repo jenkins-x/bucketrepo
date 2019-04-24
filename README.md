@@ -51,7 +51,6 @@ Note that the basic authentication is turned off when HTTPS is disabled.
 ### Installing
 
 The repository can be started in a docker container:
-
 ```bash
 docker run -v $(pwd)/config:/config -p 8080:8080 jenkinsxio/bucketrepo -config-path=/config
 ```
