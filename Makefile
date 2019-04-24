@@ -8,7 +8,7 @@ GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 BUILDFLAGS := ''
 CGO_ENABLED = 0
 
-all: fmt lint sec build test 
+all: build fmt lint sec test 
 
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
