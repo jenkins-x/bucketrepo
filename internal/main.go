@@ -27,8 +27,11 @@ func main() {
 
 	storage := NewStorage(config.Storage)
 	cache := NewFileSystemStorage(config.Cache)
-	repository := NewRepository(config.Repository)
-	controller := NewFileController(cache, storage, repository)
+	repositories := make([]Repository, len(config.Repositories))
+	for i, r := range config.Repositories {
+		repositories[i] = NewRepository(r)
+	}
+	controller := NewFileController(cache, storage, repositories)
 
 	InitHTTP(config.HTTP, controller)
 }
