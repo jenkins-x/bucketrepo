@@ -11,20 +11,25 @@ CGO_ENABLED = 0
 
 all: build fmt lint sec test 
 
+.PHONY: build
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
+.PHONY: test
 test: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test ./... -test.v
 
+.PHONY: install
 install:
 	GOBIN=${GOPATH}/bin $(GO) install -ldflags $(BUILDFLAGS) $(MAIN_GO)
 
+.PHONY: fmt
 fmt:
 	@echo "FORMATTING"
 	@FORMATTED=`$(GO) fmt ./...`
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
+.PHONY: clean
 clean:
 	rm -rf bin release
 
