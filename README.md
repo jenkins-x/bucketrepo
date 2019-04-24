@@ -71,7 +71,7 @@ bin/bucketrepo -config-path=config -log-level=debug
     <mirror>
       <id>bucketrepo</id>
       <name>bucketrepo- mirror</name>
-      <url>http://localhost:8080/</url>
+      <url>http://localhost:8080/bucketrepo/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
@@ -83,18 +83,18 @@ And as a repository by adding the following in the `pom.xml` file:
 <repositories>
     <repository>
         <id>bucketrepo</id>
-        <url>http://localhost:8080</url>
+        <url>http://localhost:8080/bucketrepo/</url>
     </repository>
 </repositories>
 
 <distributionManagement>
     <snapshotRepository>
         <id>snapshots</id>
-        <url>http://localhost:8080/deploy/maven-snapshots/</url>
+        <url>http://localhost:8080/bucketrepo/deploy/maven-snapshots/</url>
     </snapshotRepository>
     <repository>
         <id>releases</id>
-        <url>http://localhost:8080/deploy/maven-releases/</url>
+        <url>http://localhost:8080/bucketrepo/deploy/maven-releases/</url>
     </repository>
 </distributionManagement>
 ```
