@@ -68,6 +68,7 @@ func NewConfig(configPath string) Config {
 	config.Storage.Enabled = viper.GetBool("storage.enabled")
 	config.Storage.BucketURL = viper.GetString("storage.bucket_url")
 	config.Storage.Timeout = viper.GetDuration("storage.timeout")
+	config.Storage.Prefix = viper.GetString("storage.prefix")
 	if config.Storage.Timeout == 0 {
 		config.Storage.Timeout = 5 * time.Minute
 	}
