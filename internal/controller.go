@@ -50,7 +50,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when serving the file from cache: %s", err)
 		log.Error(msg)
-		fmt.Fprintf(w, msg)
+		fmt.Fprint(w, msg)
 		return
 	}
 }

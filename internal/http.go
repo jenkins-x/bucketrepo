@@ -1,14 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 	log "github.com/sirupsen/logrus"
 )
 
-// BasicAuth creates a wrapper for basic authentication
-func BasicAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
+// basicAuth creates a wrapper for basic authentication
+func basicAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		user, password, hasAuth := r.BasicAuth()
 
@@ -21,23 +22,29 @@ func BasicAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 	}
 }
 
-// NoAuth creates a wrapper without any authentication
-func NoAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
+// noAuth creates a wrapper without any authentication
+func noAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		h(w, r, ps)
 	}
+}
+
+// health handles the health check requests
+func health(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Fprintf(w, "OK")
 }
 
 // InitHTTP initializes the HTTP server routes
 func InitHTTP(config HTTPConfig, controller *FileController) {
 	router := httprouter.New()
 	// Enable basic auth only for https
-	auth := NoAuth
+	auth := noAuth
 	if config.HTTPS {
-		auth = BasicAuth
+		auth = basicAuth
 	}
 	router.GET("/*filepath", auth(controller.GetFile, config))
 	router.PUT("/*filepath", auth(controller.PutFile, config))
+	router.GET("/healthz", health)
 
 	log.Infof("Start http server on %s", config.Address)
 	if config.HTTPS {
