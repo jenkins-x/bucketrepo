@@ -25,7 +25,7 @@ pipelineConfig:
           - name: GOPATH
             value: /workspace/source/go
           - name: GOPROXY
-            value: http://jx-app-athens-athens-proxy
+            value: http://jenkins-x-athens-proxy
           - name: APP_NAME
             value: bucketrepo
           - name: ORG
@@ -150,7 +150,7 @@ pipelineConfig:
           - name: BASE_WORKSPACE
             value: /workspace/source
           - name: GOPROXY
-            value: http://jx-app-athens-athens-proxy
+            value: http://jenkins-x-athens-proxy
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /builder/home/kaniko-secret.json
           - name: GOPATH
