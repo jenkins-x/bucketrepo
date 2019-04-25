@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: jenkinsxio/bucketrepo
-  tag: 0.1.0
+  tag: 0.0.8
   pullPolicy: IfNotPresent
 service:
   name: bucketrepo
@@ -32,3 +32,11 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
+
+config:
+  path: /config 
+  storage:
+    enabled: false 
+    bucketUrl: gs://bucketrepo
+  cache:
+    dir: /tmp/bucketrepo
