@@ -12,4 +12,5 @@ require (
 	gocloud.dev v0.12.0
 	golang.org/x/net v0.0.0-20190424024845-afe8014c977f // indirect
 	golang.org/x/sys v0.0.0-20190422165155-953cdadca894 // indirect
+	gopkg.in/yaml.v2 v2.2.2
 )
