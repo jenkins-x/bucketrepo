@@ -61,7 +61,7 @@ helm repo update
 ```
 You can now install the chart with:
 ```
-helm jenkins-x/bucketrepo bucketrepo
+helm install jenkins-x/bucketrepo --name bucketrepo
 ```
 
 #### Locally
