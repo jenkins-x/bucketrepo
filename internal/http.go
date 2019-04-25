@@ -46,7 +46,7 @@ func InitHTTP(config HTTPConfig, controller *FileController) {
 	router.GET("/bucketrepo/*filepath", auth(controller.GetFile, config))
 	router.PUT("/bucketrepo/*filepath", auth(controller.PutFile, config))
 
-	log.Infof("Start http server on %s", config.Address)
+	log.Infof("Starting http server on %q", config.Address)
 	if config.HTTPS {
 		log.Fatal(http.ListenAndServeTLS(config.Address, config.Certificate, config.Key, router))
 		return
