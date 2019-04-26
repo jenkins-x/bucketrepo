@@ -53,7 +53,7 @@ Note that the basic authentication is turned off when HTTPS is disabled.
 
 #### Kubernetes
 
-The repository service can be installed in a Kubernetes cluster using helm. First, you need to configure the jenkins-x chart repository:
+The repository service can be installed in a Kubernetes cluster using helm. First, you need to add the jenkins-x chart repository to your helm repositories:
 
 ```sh
 helm repo add jenkins-x http://chartmuseum.jenkins-x.io
