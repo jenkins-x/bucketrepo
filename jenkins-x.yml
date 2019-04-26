@@ -28,10 +28,6 @@ pipelineConfig:
             value: http://jenkins-x-athens-proxy
           - name: APP_NAME
             value: bucketrepo
-          - name: ORG
-            value: jenkinsxio
-          - name: DOCKER_REGISTRY
-            value: docker.io
           steps:
           - name: init-helm
             image: alpine/helm:2.12.3
@@ -121,7 +117,7 @@ pipelineConfig:
             command: /kaniko/executor
             args: 
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
-            - --destination= gcr.io/jenkinsxio/bucketrepo:${inputs.params.version} 
+            - --destination=gcr.io/jenkinsxio/bucketrepo:${inputs.params.version} 
             - --context=/workspace/source/go/src/github.com/jenkins-x/bucketrepo
             - --cache-dir=/workspace
 
@@ -157,10 +153,6 @@ pipelineConfig:
             value: /workspace/source/go
           - name: APP_NAME
             value: bucketrepo
-          - name: ORG
-            value: jenkinsxio
-          - name: DOCKER_REGISTRY
-            value: docker.io
           steps:
           - name: init-helm
             image: alpine/helm:2.12.3

@@ -17,6 +17,6 @@ cleanup:
 
 preview:
   image:
-    repository:
+    repo: gcr.io/jenkinsxio/bucketrepo
     tag:
     pullPolicy: IfNotPresent
