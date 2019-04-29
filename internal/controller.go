@@ -14,15 +14,15 @@ import (
 type FileController struct {
 	cache        Storage
 	cloudStorage Storage
-	repository   Repository
+	repositories []Repository
 }
 
 // NewFileController creates a new file controller
-func NewFileController(cache Storage, storage Storage, repository Repository) *FileController {
+func NewFileController(cache Storage, storage Storage, repositories []Repository) *FileController {
 	return &FileController{
 		cache:        cache,
 		cloudStorage: storage,
-		repository:   repository,
+		repositories: repositories,
 	}
 }
 
@@ -50,7 +50,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when serving the file from cache: %s", err)
 		log.Error(msg)
-		fmt.Fprintf(w, msg)
+		fmt.Fprint(w, msg)
 		return
 	}
 }
@@ -157,5 +157,14 @@ func (ctrl *FileController) writeFileToCloudStorage(filepath string, file io.Rea
 
 func (ctrl *FileController) downloadFile(filepath string) (io.ReadCloser, error) {
 	log.Debugf("Read file form repository: %s", filepath)
-	return ctrl.repository.DownloadFile(filepath)
+
+	for _, r := range ctrl.repositories {
+		log.Debugf("Trying to download from repository: %s", r.BaseURL())
+		b, err := r.DownloadFile(filepath)
+		if err == nil {
+			return b, nil
+		}
+	}
+
+	return nil, fmt.Errorf("unable to download %s from any configured repository", filepath)
 }

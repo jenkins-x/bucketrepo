@@ -1,5 +1,6 @@
 SHELL := /bin/bash
-GO := GO15VENDOREXPERIMENT=1 go
+GO := GO111MODULE=on go
+GO_NOMOD :=GO111MODULE=off go
 NAME := bucketrepo
 OS := $(shell uname)
 MAIN_GO := ./internal
@@ -8,39 +9,44 @@ GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 BUILDFLAGS := ''
 CGO_ENABLED = 0
 
-all: fmt lint sec  build test 
+all: build fmt lint test 
 
+.PHONY: build
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
+.PHONY: test
 test: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test ./... -test.v
 
+.PHONY: install
 install:
 	GOBIN=${GOPATH}/bin $(GO) install -ldflags $(BUILDFLAGS) $(MAIN_GO)
 
+.PHONY: fmt
 fmt:
 	@echo "FORMATTING"
 	@FORMATTED=`$(GO) fmt ./...`
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
+.PHONY: clean
 clean:
 	rm -rf bin release
 
 GOLINT := $(GOPATH)/bin/golint
 $(GOLINT):
-	go get -u golang.org/x/lint/golint
+	$(GO_NOMOD) get -u golang.org/x/lint/golint
 
 .PHONY: lint
 lint: $(GOLINT)
-	@echo "VETTING"
-	go vet ./... 
 	@echo "LINTING"
 	$(GOLINT) -set_exit_status ./... 
+	@echo "VETTING"
+	$(GO) vet ./... 
 
 GOSEC := $(GOPATH)/bin/gosec
 $(GOSEC):
-	go get -u github.com/securego/gosec/cmd/gosec/...
+	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec/...
 
 .PHONY: sec
 sec: $(GOSEC)

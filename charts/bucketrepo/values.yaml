@@ -1,0 +1,42 @@
+# Default values for Go projects.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repo: gcr.io/jenkinsxio/bucketrepo
+  tag: 0.1.5
+  pullPolicy: IfNotPresent
+service:
+  name: bucketrepo
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 8080
+  annotations:
+    fabric8.io/expose: "true"
+    fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 80m
+    memory: 128Mi
+probePath: /healthz
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+readinessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+terminationGracePeriodSeconds: 10
+
+config:
+  path: /config 
+  storage:
+    enabled: false 
+    bucketUrl: gs://bucketrepo
+  cache:
+    dir: /tmp/bucketrepo

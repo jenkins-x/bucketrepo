@@ -24,8 +24,9 @@ storage:
 cache:
     base_dir: "/tmp/bucketrepo"
 
-repository:
-    url: "https://repo1.maven.org/maven2"
+repositories:
+    - url: "https://repo1.maven.org/maven2"
+    - url: "http://uk.maven.org/maven2/"
 
 ```
 
@@ -52,10 +53,23 @@ Note that the basic authentication is turned off when HTTPS is disabled.
 
 ### Installing
 
-The repository can be started in a docker container:
+#### Kubernetes
 
+The repository service can be installed in a Kubernetes cluster using helm. First, you need to add the jenkins-x chart repository to your helm repositories:
+
+```sh
+helm repo add jenkins-x http://chartmuseum.jenkins-x.io
+helm repo update
+```
+You can now install the chart with:
+```
+helm install jenkins-x/bucketrepo --name bucketrepo
+```
+
+#### Locally
+The repository can be started in a docker container: 
 ```bash
-docker run -v $(pwd)/config:/config -p 8080:8080 jenkinsxio/bucketrepo -config-path=/config
+docker run -v $(pwd)/config:/config -p 8080:8080 gcr.io/jenkinsxio/bucketrepo:0.1.5 -config-path=/config
 ```
 
 Or it can be built and run with:
@@ -73,7 +87,7 @@ bin/bucketrepo -config-path=config -log-level=debug
     <mirror>
       <id>bucketrepo</id>
       <name>bucketrepo- mirror</name>
-      <url>http://localhost:8080/</url>
+      <url>http://localhost:8080/bucketrepo/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
@@ -85,18 +99,18 @@ And as a repository by adding the following in the `pom.xml` file:
 <repositories>
     <repository>
         <id>bucketrepo</id>
-        <url>http://localhost:8080</url>
+        <url>http://localhost:8080/bucketrepo/</url>
     </repository>
 </repositories>
 
 <distributionManagement>
     <snapshotRepository>
         <id>snapshots</id>
-        <url>http://localhost:8080/deploy/maven-snapshots/</url>
+        <url>http://localhost:8080/bucketrepo/deploy/maven-snapshots/</url>
     </snapshotRepository>
     <repository>
         <id>releases</id>
-        <url>http://localhost:8080/deploy/maven-releases/</url>
+        <url>http://localhost:8080/bucketrepo/deploy/maven-releases/</url>
     </repository>
 </distributionManagement>
 ```
