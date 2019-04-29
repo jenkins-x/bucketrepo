@@ -25,7 +25,14 @@ func NewCloudStorage(config StorageConfig) *CloudStorage {
 
 // key sanitizes the cloud storage key
 func (s *CloudStorage) key(path string) string {
-	return strings.TrimPrefix(path, "/")
+	return strings.TrimPrefix(s.prefix(path), "/")
+}
+
+func (s *CloudStorage) prefix(path string) string {
+	if len(s.config.Prefix) > 0 {
+		path = s.config.Prefix + path
+	}
+	return path
 }
 
 // ReadFile reads a file from the cloud storage

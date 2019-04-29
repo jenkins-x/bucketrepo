@@ -14,3 +14,4 @@ out/
 config.yml
 vendor/
 bin/
+.vscode/

@@ -32,6 +32,7 @@ type StorageConfig struct {
 	Enabled   bool          `mapstructure:"enabled"`
 	BucketURL string        `mapstructure:"bucket_url"`
 	Timeout   time.Duration `mapstructure:"timeout"`
+	Prefix    string        `mapstructure:"prefix"`
 }
 
 // CacheConfig keeps the configuration for local file system cache
