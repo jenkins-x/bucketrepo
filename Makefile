@@ -8,8 +8,9 @@ ROOT_PACKAGE := $(GIT_PROVIDER)/$(ORG)/$(NAME)
 GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 BUILDFLAGS := ''
 CGO_ENABLED = 0
+GOSEC := GO111MODULE=on $(GOPATH)/bin/gosec
 
-all: build fmt lint test 
+all: build fmt lint sec test
 
 .PHONY: build
 build:
@@ -44,12 +45,11 @@ lint: $(GOLINT)
 	@echo "VETTING"
 	$(GO) vet ./... 
 
-GOSEC := $(GOPATH)/bin/gosec
-$(GOSEC):
-	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec/...
+sec_install:
+	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec
 
 .PHONY: sec
-sec: $(GOSEC)
+sec: sec_install
 	@echo "SECURITY SCANNING"
 	$(GOSEC) -fmt=csv ./...
 
