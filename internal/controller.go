@@ -59,7 +59,6 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	filepath := ps.ByName("filepath")
 	log.Debugf("PutFile, filepath: %s\n", filepath)
-
 	err := ctrl.writeFileToCache(filepath, r.Body)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
@@ -85,23 +84,22 @@ func (ctrl *FileController) updateCache(filepath string) error {
 	file, err := ctrl.downloadFile(filepath)
 	updateCloud := false
 	if err != nil {
-
 		file, err = ctrl.readFileFromCloudStorage(filepath)
 		if err != nil {
-			return err
+			return fmt.Errorf("reading file from cloud storage: %v", err)
 		}
 		updateCloud = true
 	}
 	defer file.Close()
 	err = ctrl.writeFileToCache(filepath, file)
 	if err != nil {
-		return err
+		return fmt.Errorf("writing file to cache: %v", err)
 	}
 
 	if updateCloud && ctrl.cloudStorage != nil {
 		file, err := ctrl.cache.ReadFile(filepath)
 		if err != nil {
-			return err
+			return fmt.Errorf("reading file from cache: %v", err)
 		}
 		defer file.Close()
 		err = ctrl.writeFileToCloudStorage(filepath, file)
@@ -116,7 +114,7 @@ func (ctrl *FileController) updateCache(filepath string) error {
 func (ctrl *FileController) updateCloudStorage(filepath string) error {
 	file, err := ctrl.cache.ReadFile(filepath)
 	if err != nil {
-		return err
+		return fmt.Errorf("reading file from cache: %v", err)
 	}
 	defer file.Close()
 
@@ -127,11 +125,11 @@ func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath st
 	log.Debugf("Read file form cache: %s\n", filepath)
 	file, err := ctrl.cache.ReadFile(filepath)
 	if err != nil {
-		return err
+		return fmt.Errorf("reading file from cache: %v", err)
 	}
 	defer file.Close()
 	_, err = io.Copy(w, file)
-	return err
+	return fmt.Errorf("reading file from cache: %v", err)
 }
 
 func (ctrl *FileController) writeFileToCache(filepath string, file io.ReadCloser) error {
@@ -157,7 +155,6 @@ func (ctrl *FileController) writeFileToCloudStorage(filepath string, file io.Rea
 
 func (ctrl *FileController) downloadFile(filepath string) (io.ReadCloser, error) {
 	log.Debugf("Read file form repository: %s", filepath)
-
 	for _, r := range ctrl.repositories {
 		log.Debugf("Trying to download from repository: %s", r.BaseURL())
 		b, err := r.DownloadFile(filepath)
