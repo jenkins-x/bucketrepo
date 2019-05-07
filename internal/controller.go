@@ -31,7 +31,7 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	filepath := ps.ByName("filepath")
 	log.Debugf("GetFile, filepath: %s", filepath)
-	err := ctrl.readFileFromCache(w, filepath)
+	err := ctrl.readFileFromCache(w, filepath, r.Method != "HEAD")
 	if err == nil {
 		return
 	}
@@ -45,7 +45,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 		return
 	}
 
-	err = ctrl.readFileFromCache(w, filepath)
+	err = ctrl.readFileFromCache(w, filepath, r.Method != "HEAD")
 	if err != nil {
 		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when serving the file from cache: %s", err)
@@ -121,13 +121,16 @@ func (ctrl *FileController) updateCloudStorage(filepath string) error {
 	return ctrl.writeFileToCloudStorage(filepath, file)
 }
 
-func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath string) error {
+func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath string, writeBody bool) error {
 	log.Debugf("Read file form cache: %s\n", filepath)
 	file, err := ctrl.cache.ReadFile(filepath)
 	if err != nil {
 		return fmt.Errorf("reading file from cache: %v", err)
 	}
 	defer file.Close()
+	if !writeBody {
+		return nil
+	}
 	_, err = io.Copy(w, file)
 	return fmt.Errorf("reading file from cache: %v", err)
 }
