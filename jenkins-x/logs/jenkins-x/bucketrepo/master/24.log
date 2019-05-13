@@ -1,0 +1,735 @@
+Step: build-step-credential-initializer-hg8g4:
+
+{"level":"warn","ts":1557749945.046913,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1557749945.0502675,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-jenkins-x-bucketrepo-master-tek-2pnjl:
+
+{"level":"warn","ts":1557749945.9577954,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1557749948.1978116,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/jenkins-x/bucketrepo\" @ \"v0.1.13\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:b80ecded1f49e12f73e611a1c8600d6fff8bc2b2
+time="2019-05-13T12:19:11Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-init-helm:
+
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+Step: build-step-step3:
+
+/builder/home/kaniko-secret.json
+Step: build-step-step4:
+
+/builder/home/basic-auth-user
+Step: build-step-step5:
+
+/builder/home/basic-auth-pass
+Step: build-step-step6:
+
+Step: build-step-step7:
+
+Step: build-step-step8:
+
+Step: build-step-release:
+
+CGO_ENABLED=0 GO111MODULE=on go build -ldflags '' -o bin/bucketrepo ./internal
+go: finding github.com/sirupsen/logrus v1.4.1
+go: finding golang.org/x/net v0.0.0-20190424024845-afe8014c977f
+go: finding github.com/pelletier/go-toml v1.3.0
+go: finding github.com/spf13/viper v1.3.2
+go: finding github.com/konsorten/go-windows-terminal-sequences v1.0.2
+go: finding github.com/julienschmidt/httprouter v1.2.0
+go: finding golang.org/x/sys v0.0.0-20190422165155-953cdadca894
+go: finding github.com/spf13/jwalterweatherman v1.1.0
+go: finding github.com/spf13/afero v1.2.2
+go: finding gopkg.in/yaml.v2 v2.2.2
+go: finding github.com/stretchr/testify v1.3.0
+go: finding gocloud.dev v0.12.0
+go: finding golang.org/x/text v0.3.0
+go: finding golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
+go: finding gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405
+go: finding github.com/BurntSushi/toml v0.3.1
+go: finding github.com/davecgh/go-spew v1.1.1
+go: finding github.com/spf13/afero v1.1.2
+go: finding github.com/mitchellh/mapstructure v1.1.2
+go: finding github.com/pmezard/go-difflib v1.0.0
+go: finding github.com/pelletier/go-toml v1.2.0
+go: finding github.com/stretchr/ob** v0.1.1
+go: finding golang.org/x/sys v0.0.0-20181205085412-a5c9d58dba9a
+go: finding github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77
+go: finding github.com/magiconair/properties v1.8.0
+go: finding github.com/stretchr/ob** v0.1.0
+go: finding github.com/davecgh/go-spew v1.1.0
+go: finding golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9
+go: finding github.com/konsorten/go-windows-terminal-sequences v1.0.1
+go: finding github.com/hashicorp/nomad v0.8.7
+go: finding github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
+go: finding github.com/go-errors/errors v1.0.1
+go: finding github.com/go-stomp/stomp v2.0.2+incompatible
+go: finding github.com/gorilla/context v1.1.1
+go: finding github.com/Azure/azure-amqp-common-go v1.1.4
+go: finding github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8
+go: finding github.com/sirupsen/logrus v1.3.0
+go: finding github.com/hashicorp/vault-plugin-auth-gcp v0.0.0-20181210200133-4d63bbfe6fcf
+go: finding github.com/Azure/azure-pipeline-go v0.1.8
+go: finding layeh.com/radius v0.0.0-20190118135028-0f678f039617
+go: finding github.com/gammazero/deque v0.0.0-20180920172122-f6adf94963e4
+go: finding github.com/ugorji/go/codec v0.0.0-20181012064053-8333dd449516
+go: finding github.com/dimchansky/utfbom v1.1.0
+go: finding github.com/duosecurity/duo_api_golang v0.0.0-20190107154727-539434bf0d45
+go: finding github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
+go: finding github.com/hashicorp/vault v1.0.2
+go: finding github.com/Azure/azure-sdk-for-go v26.0.0+incompatible
+go: finding github.com/google/uuid v1.1.0
+go: finding github.com/hashicorp/vault-plugin-secrets-azure v0.0.0-20181207232500-0087bdef705a
+go: finding github.com/fullsailor/pkcs7 v0.0.0-20180613152042-8306686428a5
+go: finding github.com/containerd/continuity v0.0.0-20181203112020-004b46473808
+go: finding github.com/ory-am/common v0.4.0
+go: finding github.com/dgrijalva/jwt-go v3.2.0+incompatible
+go: finding github.com/hashicorp/hcl v1.0.0
+go: finding golang.org/x/crypto v0.0.0-20190225124518-7f87c0fbb88b
+go: finding github.com/json-iterator/go v1.1.5
+go: finding go.opencensus.io v0.18.1-0.20181204023538-aab39bd6a98b
+go: finding github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2
+go: finding golang.org/x/crypto v0.0.0-20181001203147-e3636079e1a4
+go: finding golang.org/x/net v0.0.0-20181023162649-9b4f9f5ad519
+go: finding github.com/chrismalek/oktasdk-go v0.0.0-20181212195951-3430665dfaa0
+go: finding github.com/hashicorp/vault-plugin-secrets-kv v0.0.0-20190115203747-edbfe287c5d9
+go: finding github.com/Azure/azure-sdk-for-go v21.3.0+incompatible
+go: finding github.com/ory/dockertest v3.3.4+incompatible
+go: finding github.com/coreos/go-semver v0.2.0
+go: finding github.com/gorilla/websocket v1.4.0
+go: finding contrib.go.opencensus.io/exporter/ocagent v0.4.2
+go: finding github.com/hashicorp/vault-plugin-auth-jwt v0.0.0-20190117220024-3e8048f1026f
+go: finding github.com/matttproud/golang_protobuf_extensions v1.0.1
+go: finding github.com/soheilhy/cmux v0.1.4
+go: finding golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6
+go: finding github.com/pborman/uuid v1.2.0
+go: finding golang.org/x/sys v0.0.0-20180909124046-d0be0721c37e
+go: finding github.com/influxdata/platform v0.0.0-20190117200541-d500d3cf5589
+go: finding github.com/gocql/gocql v0.0.0-20190122205811-30de9a1866a8
+go: finding github.com/hashicorp/vault-plugin-secrets-ad v0.0.0-20181109182834-540c0b6f1f11
+go: finding github.com/influxdata/influxdb v1.7.3
+go: finding github.com/hashicorp/go-uuid v1.0.1
+go: finding k8s.io/klog v0.1.0
+go: finding github.com/gammazero/workerpool v0.0.0-20181230203049-86a96b5d5d92
+go: finding github.com/grpc-ecosystem/grpc-gateway v1.5.0
+go: finding google.golang.org/api v0.1.0
+go: finding github.com/hashicorp/vault-plugin-secrets-gcp v0.0.0-20180921173200-d6445459e80c
+go: finding sigs.k8s.io/yaml v1.1.0
+go: finding git.apache.org/thrift.git v0.0.0-20180902110319-2566ecd5d999
+go: finding golang.org/x/sys v0.0.0-20180905080454-ebe1bf3edb33
+go: finding contrib.go.opencensus.io/integrations/ocsql v0.1.3
+go: finding github.com/hashicorp/go-retryablehttp v0.5.1
+go: finding github.com/pkg/errors v0.8.0
+go: finding github.com/jtolds/gls v4.2.1+incompatible
+go: finding github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed
+go: finding github.com/hashicorp/go-version v1.1.0
+go: finding google.golang.org/grpc v1.19.0
+go: finding github.com/hashicorp/vault-plugin-auth-centrify v0.0.0-20180816201131-66b0a34a58bf
+go: finding github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973
+go: finding github.com/hashicorp/go-msgpack v0.0.0-20150518234257-fa3f63826f7c
+go: finding github.com/mna/pigeon v1.0.1-0.20180808201053-bb0192cfc2ae
+go: finding github.com/getkin/kin-openapi v0.1.0
+go: finding google.golang.org/grpc v1.14.0
+go: finding github.com/gorilla/mux v1.6.2
+go: finding google.golang.org/api v0.0.0-20180910000450-7ca32eb868bf
+go: finding github.com/SermoDigital/jose v0.9.2-0.20161205224733-f6df55f235c2
+go: finding github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869
+go: finding github.com/araddon/gou v0.0.0-20190110011759-c797efecbb61
+go: finding github.com/imdario/mergo v0.3.6
+go: finding gopkg.in/square/go-jose.v2 v2.2.2
+go: finding github.com/containerd/continuity v0.0.0-20181027224239-bea7585dbfac
+go: finding golang.org/x/net v0.0.0-20180906233101-161cd47e91fd
+go: finding gopkg.in/vmihailenco/msgpack.v2 v2.9.1
+go: finding github.com/SermoDigital/jose v0.9.1
+go: finding github.com/jefferai/jsonx v0.0.0-20160721235117-9cc31c3135ee
+go: finding github.com/hashicorp/go-sockaddr v0.0.0-20180320115054-6d291a969b86
+go: finding github.com/jonboulle/clockwork v0.1.0
+go: finding github.com/hashicorp/go-immutable-radix v1.0.0
+go: finding github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
+go: finding honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099
+go: finding github.com/smartystreets/goconvey v0.0.0-20180222194500-ef6db91d284a
+go: finding github.com/fatih/structs v1.1.0
+go: finding github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5
+go: finding github.com/pquerna/cachecontrol v0.0.0-20180517163645-1555304b9b35
+go: finding github.com/coreos/go-etcd v2.0.0+incompatible
+go: finding github.com/mitchellh/copystructure v1.0.0
+go: finding github.com/hashicorp/go-plugin v0.0.0-20181212150838-f444068e8f5a
+go: finding github.com/philhofer/fwd v1.0.0
+go: finding github.com/cespare/xxhash v1.1.0
+go: finding github.com/jwilder/encoding v0.0.0-20170811194829-b4e1701a28ef
+go: finding github.com/onsi/ginkgo v1.7.0
+go: finding github.com/gocql/gocql v0.0.0-20181117210152-33c0e89ca93a
+go: finding github.com/Azure/azure-storage-blob-go v0.0.0-20190104215108-45d0c5e3638e
+go: finding github.com/coreos/go-oidc v2.0.0+incompatible
+go: finding github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6
+go: finding github.com/willf/bitset v1.1.9
+go: finding gotest.tools v2.2.0+incompatible
+go: finding github.com/circonus-labs/circonusllhist v0.1.3
+go: finding github.com/google/wire v0.2.1
+go: finding github.com/jeffchao/backoff v0.0.0-20140404060208-9d7fd7aa17f2
+go: finding github.com/pquerna/otp v1.1.0
+go: finding github.com/fortytw2/leaktest v1.2.0
+go: finding github.com/tinylib/msgp v1.0.2
+go: finding github.com/google/go-querystring v1.0.0
+go: finding github.com/mitchellh/go-testing-interface v1.0.0
+go: finding github.com/influxdata/usage-client v0.0.0-20160829180054-6d3895376368
+go: finding github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec
+go: finding golang.org/x/oauth2 v0.0.0-20190115181402-5dab4167f31c
+go: finding github.com/hashicorp/go-uuid v1.0.0
+go: finding github.com/Azure/go-autorest v11.0.0+incompatible
+go: finding github.com/hashicorp/vault-plugin-auth-kubernetes v0.0.0-20181130162533-091d9e5d5fab
+go: finding github.com/nats-io/nats-streaming-server v0.11.2
+go: finding github.com/mattbaird/elastigo v0.0.0-20170123220020-2fe47fd29e4b
+go: finding github.com/hashicorp/consul v1.4.0
+go: finding github.com/nats-io/go-nats v1.7.2
+go: finding github.com/bitly/go-hostpool v0.0.0-20171023180738-a3a6125de932
+go: finding github.com/tcnksm/go-input v0.0.0-20180404061846-548a7d7a8ee8
+go: finding github.com/go-test/deep v1.0.1
+go: finding github.com/campoy/unique v0.0.0-20180121183637-88950e537e7e
+go: finding github.com/spf13/cobra v0.0.3
+go: finding golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4
+go: finding gopkg.in/ory-am/dockertest.v2 v2.2.3
+go: finding github.com/streadway/amqp v0.0.0-20181205114330-a314942b2fd9
+go: finding github.com/mitchellh/hashstructure v1.0.0
+go: finding github.com/hashicorp/go-multierror v1.0.0
+go: finding github.com/SAP/go-hdb v0.13.1
+go: finding github.com/jessevdk/go-flags v1.4.0
+go: finding github.com/hashicorp/golang-lru v0.5.0
+go: finding github.com/elazarl/go-bindata-assetfs v1.0.0
+go: finding github.com/go-sql-driver/mysql v1.4.1
+go: finding github.com/hashicorp/serf v0.8.1
+go: finding golang.org/x/xerrors v0.0.0-20190129162528-20feca13ea86
+go: finding github.com/googleapis/gax-go v2.0.2+incompatible
+go: finding github.com/benbjohnson/tmpl v1.0.0
+go: finding gopkg.in/asn1-ber.v1 v1.0.0-20181015200546-f715ec2f112d
+go: finding github.com/modern-go/reflect2 v1.0.1
+go: finding github.com/gotestyourself/gotestyourself v2.2.0+incompatible
+go: finding github.com/google/go-github v17.0.0+incompatible
+go: finding github.com/hashicorp/errwrap v1.0.0
+go: finding github.com/DataDog/datadog-go v0.0.0-20180822151419-281ae9f2d895
+go: finding github.com/hashicorp/vault v0.11.5
+go: finding github.com/go-ldap/ldap v3.0.0+incompatible
+go: finding github.com/prometheus/procfs v0.0.0-20180725123919-05ee40e3a273
+go: finding github.com/nats-io/go-nats v1.6.0
+go: finding go.etcd.io/etcd v3.3.11+incompatible
+go: finding google.golang.org/genproto v0.0.0-20180831171423-11092d34479b
+go: finding k8s.io/api v0.0.0-20181221193117-173ce66c1e39
+go: finding github.com/circonus-labs/circonus-gometrics v2.2.5+incompatible
+go: finding gopkg.in/yaml.v2 v2.2.1
+go: finding golang.org/x/tools v0.0.0-20181017214349-06f26fdaaa28
+go: finding github.com/go-ldap/ldap v2.5.1+incompatible
+go: finding github.com/ghodss/yaml v1.0.0
+go: finding github.com/pkg/errors v0.8.1
+go: finding github.com/aws/aws-sdk-go v1.16.23
+go: finding github.com/golang/snappy v0.0.0-20170215233205-553a64147049
+go: finding google.golang.org/genproto v0.0.0-20181202183823-bd91e49a0898
+go: finding pack.ag/amqp v0.10.2
+go: finding github.com/gogo/protobuf v1.1.1
+go: finding github.com/hashicorp/vault-plugin-secrets-alicloud v0.0.0-20181109181453-2aee79cc5cbf
+go: finding github.com/cenkalti/backoff v2.1.1+incompatible
+go: finding github.com/opencontainers/image-spec v1.0.1
+go: finding github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78
+go: finding gopkg.in/inf.v0 v0.9.1
+go: finding github.com/hashicorp/go-retryablehttp v0.5.0
+go: finding github.com/Masterminds/semver v1.4.2
+go: finding github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb
+go: finding go.uber.org/zap v1.9.1
+go: finding pack.ag/amqp v0.8.0
+go: finding github.com/patrickmn/go-cache v2.1.0+incompatible
+go: finding google.golang.org/appengine v1.4.0
+go: finding github.com/hashicorp/vault-plugin-auth-azure v0.0.0-20181207232528-4c0b46069a22
+go: finding github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529
+go: finding github.com/hashicorp/go-cleanhttp v0.5.0
+go: finding github.com/testcontainers/testcontainer-go v0.0.0-20181115231424-8e868ca12c0f
+go: finding github.com/NYTimes/gziphandler v1.0.1
+go: finding golang.org/x/tools v0.0.0-20190114222345-bf090417da8b
+go: finding github.com/garyburd/redigo v1.6.0
+go: finding google.golang.org/grpc v1.17.0
+go: finding google.golang.org/grpc v1.15.0
+go: finding github.com/keybase/go-crypto v0.0.0-20181031135447-f919bfda4fc1
+go: finding gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
+go: finding golang.org/x/oauth2 v0.0.0-20181017192945-9dcd33a902f4
+go: finding google.golang.org/grpc v1.16.0
+go: finding github.com/hashicorp/go-hclog v0.0.0-20190109152822-4783caec6f2e
+go: finding github.com/prometheus/client_golang v0.9.0
+go: finding github.com/golang/gddo v0.0.0-20181116215533-9bd4a3295021
+go: finding github.com/mschoch/smat v0.0.0-20160514031455-90eadee771ae
+go: finding golang.org/x/net v0.0.0-20180724234803-3673e40ba225
+go: finding gopkg.in/check.v1 v1.0.0-20161208181325-20d25e280405
+go: finding golang.org/x/tools v0.0.0-20181221154417-3ad2d988d5e2
+go: finding golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
+go: finding github.com/ory/dockertest v3.3.2+incompatible
+go: finding github.com/duosecurity/duo_api_golang v0.0.0-20181024123116-92fea9203dbc
+go: finding google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
+go: finding github.com/mattn/go-isatty v0.0.4
+go: finding github.com/prometheus/common v0.0.0-20180801064454-c7de2306084e
+go: finding github.com/influxdata/influxql v0.0.0-20180925231337-1cbfca8e56b6
+go: finding github.com/fatih/color v1.7.0
+go: finding google.golang.org/api v0.0.0-20181021000519-a2651947f503
+go: finding github.com/golang/groupcache v0.0.0-20181024230925-c65c006176ff
+go: finding github.com/hashicorp/go-rootcerts v1.0.0
+go: finding github.com/hashicorp/vault-plugin-auth-alicloud v0.0.0-20181109180636-f278a59ca3e8
+go: finding github.com/mitchellh/go-testing-interface v0.0.0-20171004221916-a61a99592b77
+go: finding golang.org/x/lint v0.0.0-20180702182130-06c8688daad7
+go: finding github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1
+go: finding github.com/centrify/cloud-golang-sdk v0.0.0-20180119173102-7c97cc6fde16
+go: finding github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
+go: finding cloud.google.com/go v0.26.0
+go: finding github.com/docker/distribution v2.6.2+incompatible
+go: finding github.com/dustin/go-humanize v1.0.0
+go: finding gopkg.in/asn1-ber.v1 v1.0.0-20170511165959-379148ca0225
+go: finding github.com/keybase/go-crypto v0.0.0-20181127160227-255a5089e85a
+go: finding github.com/huandu/xstrings v1.0.0
+go: finding github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88
+go: finding github.com/satori/go.uuid v1.2.0
+go: finding github.com/asaskevich/govalidator v0.0.0-20180720115003-f9ffefc3facf
+go: finding github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
+go: finding github.com/tylerb/graceful v1.2.15
+go: finding github.com/michaelklishin/rabbit-hole v1.4.0
+go: finding github.com/hashicorp/vault-plugin-secrets-gcpkms v0.0.0-20190116164938-d6b25b0b4a39
+go: finding github.com/ryanuber/go-glob v0.0.0-20170128012129-256dc444b735
+go: finding github.com/lib/pq v1.0.0
+go: finding cloud.google.com/go v0.34.0
+go: finding github.com/google/subcommands v0.0.0-20181012225330-46f0354f6315
+go: finding github.com/cenkalti/backoff v2.0.0+incompatible
+go: finding github.com/hashicorp/vault-plugin-secrets-kv v0.0.0-20181106190520-2236f141171e
+go: finding github.com/dnaeon/go-vcr v1.0.1
+go: finding google.golang.org/appengine v1.2.0
+go: finding github.com/nats-io/nkeys v0.0.2
+go: finding github.com/armon/go-radix v1.0.0
+go: finding golang.org/x/sys v0.0.0-20180830151530-49385e6e1522
+go: finding github.com/prometheus/client_golang v0.8.0
+go: finding github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c
+go: finding honnef.co/go/tools v0.0.0-20181108184350-ae8f1f9103cc
+go: finding github.com/hashicorp/go-msgpack v0.5.3
+go: finding github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db
+go: finding golang.org/x/net v0.0.0-20181106065722-10aee1819953
+go: finding golang.org/x/crypto v0.0.0-20180505025534-4ec37c66abab
+go: finding github.com/google/gofuzz v0.0.0-20170612174753-24818f796faf
+go: finding github.com/RoaringBitmap/roaring v0.4.16
+go: finding github.com/nats-io/gnatsd v1.4.1
+go: finding github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82
+go: finding github.com/opencontainers/runc v0.1.1
+go: finding github.com/golang/lint v0.0.0-20180702182130-06c8688daad7
+go: finding github.com/hashicorp/go-memdb v0.0.0-20181108192425-032f93b25bec
+go: finding github.com/briankassouf/jose v0.9.1
+go: finding github.com/mattn/go-zglob v0.0.0-20180803001819-2ea3427bfa53
+go: finding golang.org/x/net v0.0.0-20180826012351-8a410e7b638d
+go: finding github.com/apache/arrow/go/arrow v0.0.0-20181217213538-e9ed591db9cb
+go: finding github.com/yudai/gojsondiff v1.0.0
+go: finding github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926
+go: finding go.opencensus.io v0.18.0
+go: finding contrib.go.opencensus.io/exporter/stackdriver v0.9.1
+go: finding golang.org/x/tools v0.0.0-20180828015842-6cd1fcedba52
+go: finding github.com/client9/misspell v0.3.4
+go: finding k8s.io/apimachinery v0.0.0-20190119020841-d41becfba9ee
+go: finding github.com/nats-io/go-nats-streaming v0.4.0
+go: finding github.com/opencontainers/go-digest v1.0.0-rc1
+go: finding github.com/coreos/bbolt v1.3.1-coreos.6
+go: finding github.com/spf13/cast v1.3.0
+go: finding github.com/aokoli/goutils v1.0.1
+go: finding github.com/dgryski/go-bitstream v0.0.0-20180413035011-3522498ce2c8
+go: finding github.com/golang/protobuf v1.1.0
+go: finding github.com/docker/go-connections v0.4.0
+go: finding github.com/golang/protobuf v1.2.0
+go: finding go.opencensus.io v0.15.0
+go: finding github.com/golang/mock v1.1.1
+go: finding contrib.go.opencensus.io/exporter/aws v0.0.0-20181029163544-2befc13012d0
+go: finding github.com/hashicorp/raft v1.0.0
+go: finding github.com/GoogleCloudPlatform/cloudsql-proxy v0.0.0-20181215173202-6f1ecdcf9588
+go: finding github.com/miekg/dns v1.1.1
+go: finding golang.org/x/oauth2 v0.0.0-20181203162652-d668ce993890
+go: finding github.com/influxdata/flux v0.13.0
+go: finding github.com/glycerine/go-unsnap-stream v0.0.0-20180323001048-9f0cb55181dd
+go: finding honnef.co/go/tools v0.0.0-20180728063816-88497007e858
+go: finding github.com/aws/aws-sdk-go v1.15.31
+go: finding github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75
+go: finding github.com/spf13/pflag v1.0.3
+go: finding golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f
+go: finding github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d
+go: finding github.com/fsnotify/fsnotify v1.4.7
+go: finding github.com/coreos/etcd v3.3.10+incompatible
+go: finding github.com/caarlos0/ctrlc v1.0.0
+go: finding github.com/hashicorp/go-plugin v0.0.0-20181030172320-54b6ff97d818
+go: finding github.com/Azure/go-autorest v11.3.2+incompatible
+go: finding github.com/google/uuid v1.0.0
+go: finding github.com/denisenkom/go-mssqldb v0.0.0-20190121005146-b04fd42d9952
+go: finding go.uber.org/atomic v1.3.2
+go: finding github.com/nats-io/nuid v1.0.0
+go: finding github.com/go-sql-driver/mysql v1.4.0
+go: finding github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190122153857-e0ace9b64d22
+go: finding github.com/kisielk/gotool v1.0.0
+go: finding github.com/stevvooe/resumable v0.0.0-20180830230917-22b14a53ba50
+go: finding gopkg.in/robfig/cron.v2 v2.0.0-20150107220207-be2e0b0deed5
+go: finding github.com/segmentio/kafka-go v0.1.0
+go: finding github.com/aws/aws-sdk-go v1.15.27
+go: finding github.com/mitchellh/reflectwalk v1.0.0
+go: finding github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f
+go: finding golang.org/x/exp v0.0.0-20181112044915-a3060d491354
+go: finding github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8
+go: finding github.com/onsi/gomega v1.4.3
+go: finding github.com/Jeffail/gabs v1.1.1
+go: finding github.com/openzipkin/zipkin-go v0.1.1
+go: finding github.com/Azure/azure-service-bus-go v0.2.0
+go: finding github.com/apex/log v1.1.0
+go: finding github.com/hashicorp/memberlist v0.1.0
+go: finding github.com/census-instrumentation/opencensus-proto v0.1.0
+go: finding github.com/mattn/go-tty v0.0.0-20180907095812-13ff1204f104
+go: finding github.com/pkg/term v0.0.0-20180730021639-bffc007b7fd5
+go: finding github.com/google/btree v0.0.0-20180813153112-4030bb1f1f0c
+go: finding github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd
+go: finding github.com/go-ini/ini v1.25.4
+go: finding golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
+go: finding github.com/stretchr/testify v1.2.0
+go: finding github.com/Masterminds/sprig v2.16.0+incompatible
+go: finding golang.org/x/crypto v0.0.0-20180904163835-0709b304e793
+go: finding github.com/spf13/viper v1.2.1
+go: finding google.golang.org/genproto v0.0.0-20190306203927-b5d61aea6440
+go: finding golang.org/x/net v0.0.0-20190108225652-1e06a53dbb7e
+go: finding github.com/dancannon/gorethink v4.0.0+incompatible
+go: finding github.com/boltdb/bolt v1.3.1
+go: finding github.com/joho/godotenv v1.3.0
+go: finding github.com/goreleaser/nfpm v0.9.7
+go: finding github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+go: finding github.com/hashicorp/go-hclog v0.0.0-20181001195459-61d530d6c27f
+go: finding github.com/influxdata/tdigest v0.0.0-20181121200506-bf2b5ad3c0a9
+go: finding github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5
+go: finding github.com/hpcloud/tail v1.0.0
+go: finding cloud.google.com/go v0.37.0
+go: finding golang.org/x/lint v0.0.0-20190227174305-5b3e6a55c961
+go: finding github.com/mattn/go-colorable v0.0.9
+go: finding github.com/prometheus/procfs v0.0.0-20181005140218-185b4288413d
+go: finding github.com/hashicorp/go-sockaddr v1.0.1
+go: finding github.com/coreos/etcd v3.3.11+incompatible
+go: finding golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3
+go: finding github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf
+go: finding google.golang.org/appengine v1.3.0
+go: finding github.com/kevinburke/go-bindata v3.11.0+incompatible
+go: finding github.com/hashicorp/go-gcp-common v0.0.0-20180425173946-763e39302965
+go: finding google.golang.org/appengine v1.0.0
+go: finding gopkg.in/ldap.v2 v2.5.1
+go: finding github.com/census-instrumentation/opencensus-proto v0.1.0-0.20181214143942-ba49f56771b8
+go: finding github.com/yudai/pp v2.0.1+incompatible
+go: finding golang.org/x/sync v0.0.0-20181108010431-42b317875d0f
+go: finding github.com/bouk/httprouter v0.0.0-20160817010721-ee8b3818a7f5
+go: finding gopkg.in/pipe.v2 v2.0.0-20140414041502-3c2ca4d52544
+go: finding github.com/denisenkom/go-mssqldb v0.0.0-20181014144952-4e0d7dc8888f
+go: finding github.com/apache/arrow/go/arrow v0.0.0-20181031164735-a56c009257a7
+go: finding github.com/oklog/run v1.0.0
+go: finding github.com/Azure/azure-amqp-common-go v1.1.3
+go: finding gopkg.in/gorethink/gorethink.v4 v4.1.0
+go: finding golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
+go: finding golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2
+go: finding github.com/hashicorp/go-version v1.0.0
+go: finding github.com/OneOfOne/xxhash v1.2.2
+go: finding github.com/spf13/jwalterweatherman v1.0.0
+go: finding github.com/mitchellh/go-homedir v1.0.0
+go: finding github.com/google/martian v2.1.0+incompatible
+go: finding github.com/sirupsen/logrus v1.0.6
+go: finding github.com/mitchellh/go-wordwrap v1.0.0
+go: finding github.com/SAP/go-hdb v0.13.2
+go: finding golang.org/x/net v0.0.0-20180530234432-1e491301e022
+go: finding github.com/uber/jaeger-lib v1.5.0
+go: finding github.com/Azure/go-autorest v11.1.1+incompatible
+go: finding golang.org/x/sys v0.0.0-20180828065106-d99a578cf41b
+go: finding github.com/hashicorp/go-rootcerts v0.0.0-20160503143440-6bb64b370b90
+go: finding github.com/googleapis/gax-go v2.0.0+incompatible
+go: finding github.com/aws/aws-sdk-go v1.15.59
+go: finding cloud.google.com/go v0.23.0
+go: finding github.com/hashicorp/go-hclog v0.0.0-20180709165350-ff2cf002a8dd
+go: finding github.com/uber/jaeger-client-go v2.15.0+incompatible
+go: finding github.com/spf13/pflag v1.0.2
+go: finding google.golang.org/genproto v0.0.0-20180601223552-81158efcc9f2
+go: finding golang.org/x/sys v0.0.0-20180906133057-8cf3aee42992
+go: finding golang.org/x/time v0.0.0-20181108054448-85acf8d2951c
+go: finding honnef.co/go/tools v0.0.0-20190106161140-3f1c8253044a
+go: finding github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883
+go: finding github.com/google/go-cmp v0.2.0
+go: finding github.com/inconshreveable/mousetrap v1.0.0
+go: finding github.com/influxdata/line-protocol v0.0.0-20180522152040-32c6aa80de5e
+go: finding github.com/uber-go/atomic v1.3.2
+go: finding github.com/mattn/go-zglob v0.0.0-20171230104132-4959821b4817
+go: finding gopkg.in/fsnotify.v1 v1.4.7
+go: finding github.com/kr/pretty v0.1.0
+go: finding github.com/Microsoft/go-winio v0.4.11
+go: finding golang.org/x/exp v0.0.0-20190121172915-509febef88a4
+go: finding github.com/imdario/mergo v0.3.4
+go: finding github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910
+go: finding golang.org/x/tools v0.0.0-20190226205152-f727befe758c
+go: finding github.com/opentracing/opentracing-go v1.0.2
+go: finding github.com/golang/mock v1.2.0
+go: finding golang.org/x/oauth2 v0.0.0-20180603041954-1e0a3fa8ba9a
+go: finding github.com/docker/go-units v0.3.3
+go: finding gonum.org/v1/gonum v0.0.0-20181121035319-3f7ecaa7e8ca
+go: finding github.com/stretchr/testify v1.2.2
+go: finding github.com/docker/docker v0.0.0-20180422163414-57142e89befe
+go: finding gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+go: finding github.com/goreleaser/goreleaser v0.94.0
+go: finding google.golang.org/genproto v0.0.0-20181016170114-94acd270e44e
+go: finding github.com/boombuler/barcode v1.0.0
+go: finding github.com/jsternberg/zap-logfmt v1.2.0
+go: finding github.com/mattn/go-runewidth v0.0.3
+go: finding github.com/c-bata/go-prompt v0.2.2
+go: finding gopkg.in/fatih/pool.v2 v2.0.0
+go: finding github.com/mitchellh/mapstructure v1.0.0
+go: finding github.com/kr/text v0.1.0
+go: finding github.com/glycerine/goconvey v0.0.0-20180728074245-46e3a41ad493
+go: finding gopkg.in/src-d/go-git.v4 v4.8.1
+go: finding github.com/googleapis/gax-go/v2 v2.0.3
+go: finding golang.org/x/exp v0.0.0-20180321215751-8460e604b9de
+go: finding github.com/nats-io/gnatsd v1.3.0
+go: finding github.com/google/pprof v0.0.0-20181206194817-3ea8567a2e57
+go: finding golang.org/x/crypto v0.0.0-20180820150726-614d502a4dac
+go: finding github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da
+go: finding github.com/pierrec/lz4 v2.0.5+incompatible
+go: finding github.com/alecthomas/kingpin v2.2.6+incompatible
+go: finding github.com/onsi/ginkgo v1.6.0
+go: finding golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2
+go: finding google.golang.org/grpc v1.12.0
+go: finding github.com/anmitsu/go-shlex v0.0.0-20161002113705-648efa622239
+go: finding golang.org/x/sys v0.0.0-20181030150119-7e31e0c00fa0
+go: finding github.com/mitchellh/cli v1.0.0
+go: finding github.com/sirupsen/logrus v1.2.0
+go: finding github.com/prometheus/common v0.0.0-20181020173914-7e9e6cabbd39
+go: finding github.com/kevinburke/ssh_config v0.0.0-20180830205328-81db2a75821e
+go: finding github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024
+go: finding github.com/aws/aws-sdk-go v1.15.64
+go: finding gopkg.in/src-d/go-billy.v4 v4.2.1
+go: finding gopkg.in/src-d/go-git-fixtures.v3 v3.1.1
+go: finding github.com/sergi/go-diff v1.0.0
+go: finding github.com/pelletier/go-buffruneio v0.2.0
+go: finding github.com/blakesmith/ar v0.0.0-20150311145944-8bd4349a67f2
+go: finding go.uber.org/multierr v1.1.0
+go: finding github.com/spf13/cast v1.2.0
+go: finding gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127
+go: finding github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568
+go: finding github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310
+go: finding github.com/kr/pty v1.1.1
+go: finding google.golang.org/appengine v1.1.0
+go: finding gonum.org/v1/netlib v0.0.0-20181029234149-ec6d1f5cefe6
+go: finding github.com/gliderlabs/ssh v0.1.1
+go: finding github.com/posener/complete v1.1.1
+go: finding github.com/bgentry/speakeasy v0.1.0
+go: finding github.com/alcortesm/tgz v0.0.0-20161220082320-9c5fe88206d7
+go: finding github.com/src-d/gcfg v1.4.0
+go: finding github.com/xanzy/ssh-agent v0.2.0
+go: finding golang.org/x/build v0.0.0-20190111050920-041ab4dc3f9d
+go: finding github.com/prometheus/client_golang v0.0.0-20171201122222-661e31bf844d
+go: finding golang.org/x/tools v0.0.0-20180525024113-a5b4c53f6e8b
+go: finding github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99
+go: finding github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
+go: finding golang.org/x/sys v0.0.0-20180823144017-11551d06cbcc
+go: finding github.com/ryanuber/columnize v2.1.0+incompatible
+go: finding github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72
+go: finding golang.org/x/sys v0.0.0-20180903190138-2b024373dcd9
+go: finding github.com/emirpasic/gods v1.9.0
+go: finding dmitri.shuralyov.com/service/change v0.0.0-20181023043359-a85b471d5412
+go: finding golang.org/x/tools v0.0.0-20181030000716-a0a13e073c7b
+go: finding github.com/shurcooL/octicon v0.0.0-20181028054416-fa4f57f9efb2
+go: finding github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625
+go: finding github.com/shurcooL/users v0.0.0-20180125191416-49c67e49c537
+go: finding github.com/shurcooL/reactions v0.0.0-20181006231557-f2e0b4ca5b82
+go: finding github.com/coreos/go-systemd v0.0.0-20181012123002-c6f51f82210d
+go: finding github.com/kr/pty v1.1.3
+go: finding github.com/jellevandenhooff/dkim v0.0.0-20150330215556-f50fe3d243e1
+go: finding github.com/shurcooL/notifications v0.0.0-20181007000457-627ab5aea122
+go: finding gopkg.in/warnings.v0 v0.1.2
+go: finding golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16
+go: finding github.com/stretchr/testify v1.2.1
+go: finding github.com/shurcooL/issuesapp v0.0.0-20180602232740-048589ce2241
+go: finding github.com/neelance/astrewrite v0.0.0-20160511093645-99348263ae86
+go: finding github.com/shurcooL/home v0.0.0-20181020052607-80b7ffcb30f9
+go: finding google.golang.org/genproto v0.0.0-20181029155118-b69ba1387ce2
+go: finding google.golang.org/api v0.0.0-20180603000442-8e296ef26005
+go: finding github.com/shurcooL/component v0.0.0-20170202220835-f88ec8f54cc4
+go: finding github.com/shurcooL/github_flavored_markdown v0.0.0-20181002035957-2122de532470
+go: finding github.com/mattn/go-isatty v0.0.3
+go: finding github.com/microcosm-cc/bluemonday v1.0.1
+go: finding dmitri.shuralyov.com/html/belt v0.0.0-20180602232347-f7d459c86be0
+go: finding github.com/shurcooL/httpfs v0.0.0-20171119174359-809beceb2371
+go: finding github.com/shurcooL/sanitized_anchor_name v0.0.0-20170918181015-86672fcb3f95
+go: finding github.com/sourcegraph/annotate v0.0.0-20160123013949-f4cad6c6324d
+go: finding cloud.google.com/go v0.31.0
+go: finding github.com/shurcooL/events v0.0.0-20181021180414-410e4ca65f48
+go: finding github.com/shurcooL/htmlg v0.0.0-20170918183704-d01228ac9e50
+go: finding github.com/shurcooL/highlight_diff v0.0.0-20170515013008-09bb4053de1b
+go: finding github.com/neelance/sourcemap v0.0.0-20151028013722-8c68805598ab
+go: finding github.com/shurcooL/httpgzip v0.0.0-20180522190206-b1c53ac65af9
+go: finding github.com/russross/blackfriday v1.5.2
+go: finding grpc.go4.org v0.0.0-20170609214715-11d0a25b4919
+go: finding go4.org v0.0.0-20180809161055-417644f6feb5
+go: finding golang.org/x/sys v0.0.0-20181029174526-d69651ed3497
+go: finding dmitri.shuralyov.com/state v0.0.0-20180228185332-28bcc343414c
+go: finding github.com/shurcooL/highlight_go v0.0.0-20181028180052-98c3abbbae20
+go: finding github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7
+go: finding github.com/shurcooL/issues v0.0.0-20181008053335-6292fdc1e191
+go: finding golang.org/x/perf v0.0.0-20180704124530-6e6d33e29852
+go: finding github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07
+go: finding golang.org/x/net v0.0.0-20181029044818-c44066c5c816
+go: finding google.golang.org/api v0.0.0-20181030000543-1d582fd0359e
+go: finding dmitri.shuralyov.com/app/changes v0.0.0-20180602232624-0a106ad413e3
+go: finding github.com/sourcegraph/syntaxhighlight v0.0.0-20170531221838-bd320f5d308e
+go: finding sourcegraph.com/sourcegraph/go-diff v0.5.0
+go: finding github.com/shurcooL/gopherjslib v0.0.0-20160914041154-feb6d3990c2c
+go: finding github.com/shurcooL/webdavfs v0.0.0-20170829043945-18c3829fa133
+go: finding github.com/shurcooL/httperror v0.0.0-20170206035902-86b7830d14cc
+go: finding github.com/shurcooL/gofontwoff v0.0.0-20180329035133-29b52fc0a18d
+go: finding github.com/shurcooL/go-goon v0.0.0-20170922171312-37c2f522c041
+go: finding sourcegraph.com/sqs/pbtypes v0.0.0-20180604144634-d3ebe8f20ae4
+go: finding github.com/shurcooL/go v0.0.0-20180423040247-9e1955d9fb6e
+go: downloading github.com/sirupsen/logrus v1.4.1
+go: downloading github.com/julienschmidt/httprouter v1.2.0
+go: downloading gocloud.dev v0.12.0
+go: downloading github.com/spf13/viper v1.3.2
+go: downloading github.com/hashicorp/hcl v1.0.0
+go: downloading github.com/fsnotify/fsnotify v1.4.7
+go: downloading gopkg.in/yaml.v2 v2.2.2
+go: downloading github.com/mitchellh/mapstructure v1.1.2
+go: downloading github.com/pelletier/go-toml v1.3.0
+go: downloading golang.org/x/sys v0.0.0-20190422165155-953cdadca894
+go: downloading github.com/spf13/cast v1.3.0
+go: downloading github.com/spf13/pflag v1.0.3
+go: downloading github.com/spf13/afero v1.2.2
+go: downloading github.com/magiconair/properties v1.8.0
+go: downloading github.com/spf13/jwalterweatherman v1.1.0
+go: downloading golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2
+go: downloading github.com/Azure/azure-storage-blob-go v0.0.0-20190104215108-45d0c5e3638e
+go: downloading github.com/google/wire v0.2.1
+go: downloading go.opencensus.io v0.18.1-0.20181204023538-aab39bd6a98b
+go: downloading github.com/Azure/azure-pipeline-go v0.1.8
+go: downloading google.golang.org/grpc v1.19.0
+go: downloading google.golang.org/api v0.1.0
+go: downloading github.com/aws/aws-sdk-go v1.16.23
+go: downloading cloud.google.com/go v0.37.0
+go: downloading github.com/golang/protobuf v1.2.0
+go: downloading github.com/google/uuid v1.1.0
+go: downloading github.com/googleapis/gax-go v2.0.2+incompatible
+go: downloading github.com/googleapis/gax-go/v2 v2.0.3
+go: downloading google.golang.org/genproto v0.0.0-20190306203927-b5d61aea6440
+go: downloading golang.org/x/oauth2 v0.0.0-20190115181402-5dab4167f31c
+go: downloading golang.org/x/xerrors v0.0.0-20190129162528-20feca13ea86
+go: downloading golang.org/x/net v0.0.0-20190424024845-afe8014c977f
+go: downloading github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
+FORMATTING
+GO111MODULE=off go get -u golang.org/x/lint/golint
+LINTING
+/workspace/source/go/bin/golint -set_exit_status ./... 
+VETTING
+GO111MODULE=on go vet ./... 
+GO111MODULE=off go get -u github.com/securego/gosec/cmd/gosec
+SECURITY SCANNING
+GO111MODULE=on /workspace/source/go/bin/gosec -fmt=csv ./...
+[gosec] 2019/05/13 12:20:22 Including rules: default
+[gosec] 2019/05/13 12:20:22 Excluding rules: default
+[gosec] 2019/05/13 12:20:22 Import directory: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal
+[gosec] 2019/05/13 12:20:25 Checking package: main
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/cloud_storage.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/config.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/controller.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/fs_storage.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/http.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/log.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/main.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/repository.go
+[gosec] 2019/05/13 12:20:25 Checking file: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/internal/storage.go
+CGO_ENABLED=0 GO111MODULE=on go test ./... -test.v
+?   	github.com/jenkins-x/bucketrepo/internal	[no test files]
+Step: build-step-build-and-push-image:
+
+[36mINFO[0m[0000] Downloading base image alpine:latest         
+ERROR: logging before flag.Parse: E0513 12:20:34.834953      12 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0513 12:20:34.841526      12 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+[36mINFO[0m[0001] Error while retrieving image from cache: getting file info: stat /workspace/sha256:bf1684a6e3676389ec861c602e97f27b03f14178e5bc3f70dce198f9f160cce9: no such file or directory 
+[36mINFO[0m[0001] Downloading base image alpine:latest         
+[36mINFO[0m[0002] Unpacking rootfs as cmd RUN apk --no-cache add ca-certificates requires it. 
+[36mINFO[0m[0003] Taking snapshot of full filesystem...        
+[36mINFO[0m[0003] RUN apk --no-cache add ca-certificates       
+[36mINFO[0m[0003] cmd: /bin/sh                                 
+[36mINFO[0m[0003] args: [-c apk --no-cache add ca-certificates] 
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing ca-certificates (20190108-r0)
+Executing busybox-1.29.3-r10.trigger
+Executing ca-certificates-20190108-r0.trigger
+OK: 6 MiB in 15 packages
+[36mINFO[0m[0003] Taking snapshot of full filesystem...        
+[36mINFO[0m[0003] Using files from context: [/workspace/source/go/src/github.com/jenkins-x/bucketrepo/config/config.yaml] 
+[36mINFO[0m[0003] COPY ./config/config.yaml /                  
+[36mINFO[0m[0003] Taking snapshot of files...                  
+[36mINFO[0m[0003] Using files from context: [/workspace/source/go/src/github.com/jenkins-x/bucketrepo/bin] 
+[36mINFO[0m[0003] COPY ./bin/ /                                
+[36mINFO[0m[0003] Taking snapshot of files...                  
+[36mINFO[0m[0004] ENTRYPOINT ["/bucketrepo"]                   
+2019/05/13 12:20:39 existing blob: sha256:e7c96db7181be991f19a9fb6975cdbbd73c65f4a2681348e63a141a2192a5f10
+2019/05/13 12:20:42 pushed blob: sha256:985a795d926c0586e8b7e91a87c7dcadd633eb8ed4bcb5e49fbdabccf196f5d3
+2019/05/13 12:20:42 pushed blob: sha256:02279d146a637200281a8a334090732dc7009b34801633a2235927ecdd83e991
+2019/05/13 12:20:42 pushed blob: sha256:700d0814026d4be34f55cd73ee2acae47a57e41d0c3fc5657113ca654eb3a444
+2019/05/13 12:20:43 pushed blob: sha256:92da641fa0edaeaa6e333ddeb8f8d35205b62366829550126fb67acd43a72b30
+2019/05/13 12:20:45 gcr.io/jenkinsxio/bucketrepo:0.1.13: digest: sha256:e4842a31b4f9a00bde2574b76f89ba1f1b93c4a13b093612ec96257d4536e7ea size: 916
+Step: build-step-release-charts:
+
+rm -rf charts
+rm -rf bucketrepo*.tgz
+rm -rf requirements.lock
+helm init --client-only
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+helm repo add jenkinsx http://chartmuseum.jenkins-x.io 	
+"jenkinsx" has been added to your repositories
+helm dependency build
+No requirements found in ./charts.
+helm lint
+==> Linting .
+Lint OK
+
+1 chart(s) linted, no failures
+sed -i -e "s/version:.*/version: 0.1.13/" Chart.yaml
+sed -i -e "s/tag:.*/tag: 0.1.13/" values.yaml
+helm package .
+Successfully packaged chart and saved it to: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/bucketrepo/bucketrepo-0.1.13.tgz
+curl --fail -u *****:************ --data-binary "@bucketrepo-0.1.13.tgz" http://jenkins-x-chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  2806  100    14  100  2792     57  11477 --:--:-- --:--:-- --:--:-- 11442100  2806  100    14  100  2792     57  11472 --:--:-- --:--:-- --:--:-- 11442
+{"saved":true}helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Skip local chart repository
+...Successfully got an update from the "jenkinsx" chart repository
+...Successfully got an update from the "stable" chart repository
+Update Complete. ⎈ Happy Helming!⎈ 
+rm -rf bucketrepo*.tgz
+Step: build-step-release-app:
+
+rm -rf requirements.lock
+rm -rf charts
+rm -rf **-app-bucketrepo*.tgz
+sed -i -e "s/version:.*/version: 0.1.13/" Chart.yaml
+echo "  version: 0.1.13" >> requirements.yaml
+** step helm build
+No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: releases http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository releases.
+helm package .
+Successfully packaged chart and saved it to: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/**-app-bucketrepo/**-app-bucketrepo-0.1.13.tgz
+curl --fail -u *****:************ --data-binary "@**-app-bucketrepo-0.1.13.tgz" https://chartmuseum:8080/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: chartmuseum; Unknown error
+make: *** [release] Error 6
+{"component":"entrypoint","error":"wrapped process failed: exit status 2","level":"error","msg":"Error executing test process","time":"2019-05-13T12:21:09Z"}
