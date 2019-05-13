@@ -128,6 +128,13 @@ pipelineConfig:
             args:
             - release
 
+          - name: release-app
+            image: gcr.io/jenkinsxio/builder-go:0.1.332
+            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/jx-app-bucketrepo
+            command: make
+            args:
+              - release
+
     pullRequest:
       pipeline:
         agent:
