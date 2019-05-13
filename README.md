@@ -67,9 +67,9 @@ helm install jenkins-x/bucketrepo --name bucketrepo
 ```
 
 #### Locally
-The repository can be started in a docker container: 
+The repository can be started in a docker container usinged the [latest released](https://github.com/jenkins-x/bucketrepo/releases) image:
 ```bash
-docker run -v $(pwd)/config:/config -p 8080:8080 gcr.io/jenkinsxio/bucketrepo:0.1.5 -config-path=/config
+docker run -v $(pwd)/config:/config -p 8080:8080 gcr.io/jenkinsxio/bucketrepo:0.1.12 -config-path=/config
 ```
 
 Or it can be built and run with:
