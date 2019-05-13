@@ -1,0 +1,1555 @@
+Step: build-step-credential-initializer-k4l75:
+
+{"level":"warn","ts":1557749885.6517794,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1557749885.6522868,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-cloudbees-**ui-frontend-master-tcn72:
+
+{"level":"warn","ts":1557749886.3225043,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1557749889.1711373,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/cloudbees/**ui-frontend\" @ \"v0.0.696\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+548a93a-dev+981c48321: No Major.Minor.Patch elements found
+Using SHAs from PULL_REFS=master:292589f5a1ffe15e58aa45eae3b0c703d44423f9
+time="2019-05-13T12:18:10Z" level=warning msg="no SHAs to merge, falling back to initial cloned commit"
+Step: build-step-init-helm:
+
+Creating /builder/home/.helm 
+Creating /builder/home/.helm/repository 
+Creating /builder/home/.helm/repository/cache 
+Creating /builder/home/.helm/repository/local 
+Creating /builder/home/.helm/plugins 
+Creating /builder/home/.helm/starters 
+Creating /builder/home/.helm/cache/archive 
+Creating /builder/home/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /builder/home/.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+Step: build-step-step3:
+
+/builder/home/basic-auth-user
+Step: build-step-step4:
+
+/builder/home/basic-auth-pass
+Step: build-step-kaniko-secrets:
+
+/builder/home/kaniko-secret.json
+Step: build-step-get-credentials:
+
+/builder/home/core-dev-gke-sa.key.json
+Step: build-step-warm-cache:
+
+Step: build-step-build-project:
+
++ set -e
++ npm install -g yarn
+/usr/bin/yarnpkg -> /usr/lib/node_modules/yarn/bin/yarn.js
+/usr/bin/yarn -> /usr/lib/node_modules/yarn/bin/yarn.js
++ yarn@1.16.0
+added 1 package in 0.641s
++ yarn install --ignore-engines
+yarn install v1.3.2
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@1.2.4: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.4" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.7: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.7" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard@1.0.0" has unmet peer dependency "react@^16.6.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard@1.0.0" has unmet peer dependency "react-dom@^16.6.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > formik@1.4.3" has unmet peer dependency "react@>=15".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-gravatar@2.6.3" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-modal@3.8.1" has unmet peer dependency "react@^0.14.0 || ^15.0.0 || ^16".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-outside-click-handler@1.2.2" has unmet peer dependency "react@^0.14 || >=15".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-router-dom@4.3.1" has unmet peer dependency "react@>=15".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-select@2.3.0" has unmet peer dependency "react@^15.3.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-transition-group@2.5.3" has unmet peer dependency "react@>=15.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-virtualized@9.21.0" has unmet peer dependency "react@^15.3.0 || ^16.0.0-alpha".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions@4.1.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-info@3.4.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-jest@3.4.11" has unmet peer dependency "@storybook/addons@^3.3.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-jest@3.4.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-options@3.4.11" has unmet peer dependency "@storybook/addons@^3.3.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-options@3.4.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/react@4.1.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > env-var-helpers@4.1.0" has unmet peer dependency "lodash@^4.x".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > enzyme-adapter-react-16@1.9.1" has unmet peer dependency "react@^16.0.0-0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-dom@16.8.1" has unmet peer dependency "react@^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-test-renderer@16.8.1" has unmet peer dependency "react@^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > @expantra/pipeline-widget-proto@0.0.2-JW" has unmet peer dependency "react@^16.4.1".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > @expantra/pipeline-widget-proto@0.0.2-JW" has unmet peer dependency "react-dom@^16.4.1".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > mobx-react@5.4.3" has unmet peer dependency "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > react-hotkeys@1.1.4" has unmet peer dependency "react@>= 0.14.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > react-hotkeys@1.1.4" has unmet peer dependency "react-dom@>= 0.14.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > react-router@4.2.0" has unmet peer dependency "react@>=15".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > formik > create-react-context@0.2.3" has unmet peer dependency "prop-types@^15.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > formik > create-react-context@0.2.3" has unmet peer dependency "react@^0.14.0 || ^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-outside-click-handler > airbnb-prop-types@2.11.0" has unmet peer dependency "react@^0.14 || ^15.0.0 || ^16.0.0-alpha".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > react-select > react-input-autosize@2.2.1" has unmet peer dependency "react@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @emotion/core@0.13.1" has unmet peer dependency "react@>=16.3.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @emotion/provider@0.11.2" has unmet peer dependency "react@>=16.3.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @storybook/components@4.1.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > react-inspector@2.3.1" has unmet peer dependency "react@^0.14.0 || ^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-info > @storybook/components@3.4.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-storyshots > jest-specific-snapshot@1.0.0" has unmet peer dependency "jest@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/react > @storybook/core@4.1.11" has unmet peer dependency "react@*".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > env-var-helpers > mad-logs@10.3.6" has unmet peer dependency "lodash@^4.x".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > enzyme-adapter-react-16 > enzyme-adapter-utils@1.10.0" has unmet peer dependency "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > jsdom > request-promise-native@1.0.5" has unmet peer dependency "request@^2.34".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-ui > react-document-title > react-side-effect@1.1.5" has unmet peer dependency "react@^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @emotion/styled > @emotion/styled-base@0.10.6" has unmet peer dependency "react@>=16.3.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @storybook/components > react-textarea-autosize@7.1.0" has unmet peer dependency "react@>=0.14.0 <17.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @storybook/components > render-fragment@0.1.1" has unmet peer dependency "react@^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/addon-actions > @storybook/components > render-fragment@0.1.1" has unmet peer dependency "prop-types@^15.0.0 || ^16.0.0".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > env-var-helpers > mad-logs > env-var-helpers@5.2.0" has unmet peer dependency "lodash@^4.x".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > jsdom > request-promise-native > request-promise-core@1.1.1" has unmet peer dependency "request@^2.34".
+warning "workspace-aggregator-39691df6-cc3a-4c37-ab6c-ca002b1f8271 > @cloudbees/core-shipyard > @storybook/react > @storybook/core > @storybook/ui > react-treebeard@3.1.0" has unmet peer dependency "@emotion/styled@^0.10.6".
+[4/4] Building fresh packages...
+Done in 137.60s.
++ yarn bootstrap
+yarn run v1.3.2
+$ lerna bootstrap && yarn build-packages
+lerna notice cli v3.10.8
+lerna info versioning independent
+lerna info ci enabled
+lerna info bootstrap root only
+[1/5] Validating package.json...
+[2/5] Resolving packages...
+success Already up-to-date.
+$ lerna run build --ignore '@cloudbees/*-ui'
+lerna notice cli v3.10.8
+lerna info versioning independent
+lerna info ci enabled
+lerna info filter [ '!@cloudbees/*-ui' ]
+lerna info Executing command in 4 packages: "yarn run build"
+lerna info run Ran npm script 'build' in '@cloudbees/core-flags' in 4.3s:
+$ rimraf ./dist && tsc -p ./tsconfig.build.json
+lerna info run Ran npm script 'build' in '@cloudbees/core-api' in 4.5s:
+$ rimraf ./dist && tsc -p ./tsconfig.build.json
+lerna info run Ran npm script 'build' in '@cloudbees/core-shipyard' in 10.3s:
+$ rimraf ./dist && tsc -p ./tsconfig.build.json && yarn run build-css && yarn run copy-assets
+$ node-sass --importer ../../node_modules/node-sass-package-importer/dist/cli.js src/styles/shipyard.scss dist/index.css
+Rendering Complete, saving .css file...
+Wrote CSS to /workspace/source/packages/core-shipyard/dist/index.css
+$ cd src/ && cpx "./**/*.{scss, css}" ../dist
+lerna info run Ran npm script 'build' in '@cloudbees/core-common' in 4.2s:
+$ rimraf ./dist && tsc -p ./tsconfig.build.json
+lerna success run Ran npm script 'build' in 4 packages in 14.6s:
+lerna success - @cloudbees/core-api
+lerna success - @cloudbees/core-common
+lerna success - @cloudbees/core-flags
+lerna success - @cloudbees/core-shipyard
+Done in 18.52s.
++ yarn lint-ci
+yarn run v1.3.2
+$ yarn lint -q -c ../../tslint.ci.json
+$ lerna run lint --stream --parallel -- -q -c ../../tslint.ci.json
+lerna notice cli v3.10.8
+lerna info versioning independent
+lerna info ci enabled
+lerna info Executing command in 5 packages: "yarn run lint -q -c ../../tslint.ci.json"
+@cloudbees/core-api: warning package.json: No license field
+@cloudbees/core-flags: warning package.json: No license field
+@cloudbees/core-api: $ tslint -c ../../tslint.json -p . "./src/**/*.ts?(x)" -q -c ../../tslint.ci.json
+@cloudbees/core-flags: $ tslint -c ../../tslint.json -p . "./src/**/*.ts?(x)" -q -c ../../tslint.ci.json
+@cloudbees/core-shipyard: warning package.json: No license field
+@cloudbees/core-common: warning package.json: No license field
+@cloudbees/core-shipyard: $ tslint -c ../../tslint.json -p . "./src/**/*.ts?(x)" -q -c ../../tslint.ci.json
+@cloudbees/core-common: $ tslint -c ../../tslint.json -p . "./src/**/*.ts?(x)" -q -c ../../tslint.ci.json
+@cloudbees/core-ui: $ tslint -c ../../tslint.json -p . "./src/**/*.ts?(x)" "./cypress/**/*.ts" -q -c ../../tslint.ci.json
+lerna success run Ran npm script 'lint' in 5 packages in 11.5s:
+lerna success - @cloudbees/core-api
+lerna success - @cloudbees/core-common
+lerna success - @cloudbees/core-flags
+lerna success - @cloudbees/core-shipyard
+lerna success - @cloudbees/core-ui
+Done in 12.63s.
++ yarn build
+yarn run v1.3.2
+$ lerna run build --scope '@cloudbees/*-ui'
+lerna notice cli v3.10.8
+lerna info versioning independent
+lerna info ci enabled
+lerna info filter [ '@cloudbees/*-ui' ]
+lerna info Executing command in 1 package: "yarn run build"
+lerna info run Ran npm script 'build' in '@cloudbees/core-ui' in 35.8s:
+$ rimraf ../../build && cross-env NODE_ENV='production' webpack --config=./webpack/web.js --progress -p
+Starting type checking service...
+Using 1 worker with 2048MB memory limit
+Hash: 9b16ebc559d44ed0afd6
+Version: webpack 4.29.3
+Time: 33537ms
+Built at: 2019-05-13 12:21:50
+                             Asset       Size  Chunks                    Chunk Names
+                       favicon.ico    7.7 KiB          [emitted]         
+    index.9b16ebc559d44ed0afd6.css    191 KiB       0  [emitted]         index
+index.9b16ebc559d44ed0afd6.css.map  107 bytes       0  [emitted]         index
+     index.9b16ebc559d44ed0afd6.js    924 KiB       0  [emitted]  [big]  index
+ index.9b16ebc559d44ed0afd6.js.map   2.95 MiB       0  [emitted]         index
+                        index.html  662 bytes          [emitted]         
+Entrypoint index [big] = index.9b16ebc559d44ed0afd6.js index.9b16ebc559d44ed0afd6.css index.9b16ebc559d44ed0afd6.js.map index.9b16ebc559d44ed0afd6.css.map
+ [27] (webpack)/buildin/global.js 472 bytes {0} [built]
+ [82] (webpack)/buildin/module.js 497 bytes {0} [built]
+[245] multi ./src/index.tsx 28 bytes {0} [built]
+[338] /workspace/source/node_modules/moment/locale sync ^\.\/.*$ 3 KiB {0} [optional] [built]
+[339] ./src/index.tsx + 194 modules 925 KiB {0} [built]
+      | ./src/index.tsx 243 bytes [built]
+      | ../core-flags/src/context.tsx 891 bytes [built]
+      | ./src/routes/index.tsx 2 KiB [built]
+      | ./src/flags.ts 97 bytes [built]
+      | ./src/stores/BuildStore.ts 8.27 KiB [built]
+      | ./src/stores/ProjectStore.ts 6.61 KiB [built]
+      | ./src/kubeql/KubeQLClient.ts 3.3 KiB [built]
+      | ../core-shipyard/src/styles/index.ts 256 KiB [built]
+      | ../core-flags/src/storage.ts 344 bytes [built]
+      | ./src/routes/projects.tsx 3.93 KiB [built]
+      | ./src/routes/builds.tsx 601 bytes [built]
+      | ./src/kubeql/KubeQLQuery.ts 496 bytes [built]
+      | ../core-shipyard/src/icons/CloudbeesCoreLogo.tsx 29.2 KiB [built]
+      | ../core-shipyard/src/icons/Projects.tsx 953 bytes [built]
+      | ../core-shipyard/src/icons/Builds.tsx 1.11 KiB [built]
+      |     + 180 hidden modules
+[363] ../core-shipyard/src/styles/shipyard.scss 41 bytes [built]
+[364] /workspace/source/node_modules/css-loader??ref--5-2!/workspace/source/node_modules/sass-loader/lib/loader.js!../core-shipyard/src/styles/shipyard.scss 192 KiB [built]
+    + 358 hidden modules
+
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  index.9b16ebc559d44ed0afd6.js (924 KiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  index (1.09 MiB)
+      index.9b16ebc559d44ed0afd6.js
+      index.9b16ebc559d44ed0afd6.css
+
+
+WARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+Child extract-text-webpack-plugin ../../node_modules/extract-text-webpack-plugin/dist ../../node_modules/css-loader/index.js??ref--5-2!../../node_modules/sass-loader/lib/loader.js!../../node_modules/@expantra/pipeline-widget-proto/styles/css/main.css:
+    Entrypoint undefined = extract-text-webpack-plugin-output-filename
+       2 modules
+Child extract-text-webpack-plugin ../../node_modules/extract-text-webpack-plugin/dist ../../node_modules/css-loader/index.js??ref--5-2!../../node_modules/sass-loader/lib/loader.js!../../node_modules/react-virtualized/styles.css:
+    Entrypoint undefined = extract-text-webpack-plugin-output-filename
+       2 modules
+Child extract-text-webpack-plugin ../../node_modules/extract-text-webpack-plugin/dist ../../node_modules/css-loader/index.js??ref--5-2!../../node_modules/sass-loader/lib/loader.js!../core-shipyard/src/styles/shipyard.scss:
+    Entrypoint undefined = extract-text-webpack-plugin-output-filename
+    [0] /workspace/source/node_modules/css-loader??ref--5-2!/workspace/source/node_modules/sass-loader/lib/loader.js!../core-shipyard/src/styles/shipyard.scss 192 KiB {0} [built]
+        + 1 hidden module
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [0] /workspace/source/node_modules/html-webpack-plugin/lib/loader.js!./src/index.html 811 bytes {0} [built]
+    [2] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [3] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+lerna success run Ran npm script 'build' in 1 package in 35.8s:
+lerna success - @cloudbees/core-ui
+Done in 36.40s.
+Step: build-step-build-docker-image:
+
+[36mINFO[0m[0000] Downloading base image nginx:1.14.2          
+ERROR: logging before flag.Parse: E0513 12:21:50.715161      12 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0513 12:21:50.720596      12 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+[36mINFO[0m[0001] Error while retrieving image from cache: getting file info: stat /workspace/sha256:706446e9c6667c0880d5da3f39c09a6c7d2114f5a5d6b74a2fafd24ae30d2078: no such file or directory 
+[36mINFO[0m[0001] Downloading base image nginx:1.14.2          
+[36mINFO[0m[0002] Using files from context: [/workspace/source/build] 
+[36mINFO[0m[0002] Using files from context: [/workspace/source/nginx.conf] 
+[36mINFO[0m[0002] Using files from context: [/workspace/source/set_proxy_pass.sh] 
+[36mINFO[0m[0002] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0002] Taking snapshot of full filesystem...        
+[36mINFO[0m[0002] Using files from context: [/workspace/source/build] 
+[36mINFO[0m[0002] COPY ./build /usr/share/nginx/html           
+[36mINFO[0m[0002] Taking snapshot of files...                  
+[36mINFO[0m[0002] Using files from context: [/workspace/source/nginx.conf] 
+[36mINFO[0m[0002] COPY nginx.conf /etc/nginx/nginx-template.conf 
+[36mINFO[0m[0002] Taking snapshot of files...                  
+[36mINFO[0m[0002] Using files from context: [/workspace/source/set_proxy_pass.sh] 
+[36mINFO[0m[0002] COPY set_proxy_pass.sh /                     
+[36mINFO[0m[0002] Taking snapshot of files...                  
+[36mINFO[0m[0002] ENTRYPOINT ["/set_proxy_pass.sh"]            
+[36mINFO[0m[0002] No files changed in this command, skipping snapshotting. 
+2019/05/13 12:21:53 existing blob: sha256:8ca774778e858d3f97d9ec1bec1de879ac5e10096856dc22ed325a3ad944f78a
+2019/05/13 12:21:53 existing blob: sha256:0f23e58bd0b7c74311703e20c21c690a6847e62240ed456f8821f4c067d3659b
+2019/05/13 12:21:53 existing blob: sha256:27833a3ba0a545deda33bb01eaf95a14d05d43bf30bce9267d92d17f069fe897
+2019/05/13 12:21:56 pushed blob: sha256:0953570344003cf754831c42d207b88b3d9fd4851bb91fc742aacee0768d83ce
+2019/05/13 12:21:56 pushed blob: sha256:f8fe430314ea04b289a4a68615da8569908bc17c148f975027eb14707b5f9969
+2019/05/13 12:21:56 pushed blob: sha256:304868c523e10c12216ccbad1e5150ac08beea119be3b585b176f64f65ac802d
+2019/05/13 12:21:57 pushed blob: sha256:0bb89d1703c47053928911f3b5e62e87b356532f7ae1c5be38afb6f3f93c1e3b
+2019/05/13 12:21:58 gcr.io/jenkinsxio/**ui-frontend:0.0.696: digest: sha256:2c7c9e36198a9516c011fb9b0c6027dc4848b3a04f24e2bd0a65d184214f670c size: 1238
+Step: build-step-release-project:
+
+"chartmuseum" has been added to your repositories
+rm -rf charts
+rm -rf **ui*.tgz
+rm -rf requirements.lock
+sed -i -e "s/version:.*/version: 0.0.696/" Chart.yaml
+sed -i -e "s/tag: 0.0.0/tag: 0.0.696/" values.yaml
+** step helm build
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Read credentials for http://jenkins-x-chartmuseum:8080 from vault helm/repos
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: alias1 https://chartmuseum.**.charts-****.cloudbees.com
+Read credentials for https://chartmuseum.**.charts-****.cloudbees.com from vault helm/repos
+Successfully added Helm repository alias1.
+helm lint
+==> Linting .
+Lint OK
+
+1 chart(s) linted, no failures
+helm template .
+---
+# Source: **ui/charts/**ui-cleanup/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: **ui-cleanup
+    chart: "**ui-cleanup-2.3.56"
+    release: "release-name"
+    heritage: "Tiller"
+  name: **ui-cleanup
+---
+# Source: **ui/charts/user-controller/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: user-controller
+  labels:
+    app: user-controller
+    release: release-name
+    heritage: Tiller
+
+---
+# Source: **ui/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: **ui
+    chart: "**ui-0.0.696"
+    release: "release-name"
+    heritage: "Tiller"
+  name: **ui
+---
+# Source: **ui/templates/rolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: release-name-**ui
+  labels:
+    app: **ui
+    chart: **ui-0.0.696
+    release: release-name
+    heritage: Tiller
+subjects:
+- kind: ServiceAccount
+  name: **ui
+  namespace: **
+roleRef:
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+  name: cluster-*****
+
+---
+# Source: **ui/charts/**ui-cleanup/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: **ui-cleanup
+rules:
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+
+---
+# Source: **ui/charts/user-controller/templates/role.yaml
+# Grant the user controller permission to:
+#  - create ServiceAccounts
+#  - list/watch/patch users
+# ...in the ***** namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: user-controller
+  namespace: **
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - create
+- apiGroups:
+  - jenkins.io
+  resources:
+    - users
+  verbs:
+    - list
+    - watch
+    - patch
+
+---
+# Source: **ui/charts/**ui-cleanup/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: **ui-cleanup
+  namespace: **
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: **ui-cleanup
+subjects:
+- kind: ServiceAccount
+  name: **ui-cleanup
+  namespace: **
+---
+# Source: **ui/charts/user-controller/templates/rolebinding.yaml
+# RoleBinding for the role-user permissions.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-controller
+  namespace: **
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: user-controller
+subjects:
+- kind: ServiceAccount
+  name: user-controller
+
+---
+# Source: **ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-**ui
+  labels:
+    app: **ui
+    chart: **ui-0.0.696
+    release: release-name
+    heritage: Tiller
+  annotations:
+    fabric8.io/expose: "true"
+    
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: **ui-frontend
+  selector:
+    app: **ui
+    release: release-name
+
+---
+# Source: **ui/charts/user-controller/templates/deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: user-controller
+  labels:
+    chart: "user-controller-0.0.12"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-controller
+    spec:
+      containers:
+      - name: user-controller
+        image: "docker.io/jenkinsxio/user-controller:0.0.12"
+        imagePullPolicy: Always
+        args:
+        resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 80m
+              memory: 128Mi
+            
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: user-controller
+
+
+---
+# Source: **ui/templates/deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: release-name-**ui
+  labels:
+    app: **ui
+    chart: **ui-0.0.696
+    release: release-name
+    heritage: Tiller
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 35%
+  template:
+    metadata:
+      labels:
+        app: **ui
+        release: release-name
+    spec:
+      containers:
+        - name: **ui-frontend
+          env:
+          - name: API_PORT
+            value: "8080"
+          image: "gcr.io/jenkinsxio/**ui-frontend:0.0.696"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 60
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            
+        - name: **ui-backend
+          image: "gcr.io/jenkinsxio/**ui-backend:0.0.239"
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: XDG_CONFIG_HOME
+            value: /home
+          - name: DISABLE_SSO
+            value: "true"
+          - name: JX_LOG_FORMAT
+            value: json
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /_health
+              port: 8080
+            periodSeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /_health
+              port: 8080
+            periodSeconds: 60
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            
+      serviceAccountName: **ui
+
+---
+# Source: **ui/charts/**ui-cleanup/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: **ui-cleanup
+  labels:
+    heritage: "Tiller"
+    release: "release-name"
+    chart: "**ui-cleanup-2.3.56"
+    component: "release-name-**ui-cleanup"
+  name: **ui-cleanup
+  annotations:
+    helm.sh/hook: pre-delete
+    helm.sh/hook-delete-policy: hook-succeeded
+    
+spec:
+  # backoffLimit: 5
+  template:
+    metadata:
+      name: "release-name"
+      labels:
+        heritage: "Tiller"
+        release: "release-name"
+        chart: "**ui-cleanup-2.3.56"
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: "jenkinsxio/exposecontroller:2.3.56"
+        name: **ui-cleanup
+        command: ["/exposecontroller"]
+        args:
+        - "--cleanup"
+        - "--filter"
+        - "**ui-**ui"
+      serviceAccountName: **ui-cleanup
+      restartPolicy: Never
+---
+# Source: **ui/charts/user-controller/templates/release.yaml
+apiVersion: jenkins.io/v1
+kind: Release
+metadata:
+  creationTimestamp: "2019-04-03T12:27:37Z"
+  deletionTimestamp: null
+  name: 'user-controller-0.0.12'
+spec:
+  commits:
+  - author:
+      accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    branch: master
+    committer:
+      accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    issueIds:
+    - "20"
+    message: |
+      bug: use install namespace for service accounts.
+    sha: f1ae3eea3f2435cd5746cf01c478a61e4baeb1a5
+  gitCloneUrl: https://github.com/cloudbees/core-controllers.git
+  gitHttpUrl: https://github.com/cloudbees/core-controllers
+  gitOwner: cloudbees
+  gitRepository: core-controllers
+  name: 'user-controller'
+  pullRequests:
+  - assignees:
+    - accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    body: "[PLAT-828](https://cloudbees.atlassian.net/browse/PLAT-828).\r\n\r\n<!--
+      Description of the issue/feature and how the change fixes it. -->\r\n\r\n\r\n###
+      Description\r\nExpose the option to grant new users a default role.  Useful
+      when all users should have a generic amount of access (such as that granted
+      by the `viewer` role)\r\n\r\n# Submitter checklist\r\n- [x] I have read and
+      understood the [Rules of Engagement](https://cloudbees.atlassian.net/wiki/spaces/PLAT/pages/803275040/Rules+of+Engagement)\r\n-
+      [x] Change is code complete and matches issue description.\r\n- [x] Commit messages
+      are self contained and descriptive.\r\n- [x] Testing notes provided and reviewed
+      in the JIRA and any manual/developer testing has been performed.\r\n- [x] Code
+      conforms to the go coding conventions.\r\n\r\n\r\n@cloudbees/team-core-platform\r\n"
+    closedBy:
+      accountReference:
+      - id: jtnord
+        provider: jenkins.io/git-github-userid
+      - id: UBYK94WRX
+        provider: slack.apps.cloudbees.com/userid
+      email: jnord@cloudbees.com
+      login: jtnord
+      name: James Nord
+    creationTimestamp: "2019-03-26T11:40:23Z"
+    id: "20"
+    labels:
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/approved
+      url: approved
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/lgtm
+      url: lgtm
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/size/XS
+      url: size/XS
+    state: closed
+    title: '[PLAT-828] add a flag to the chart to expose the default user role'
+    url: https://github.com/cloudbees/core-controllers/pull/20
+    user:
+      accountReference:
+      - id: jtnord
+        provider: jenkins.io/git-github-userid
+      - id: UBYK94WRX
+        provider: slack.apps.cloudbees.com/userid
+      email: jnord@cloudbees.com
+      login: jtnord
+      name: James Nord
+  releaseNotesURL: https://github.com/cloudbees/core-controllers/releases/tag/v0.0.12
+  version: v0.0.12
+status: {}
+
+---
+# Source: **ui/charts/**ui-cleanup/templates/configmap.yaml
+
+---
+# Source: **ui/templates/role.yaml
+
+
+---
+# Source: **ui/templates/sso.yaml
+
+
+helm package .
+Successfully packaged chart and saved it to: /workspace/source/charts/**ui/**ui-0.0.696.tgz
+curl --fail -u ****:********** --data-binary "@**ui-0.0.696.tgz" https://chartmuseum.**.charts-****.cloudbees.com/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  7995  100    14  100  7981     18  10558 --:--:-- --:--:-- --:--:-- 10556
+{"saved":true}rm -rf **ui*.tgz
+rm -rf requirements.lock
+rm -rf charts
+rm -rf **-app-ui*.tgz
+sed -i -e "s/version:.*/version: 0.0.696/" Chart.yaml
+echo "  version: 0.0.696" >> requirements.yaml
+** step helm build
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+helm lint
+==> Linting .
+Lint OK
+
+1 chart(s) linted, no failures
+helm template .
+---
+# Source: **-app-ui/charts/ui/charts/**ui-cleanup/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: **ui-cleanup
+    chart: "**ui-cleanup-2.3.56"
+    release: "release-name"
+    heritage: "Tiller"
+  name: **ui-cleanup
+---
+# Source: **-app-ui/charts/ui/charts/user-controller/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: user-controller
+  labels:
+    app: user-controller
+    release: release-name
+    heritage: Tiller
+
+---
+# Source: **-app-ui/charts/ui/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: ui
+    chart: "ui-0.0.696"
+    release: "release-name"
+    heritage: "Tiller"
+  name: ui
+---
+# Source: **-app-ui/charts/ui/templates/rolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: release-name-ui
+  labels:
+    app: ui
+    chart: ui-0.0.696
+    release: release-name
+    heritage: Tiller
+subjects:
+- kind: ServiceAccount
+  name: ui
+  namespace: **
+roleRef:
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+  name: cluster-*****
+
+---
+# Source: **-app-ui/charts/ui/charts/**ui-cleanup/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: **ui-cleanup
+rules:
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+
+---
+# Source: **-app-ui/charts/ui/charts/user-controller/templates/role.yaml
+# Grant the user controller permission to:
+#  - create ServiceAccounts
+#  - list/watch/patch users
+# ...in the ***** namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: user-controller
+  namespace: **
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - create
+- apiGroups:
+  - jenkins.io
+  resources:
+    - users
+  verbs:
+    - list
+    - watch
+    - patch
+
+---
+# Source: **-app-ui/charts/ui/charts/**ui-cleanup/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: **ui-cleanup
+  namespace: **
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: **ui-cleanup
+subjects:
+- kind: ServiceAccount
+  name: **ui-cleanup
+  namespace: **
+---
+# Source: **-app-ui/charts/ui/charts/user-controller/templates/rolebinding.yaml
+# RoleBinding for the role-user permissions.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-controller
+  namespace: **
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: user-controller
+subjects:
+- kind: ServiceAccount
+  name: user-controller
+
+---
+# Source: **-app-ui/charts/ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-ui
+  labels:
+    app: ui
+    chart: ui-0.0.696
+    release: release-name
+    heritage: Tiller
+  annotations:
+    fabric8.io/expose: "true"
+    
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: **ui-frontend
+  selector:
+    app: ui
+    release: release-name
+
+---
+# Source: **-app-ui/charts/ui/charts/user-controller/templates/deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: user-controller
+  labels:
+    chart: "user-controller-0.0.12"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-controller
+    spec:
+      containers:
+      - name: user-controller
+        image: "docker.io/jenkinsxio/user-controller:0.0.12"
+        imagePullPolicy: Always
+        args:
+        resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 80m
+              memory: 128Mi
+            
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: user-controller
+
+
+---
+# Source: **-app-ui/charts/ui/templates/deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: release-name-ui
+  labels:
+    app: ui
+    chart: ui-0.0.696
+    release: release-name
+    heritage: Tiller
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 35%
+  template:
+    metadata:
+      labels:
+        app: ui
+        release: release-name
+    spec:
+      containers:
+        - name: ui-frontend
+          env:
+          - name: API_PORT
+            value: "8080"
+          image: "gcr.io/jenkinsxio/**ui-frontend:0.0.696"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 60
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            
+        - name: ui-backend
+          image: "gcr.io/jenkinsxio/**ui-backend:0.0.239"
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: XDG_CONFIG_HOME
+            value: /home
+          - name: JX_LOG_FORMAT
+            value: json
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /_health
+              port: 8080
+            periodSeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /_health
+              port: 8080
+            periodSeconds: 60
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            
+      serviceAccountName: ui
+
+---
+# Source: **-app-ui/charts/ui/charts/**ui-cleanup/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: **ui-cleanup
+  labels:
+    heritage: "Tiller"
+    release: "release-name"
+    chart: "**ui-cleanup-2.3.56"
+    component: "release-name-**ui-cleanup"
+  name: **ui-cleanup
+  annotations:
+    helm.sh/hook: pre-delete
+    helm.sh/hook-delete-policy: hook-succeeded
+    
+spec:
+  # backoffLimit: 5
+  template:
+    metadata:
+      name: "release-name"
+      labels:
+        heritage: "Tiller"
+        release: "release-name"
+        chart: "**ui-cleanup-2.3.56"
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: "jenkinsxio/exposecontroller:2.3.56"
+        name: **ui-cleanup
+        command: ["/exposecontroller"]
+        args:
+        - "--cleanup"
+        - "--filter"
+        - "**ui-**ui"
+      serviceAccountName: **ui-cleanup
+      restartPolicy: Never
+---
+# Source: **-app-ui/charts/ui/templates/sso.yaml
+
+apiVersion: "jenkins.io/v1"
+kind: "SSO"
+metadata:
+  name: sso-release-name-ui
+  namespace: **
+spec:
+  oidcIssuerUrl: 
+  upstreamService: release-name-ui
+  forwardToken: true
+  domain: 
+  certIssuerName: letsencrypt-prod
+  cookieSpec:
+    name: sso-**ui
+    expire: "168h"
+    refresh: "60m"
+    secure: true
+    httpOnly: true
+  proxyImage: "quay.io/pusher/oauth2_proxy"
+  proxyImageTag: "v3.2.0"
+  proxyResources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 80m
+      memory: 128Mi
+
+---
+# Source: **-app-ui/templates/app.yaml
+apiVersion: jenkins.io/v1
+kind: App
+metadata:
+  name: release-name-**-app-ui
+  labels:
+    chart: "**-app-ui-0.0.696"
+spec:
+  schemaPreprocessor:
+    image: "gcr.io/jenkinsxio/builder-go:0.1.435"
+    command:
+      - "/bin/sh"
+    env:
+      - name: DOMAIN
+        valueFrom:
+          configMapKeyRef:
+            name: ingress-config
+            key: domain
+    args:
+      - "-c"
+      - "/usr/bin/** step values schema template --set domain=`echo $DOMAIN`"
+
+---
+# Source: **-app-ui/charts/ui/charts/user-controller/templates/release.yaml
+apiVersion: jenkins.io/v1
+kind: Release
+metadata:
+  creationTimestamp: "2019-04-03T12:27:37Z"
+  deletionTimestamp: null
+  name: 'user-controller-0.0.12'
+spec:
+  commits:
+  - author:
+      accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    branch: master
+    committer:
+      accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    issueIds:
+    - "20"
+    message: |
+      bug: use install namespace for service accounts.
+    sha: f1ae3eea3f2435cd5746cf01c478a61e4baeb1a5
+  gitCloneUrl: https://github.com/cloudbees/core-controllers.git
+  gitHttpUrl: https://github.com/cloudbees/core-controllers
+  gitOwner: cloudbees
+  gitRepository: core-controllers
+  name: 'user-controller'
+  pullRequests:
+  - assignees:
+    - accountReference:
+      - id: markawm
+        provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - provider: jenkins.io/git-github-userid
+      - id: UCKGL1HDF
+        provider: slack.apps.cloudbees.com/userid
+      email: mwynnmackenzie@cloudbees.com
+      login: cgg0mjg0njk5mbigz2l0ahvi
+      name: Mark Wynn-Mackenzie
+      serviceAccount: cgg0mjg0njk5mbigz2l0ahvi
+    body: "[PLAT-828](https://cloudbees.atlassian.net/browse/PLAT-828).\r\n\r\n<!--
+      Description of the issue/feature and how the change fixes it. -->\r\n\r\n\r\n###
+      Description\r\nExpose the option to grant new users a default role.  Useful
+      when all users should have a generic amount of access (such as that granted
+      by the `viewer` role)\r\n\r\n# Submitter checklist\r\n- [x] I have read and
+      understood the [Rules of Engagement](https://cloudbees.atlassian.net/wiki/spaces/PLAT/pages/803275040/Rules+of+Engagement)\r\n-
+      [x] Change is code complete and matches issue description.\r\n- [x] Commit messages
+      are self contained and descriptive.\r\n- [x] Testing notes provided and reviewed
+      in the JIRA and any manual/developer testing has been performed.\r\n- [x] Code
+      conforms to the go coding conventions.\r\n\r\n\r\n@cloudbees/team-core-platform\r\n"
+    closedBy:
+      accountReference:
+      - id: jtnord
+        provider: jenkins.io/git-github-userid
+      - id: UBYK94WRX
+        provider: slack.apps.cloudbees.com/userid
+      email: jnord@cloudbees.com
+      login: jtnord
+      name: James Nord
+    creationTimestamp: "2019-03-26T11:40:23Z"
+    id: "20"
+    labels:
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/approved
+      url: approved
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/lgtm
+      url: lgtm
+    - color: ededed
+      name: https://api.github.com/repos/cloudbees/core-controllers/labels/size/XS
+      url: size/XS
+    state: closed
+    title: '[PLAT-828] add a flag to the chart to expose the default user role'
+    url: https://github.com/cloudbees/core-controllers/pull/20
+    user:
+      accountReference:
+      - id: jtnord
+        provider: jenkins.io/git-github-userid
+      - id: UBYK94WRX
+        provider: slack.apps.cloudbees.com/userid
+      email: jnord@cloudbees.com
+      login: jtnord
+      name: James Nord
+  releaseNotesURL: https://github.com/cloudbees/core-controllers/releases/tag/v0.0.12
+  version: v0.0.12
+status: {}
+
+---
+# Source: **-app-ui/charts/ui/charts/**ui-cleanup/templates/configmap.yaml
+
+---
+# Source: **-app-ui/charts/ui/templates/role.yaml
+
+
+helm package .
+Successfully packaged chart and saved it to: /workspace/source/charts/**-app-ui/**-app-ui-0.0.696.tgz
+curl --fail -u ****:********** --data-binary "@**-app-ui-0.0.696.tgz" https://chartmuseum.**.charts-****.cloudbees.com/api/charts
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0  8903    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  8917  100    14  100  8903     22  14174 --:--:-- --:--:-- --:--:-- 14176
+{"saved":true}
+Step: build-step-upgrade-infra:
+
+Read credentials for https://chartmuseum.**.charts-****.cloudbees.com from vault helm/repos
+Fetched chart **-app-ui to dir /tmp/**-helm-fetch-**-app-ui-057535359/**-app-ui
+Preparing questions to configure **-app-ui.
+If this is the first time you have installed the app, this may take a couple of minutes.
+Questions prepared.
+Enter a value for domain infra.jrawlings.co.uk [Automatically accepted existing value]
+Enter a value for oidcIssuerUrl https://dex.infra.jrawlings.co.uk [Automatically accepted existing value]
+Enter a value for certIssuerName letsencrypt-prod [Automatically accepted existing value]
+Created Pull Request: https://github.com/jenkins-x/environment-tekton-mole-dev/pull/117
+
+Step: build-step-upgrade-****-cluster:
+
+Error: unknown shorthand flag: 's' in -s
+
+
+Aliases:
+step, steps
+Available Commands:
+  step bdd              Performs the BDD tests on the current cluster, new clusters or teams
+  step blog             Creates a blog post with changes, metrics and charts showing improvements
+  step buildpack        buildpack [command]
+  step changelog        Creates a changelog for a git tag
+  step collect          Collects the specified files that need storing from the build
+  step create           create [command]
+  step env              env [command]
+  step git              git [command]
+  step gpg              Creates the GPG credentials file for GPG signing releases
+  step helm             helm [command]
+  step link             achieve service linking in preview environments
+  step next-buildnumber Generates the next build unique number for a pipeline.
+  step next-version     Writes next semantic version
+  step nexus            nexus [command]
+  step post             post step actions
+  step pr               pipeline step pr
+  step pre              pre step actions
+  step release          performs a release on the current Git repository
+  step report           report step actions
+  step split            Mirrors the code from a monorepo into separate microservice style Git repositories so its easier to do finer grained releases
+  step tag              Creates a git tag and pushes to remote repo
+  step validate         Validates the command line tools, container and platform to ensure a pipeline can run properly
+  step verify           Performs deployment verification in a pipeline
+  step wait             Waits for the given artifact to be available in a maven style repository
+
+Locally Available Commands:
+  release version       /bin/**-release-version (from plugin)
+  release version       /usr/bin/**-release-version (from plugin)
+
+Usage:
+  ** step [flags] [options]
+Use "** <command> --help" for more information about a given command.
+Use "** options" for a list of global command-line options (applies to all commands).
+
+Error: unknown shorthand flag: 's' in -s
+
+
+Aliases:
+step, steps
+Available Commands:
+  step bdd              Performs the BDD tests on the current cluster, new clusters or teams
+  step blog             Creates a blog post with changes, metrics and charts showing improvements
+  step buildpack        buildpack [command]
+  step changelog        Creates a changelog for a git tag
+  step collect          Collects the specified files that need storing from the build
+  step create           create [command]
+  step env              env [command]
+  step git              git [command]
+  step gpg              Creates the GPG credentials file for GPG signing releases
+  step helm             helm [command]
+  step link             achieve service linking in preview environments
+  step next-buildnumber Generates the next build unique number for a pipeline.
+  step next-version     Writes next semantic version
+  step nexus            nexus [command]
+  step post             post step actions
+  step pr               pipeline step pr
+  step pre              pre step actions
+  step release          performs a release on the current Git repository
+  step report           report step actions
+  step split            Mirrors the code from a monorepo into separate microservice style Git repositories so its easier to do finer grained releases
+  step tag              Creates a git tag and pushes to remote repo
+  step validate         Validates the command line tools, container and platform to ensure a pipeline can run properly
+  step verify           Performs deployment verification in a pipeline
+  step wait             Waits for the given artifact to be available in a maven style repository
+
+Locally Available Commands:
+  release version       /bin/**-release-version (from plugin)
+  release version       /usr/bin/**-release-version (from plugin)
+
+Usage:
+  ** step [flags] [options]
+Use "** <command> --help" for more information about a given command.
+Use "** options" for a list of global command-line options (applies to all commands).
+
+Activated service account credentials for: [core-dev-gke-sa@core-dev-1.iam.gserviceaccount.com]
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for birdmire-ckcd-e2e.
+./upgrade-****-cluster.sh: line 18: cd: /workspace/source/charts/**ui-frontend/**ui: No such file or directory
+$HELM_HOME has been configured at /builder/home/.helm.
+
+Tiller (the Helm server-side component) has been upgraded to the current version.
+Happy Helming!
+"chartmuseum.jenkins-x.io" has been added to your repositories
+Error: Looks like "https://:@chartmuseum.**.charts-****.cloudbees.com" is not a valid chart repository or cannot be reached: Failed to fetch https://:@chartmuseum.**.charts-****.cloudbees.com/index.yaml : 401 Unauthorized
+Hang tight while we grab the latest from your chart repositories...
+...Skip local chart repository
+...Successfully got an update from the "chartmuseum.jenkins-x.io" chart repository
+...Successfully got an update from the "chartmuseum" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "alias1" chart repository
+...Successfully got an update from the "jenkins-x-chartmuseum" chart repository
+Update Complete. ⎈ Happy Helming!⎈ 
+Error: failed to download "chartmuseum.**.charts-****.cloudbees.com/**ui" (hint: running `helm repo update` may help)
+WARNING: Upgrading **** cluster failed
