@@ -129,7 +129,10 @@ func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath st
 	}
 	defer file.Close()
 	_, err = io.Copy(w, file)
-	return fmt.Errorf("reading file from cache: %v", err)
+	if err != nil {
+		return fmt.Errorf("copying file from cache: %v", err)
+	}
+	return nil
 }
 
 func (ctrl *FileController) writeFileToCache(filepath string, file io.ReadCloser) error {
