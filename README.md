@@ -27,9 +27,6 @@ cache:
 repositories:
     - url: "https://repo1.maven.org/maven2"
     - url: "http://uk.maven.org/maven2/"
-    - url: "http://my.private.maven.repo"
-      header:
-          Authorization: "Bearer <Token>"
 ```
 
 The header (for example Bearer token authentication) and timeout can be modified for every remote repository:
