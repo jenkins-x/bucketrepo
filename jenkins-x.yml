@@ -22,10 +22,6 @@ pipelineConfig:
             value: /builder/home/.helm
           - name: GOPATH
             value: /workspace/go
-          - name: GOPROXY
-            value: http://jenkins-x-athens-proxy
-          - name: GOPROXY
-            value: http://jenkins-x-athens-proxy
           - name: APP_NAME
             value: bucketrepo
           - name: GOOGLE_APPLICATION_CREDENTIALS
