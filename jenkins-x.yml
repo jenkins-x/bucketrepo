@@ -21,7 +21,9 @@ pipelineConfig:
           - name: HELM_HOME
             value: /builder/home/.helm
           - name: GOPATH
-            value: /workspace/source/go
+            value: /workspace/go
+          - name: GOPROXY
+            value: http://jenkins-x-athens-proxy
           - name: GOPROXY
             value: http://jenkins-x-athens-proxy
           - name: APP_NAME
@@ -56,36 +58,14 @@ pipelineConfig:
             command: helm
             args: ['init','--client-only']
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            command: mv
-            args:
-              - /workspace/source
-              - /workspace/tmp
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/tmp
-            command: mkdir
-            args:
-              - -p
-              - /workspace/source/go/src/github.com/jenkins-x
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/tmp
-            command: mv
-            args:
-              - /workspace/tmp
-              - /workspace/source/go/src/github.com/jenkins-x/bucketrepo
-
           - name: release
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: make
             args:
             - all
 
           - name: build-and-push-image
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: /kaniko/executor
             args: 
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
@@ -96,14 +76,14 @@ pipelineConfig:
 
           - name: release-charts
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/bucketrepo
+            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo/charts/bucketrepo
             command: make
             args:
             - release
 
           - name: release-app
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/jx-app-bucketrepo
+            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo/charts/jx-app-bucketrepo
             command: make
             args:
               - release
@@ -151,36 +131,14 @@ pipelineConfig:
             command: helm
             args: ['init','--client-only']
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            command: mv
-            args:
-              - /workspace/source
-              - /workspace/tmp
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/tmp
-            command: mkdir
-            args:
-              - -p
-              - /workspace/source/go/src/github.com/jenkins-x
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/tmp
-            command: mv
-            args:
-              - /workspace/tmp
-              - /workspace/source/go/src/github.com/jenkins-x/bucketrepo
- 
           - name: make-all
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: make
             args: 
             - all
 
           - name: build-and-push-image
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
-            dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: /kaniko/executor
             args:
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
