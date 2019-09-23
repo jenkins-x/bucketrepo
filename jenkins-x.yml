@@ -20,77 +20,56 @@ pipelineConfig:
             value: /workspace/source
           - name: HELM_HOME
             value: /builder/home/.helm
-          - name: GOOGLE_APPLICATION_CREDENTIALS
-            value: /builder/home/kaniko-secret.json
           - name: GOPATH
             value: /workspace/source/go
           - name: GOPROXY
             value: http://jenkins-x-athens-proxy
           - name: APP_NAME
             value: bucketrepo
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /secrets/kaniko/kaniko-secret.json
+          - name: CHARTMUSEUM_USER
+            valueFrom:
+              secretKeyRef:
+                name: jenkins-x-chartmuseum
+                key: BASIC_AUTH_USER
+          - name: CHARTMUSEUM_PASS
+            valueFrom:
+              secretKeyRef:
+                name: jenkins-x-chartmuseum
+                key: BASIC_AUTH_PASS
+          options:
+            volumes:
+              - name: kaniko-secret
+                secret:
+                  secretName: kaniko-secret
+                  items:
+                    - key: kaniko-secret
+                      path: kaniko/kaniko-secret.json
+            containerOptions:
+              volumeMounts:
+                - name: kaniko-secret
+                  mountPath: /secrets
           steps:
           - name: init-helm
             image: alpine/helm:2.12.3
             command: helm
             args: ['init','--client-only']
-            resources:
-              limits:
-                cpu: 0.2
-                memory: 128Mi
-              requests:
-                cpu: 0.1
-                memory: 64Mi
 
-          - image: jenkinsxio/jx:1.3.1008 
-            command: jx
-            args:
-            - step
-            - credential
-            - -s
-            - kaniko-secret
-            - -k
-            - kaniko-secret
-            - -f
-            - /builder/home/kaniko-secret.json
-
-          - image: jenkinsxio/jx:1.3.963
-            command: jx
-            args:
-            - step
-            - credential
-            - -s
-            - jenkins-x-chartmuseum
-            - -k
-            - BASIC_AUTH_USER
-            - -f
-            - /builder/home/basic-auth-user
-
-          - image: jenkinsxio/jx:1.3.963
-            command: jx
-            args:
-            - step
-            - credential
-            - -s
-            - jenkins-x-chartmuseum
-            - -k
-            - BASIC_AUTH_PASS
-            - -f
-            - /builder/home/basic-auth-pass
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             command: mv
             args:
               - /workspace/source
               - /workspace/tmp
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/tmp
             command: mkdir
             args:
               - -p
               - /workspace/source/go/src/github.com/jenkins-x
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/tmp
             command: mv
             args:
@@ -98,7 +77,7 @@ pipelineConfig:
               - /workspace/source/go/src/github.com/jenkins-x/bucketrepo
 
           - name: release
-            image: gcr.io/jenkinsxio/builder-go:0.1.332
+            image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: make
             args:
@@ -118,18 +97,19 @@ pipelineConfig:
             args: 
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
             - --destination=gcr.io/jenkinsxio/bucketrepo:${inputs.params.version} 
+            - --destination=gcr.io/jenkinsxio/bucketrepo:latest
             - --context=/workspace/source/go/src/github.com/jenkins-x/bucketrepo
             - --cache-dir=/workspace
 
           - name: release-charts
-            image: gcr.io/jenkinsxio/builder-go:0.1.332
+            image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/bucketrepo
             command: make
             args:
             - release
 
           - name: release-app
-            image: gcr.io/jenkinsxio/builder-go:0.1.332
+            image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo/charts/jx-app-bucketrepo
             command: make
             args:
@@ -138,7 +118,7 @@ pipelineConfig:
     pullRequest:
       pipeline:
         agent:
-          image: rawlingsj/executor:dev31
+          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
         stages:
         - name: ci
           environment:
@@ -155,11 +135,23 @@ pipelineConfig:
           - name: GOPROXY
             value: http://jenkins-x-athens-proxy
           - name: GOOGLE_APPLICATION_CREDENTIALS
-            value: /builder/home/kaniko-secret.json
+            value: /secrets/kaniko/kaniko-secret.json
           - name: GOPATH
             value: /workspace/source/go
           - name: APP_NAME
             value: bucketrepo
+          options:
+            volumes:
+              - name: kaniko-secret
+                secret:
+                  secretName: kaniko-secret
+                  items:
+                    - key: kaniko-secret
+                      path: kaniko/kaniko-secret.json
+            containerOptions:
+              volumeMounts:
+                - name: kaniko-secret
+                  mountPath: /secrets
           steps:
           - name: init-helm
             image: alpine/helm:2.12.3
@@ -173,32 +165,20 @@ pipelineConfig:
                 cpu: 0.1
                 memory: 64Mi
 
-          - image: jenkinsxio/jx:1.3.1008 
-            command: jx
-            args:
-            - step
-            - credential
-            - -s
-            - kaniko-secret
-            - -k
-            - kaniko-secret
-            - -f
-            - /builder/home/kaniko-secret.json
-
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             command: mv
             args:
               - /workspace/source
               - /workspace/tmp
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/tmp
             command: mkdir
             args:
               - -p
               - /workspace/source/go/src/github.com/jenkins-x
 
-          - image: gcr.io/jenkinsxio/builder-go:0.1.320
+          - image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/tmp
             command: mv
             args:
@@ -206,7 +186,7 @@ pipelineConfig:
               - /workspace/source/go/src/github.com/jenkins-x/bucketrepo
  
           - name: make-all
-            image: gcr.io/jenkinsxio/builder-go:0.1.332
+            image: gcr.io/jenkinsxio/builder-go:0.1.734
             dir: /workspace/source/go/src/github.com/jenkins-x/bucketrepo
             command: make
             args: 
