@@ -1,7 +1,5 @@
 CHART_REPO := https://chartmuseum:8080
 NAME := jx-app-bucketrepo
-CHARTMUSEUM_CREDS_USR := $(shell cat /builder/home/basic-auth-user 2> /dev/null)
-CHARTMUSEUM_CREDS_PSW := $(shell cat /builder/home/basic-auth-pass 2> /dev/null)
 
 setup:
 	minikube addons enable ingress
@@ -32,4 +30,4 @@ release: clean
 	echo "  version: $(VERSION)" >> requirements.yaml
 	jx step helm build
 	helm package .
-	curl --fail -u $(CHARTMUSEUM_CREDS_USR):$(CHARTMUSEUM_CREDS_PSW) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
+	curl --fail -u $(CHARTMUSEUM_USER):$(CHARTMUSEUM_PASS) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
