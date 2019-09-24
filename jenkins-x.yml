@@ -58,12 +58,14 @@ pipelineConfig:
 
           - name: release
             image: gcr.io/jenkinsxio/builder-go:0.1.734
+            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo
             command: make
             args:
             - all
 
           - name: build-and-push-image
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo
             command: /kaniko/executor
             args: 
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
