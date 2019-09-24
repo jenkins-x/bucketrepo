@@ -58,14 +58,12 @@ pipelineConfig:
 
           - name: release
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo
             command: make
             args:
             - all
 
           - name: build-and-push-image
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
-            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo
             command: /kaniko/executor
             args: 
             - --dockerfile=/workspace/source/go/src/github.com/jenkins-x/bucketrepo/Dockerfile
@@ -76,14 +74,14 @@ pipelineConfig:
 
           - name: release-charts
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo/charts/bucketrepo
+            dir: /workspace/source/charts/bucketrepo
             command: make
             args:
             - release
 
           - name: release-app
             image: gcr.io/jenkinsxio/builder-go:0.1.734
-            dir: /workspace/source/src/github.com/jenkins-x/bucketrepo/charts/jx-app-bucketrepo
+            dir: /workspace/source/charts/jx-app-bucketrepo
             command: make
             args:
               - release
@@ -105,12 +103,12 @@ pipelineConfig:
             value: jenkins-x-bot
           - name: BASE_WORKSPACE
             value: /workspace/source
+          - name: GOPATH
+            value: /workspace/go
           - name: GOPROXY
             value: http://jenkins-x-athens-proxy
           - name: GOOGLE_APPLICATION_CREDENTIALS
             value: /secrets/kaniko/kaniko-secret.json
-          - name: GOPATH
-            value: /workspace/source/go
           - name: APP_NAME
             value: bucketrepo
           options:
