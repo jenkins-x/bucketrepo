@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -44,6 +45,7 @@ type CacheConfig struct {
 type RepositoryConfig struct {
 	URL     string        `mapstructure:"url"`
 	Timeout time.Duration `mapstructure:"timeout"`
+	Header  http.Header   `mapstructure:"header"`
 }
 
 // Config keeps the entire configuration
@@ -73,7 +75,7 @@ func NewConfig(configPath string) Config {
 	}
 
 	if len(config.Repositories) == 0 {
-		config.Repositories = []RepositoryConfig{RepositoryConfig{"https://repo1.maven.org/maven2", 1 * time.Minute}}
+		config.Repositories = []RepositoryConfig{RepositoryConfig{"https://repo1.maven.org/maven2", 1 * time.Minute, nil}}
 	}
 	for i := range config.Repositories {
 		if config.Repositories[i].Timeout == 0 {

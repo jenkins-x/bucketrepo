@@ -27,7 +27,20 @@ cache:
 repositories:
     - url: "https://repo1.maven.org/maven2"
     - url: "http://uk.maven.org/maven2/"
+```
 
+The header (for example Bearer token authentication) and timeout can be modified for every remote repository:
+```YAML
+...
+
+repositories:
+    - url: "https://repo1.maven.org/maven2"
+      timeout: "30s"
+    - url: "http://uk.maven.org/maven2/"
+    - url: "http://my.private.maven.repo"
+      timeout: "10s"
+      header:
+          Authorization: "Bearer <Token>"
 ```
 
 The cloud storage can be enabled by providing a bucket URL:

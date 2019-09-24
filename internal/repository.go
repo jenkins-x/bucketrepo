@@ -18,6 +18,7 @@ type Repository interface {
 type HTTPRepository struct {
 	client  *http.Client
 	baseURL string
+	header  http.Header
 }
 
 var _ Repository = (*HTTPRepository)(nil)
@@ -30,6 +31,7 @@ func NewRepository(config RepositoryConfig) *HTTPRepository {
 	return &HTTPRepository{
 		client:  client,
 		baseURL: config.URL,
+		header:  config.Header,
 	}
 }
 
@@ -41,7 +43,13 @@ func (r *HTTPRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 	}
 	u.Path = path.Join(u.Path, filePath)
 
-	resp, err := r.client.Get(u.String())
+	request, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	for key, values := range r.header {
+		for _, value := range values {
+			request.Header.Add(key, value)
+		}
+	}
+	resp, err := r.client.Do(request)
 	if err != nil {
 		return nil, err
 	}
