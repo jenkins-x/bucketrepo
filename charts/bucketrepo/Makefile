@@ -7,7 +7,7 @@ init:
 	helm init --client-only
 
 setup: init
-	helm repo add jenkinsx http://chartmuseum.jenkins-x.io 	
+	helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
 
 build: clean setup
 	helm dependency build
@@ -39,6 +39,5 @@ else
 	exit -1
 endif
 	helm package .
-	curl --fail -u $(CHARTMUSEUM_USER):$(CHARTMUSEUM_PASS) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
 	helm repo update
 	rm -rf ${NAME}*.tgz

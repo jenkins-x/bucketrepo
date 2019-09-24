@@ -1,20 +1,21 @@
-CHART_REPO := https://chartmuseum:8080
+CHART_REPO := http://jenkins-x-chartmuseum:8080
 NAME := jx-app-bucketrepo
 
-setup:
-	minikube addons enable ingress
-	brew install kubernetes-helm
-	helm init
+init: 
+	helm init --client-only
 
-build: clean
+setup: init
+	helm repo add jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+
+build: clean setup
 	jx step helm build
 	helm lint
 	helm template .
 
-install: clean build
+install: clean setup build
 	helm install . --name ${NAME}
 
-upgrade: clean build
+upgrade: clean setup build
 	helm upgrade ${NAME} .
 
 delete:
