@@ -1,5 +1,7 @@
 http:
     addr: ":{{ .Values.service.internalPort }}"
+    username: ":{{ .Values.config.auth.username }}"
+    password: ":{{ .Values.config.auth.password }}"
 
 storage:
     enabled: {{ .Values.config.storage.enabled }}
@@ -9,5 +11,10 @@ cache:
     base_dir: "{{ .Values.config.cache.dir }}"
 
 repositories:
-    - url: "https://repo1.maven.org/maven2"
-    - url: "http://uk.maven.org/maven2/"
+{{- if .Values.config.repositories }}
+{{- range $key, $value := .Values.config.repositories }}
+  {{- if $value }}
+    - url: {{ $value | quote }}
+  {{- end }}
+{{- end }}
+{{- end }}
