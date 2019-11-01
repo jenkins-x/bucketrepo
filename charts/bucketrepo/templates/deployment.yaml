@@ -50,7 +50,7 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 12 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
-{{- if .Values.serviceaccount.enabled -}}
+{{- if .Values.serviceaccount.enabled }}
       serviceAccountName: {{ template "fullname" . }}
 {{- end }}
       volumes:
