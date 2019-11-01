@@ -1,7 +1,7 @@
 http:
     addr: ":{{ .Values.service.internalPort }}"
-    username: ":{{ .Values.config.auth.username }}"
-    password: ":{{ .Values.config.auth.password }}"
+    username: "{{ .Values.config.auth.username }}"
+    password: "{{ .Values.config.auth.password }}"
 
 storage:
     enabled: {{ .Values.config.storage.enabled }}
