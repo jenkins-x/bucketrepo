@@ -34,9 +34,25 @@ readinessProbe:
 terminationGracePeriodSeconds: 10
 
 config:
-  path: /config 
+  auth:
+    username: ""
+    password: ""
+  path: /config
   storage:
-    enabled: false 
+    enabled: false
     bucketUrl: gs://bucketrepo
   cache:
     dir: /tmp/bucketrepo
+  repositories:
+    central: "https://repo.maven.org/maven2"
+    central1: "https://repo1.maven.org/maven2"
+    uk: "http://uk.maven.org/maven2/"
+    spring-releases: "https://repo.spring.io/release/"
+    spring-milestone: "https://repo.spring.io/milestone/"
+    gradle: "https://services.gradle.org/distributions/"
+    gradlem2: "https://plugins.gradle.org/m2/"
+    jenkins-public: "https://repo.jenkins-ci.org/public/"
+    jenkins-releases: "https://repo.jenkins-ci.org/releases/"
+    jitpack: "https://jitpack.io/"
+    npm: "https://registry.npmjs.org/"
+

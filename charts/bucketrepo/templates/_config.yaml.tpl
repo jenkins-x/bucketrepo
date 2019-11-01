@@ -1,5 +1,7 @@
 http:
     addr: ":{{ .Values.service.internalPort }}"
+    username: ":{{ .Values.config.auth.username }}"
+    password: ":{{ .Values.config.auth.password }}"
 
 storage:
     enabled: {{ .Values.config.storage.enabled }}
@@ -9,15 +11,10 @@ cache:
     base_dir: "{{ .Values.config.cache.dir }}"
 
 repositories:
-    - url: "https://repo.maven.org/maven2"
-    - url: "https://repo1.maven.org/maven2"
-    - url: "http://uk.maven.org/maven2/"
-    - url: "https://repo.spring.io/release/"
-    - url: "https://repo.spring.io/milestone/"
-    - url: "https://services.gradle.org/distributions/"
-    - url: "https://repo.jenkins-ci.org/public/"
-    - url: "https://repo.jenkins-ci.org/releases/"
-    - url: "https://jitpack.io/"
-    - url: "https://repo.jenkins-ci.org/releases/"
-    - url: "https://registry.npmjs.org/"
-    - url: "https://plugins.gradle.org/m2/"
+{{- if .Values.config.repositories }}
+{{- range $key, $value := .Values.config.repositories }}
+  {{- if $value }}
+    - url: {{ $value | quote }}
+  {{- end }}
+{{- end }}
+{{- end }}
