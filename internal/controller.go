@@ -4,7 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
+	"path/filepath"
+	"strings"
 
 	"github.com/julienschmidt/httprouter"
 	log "github.com/sirupsen/logrus"
@@ -17,13 +20,24 @@ type FileController struct {
 	repositories []Repository
 }
 
+var (
+	// defaultChartIndex an empty chart index
+	defaultChartIndex = `apiVersion: v1
+generated: "2019-11-01T17:04:16Z"
+entries:`
+)
+
 // NewFileController creates a new file controller
-func NewFileController(cache Storage, storage Storage, repositories []Repository) *FileController {
-	return &FileController{
+func NewFileController(cache Storage, storage Storage, repositories []Repository, chartsPath string) *FileController {
+	ctrl := &FileController{
 		cache:        cache,
 		cloudStorage: storage,
 		repositories: repositories,
 	}
+	if chartsPath != "" {
+		ctrl.ensureChartIndex(filepath.Join(chartsPath, "index.yaml"))
+	}
+	return ctrl
 }
 
 // GetFile handlers which returns an artifacts file either from the local file cache, cloud storage or
@@ -170,4 +184,17 @@ func (ctrl *FileController) downloadFile(filepath string) (io.ReadCloser, error)
 	}
 
 	return nil, fmt.Errorf("unable to download %s from any configured repository", filepath)
+}
+
+func (ctrl *FileController) ensureChartIndex(filepath string) error {
+	// ignore errors if no cloud storage
+	ctrl.updateCache(filepath)
+
+	file, err := ctrl.cache.ReadFile(filepath)
+	if err != nil {
+		log.Infof("no charts file %s so generating it", filepath)
+		return ctrl.cache.WriteFile(filepath, ioutil.NopCloser(strings.NewReader(defaultChartIndex)))
+	}
+	defer file.Close()
+	return nil
 }

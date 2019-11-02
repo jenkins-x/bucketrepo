@@ -6,7 +6,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	yaml "gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 )
 
 func initConfig(configPath string) {
@@ -36,6 +36,11 @@ type StorageConfig struct {
 	Prefix    string        `mapstructure:"prefix"`
 }
 
+// ChartsConfig the configuration of charts support
+type ChartsConfig struct {
+	Path string `mapstructure:"path"`
+}
+
 // CacheConfig keeps the configuration for local file system cache
 type CacheConfig struct {
 	BaseDir string `mapstructure:"base_dir"`
@@ -53,6 +58,7 @@ type Config struct {
 	HTTP         HTTPConfig         `mapstructure:"http"`
 	Storage      StorageConfig      `mapstructure:"storage"`
 	Cache        CacheConfig        `mapstructure:"cache"`
+	Charts       ChartsConfig       `mapstructure:"charts"`
 	Repositories []RepositoryConfig `mapstructure:"repositories"`
 }
 

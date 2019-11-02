@@ -31,7 +31,8 @@ func main() {
 	for i, r := range config.Repositories {
 		repositories[i] = NewRepository(r)
 	}
-	controller := NewFileController(cache, storage, repositories)
+
+	controller := NewFileController(cache, storage, repositories, config.Charts.Path)
 
 	InitHTTP(config.HTTP, controller)
 }
