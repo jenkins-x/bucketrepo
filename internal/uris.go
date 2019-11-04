@@ -3,6 +3,8 @@ package main
 import (
 	"bytes"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 // URLJoin joins the given paths so that there is only ever one '/' character between the paths
@@ -13,13 +15,19 @@ func URLJoin(paths ...string) string {
 	for i, path := range paths {
 		p := path
 		if i > 0 {
-			buffer.WriteString("/")
+			_, err := buffer.WriteString("/")
+			if err != nil {
+				logrus.Errorf("failed to write to memory buffer: %s", err.Error())
+			}
 			p = strings.TrimPrefix(p, "/")
 		}
 		if i < last {
 			p = strings.TrimSuffix(p, "/")
 		}
-		buffer.WriteString(p)
+		_, err := buffer.WriteString(p)
+		if err != nil {
+			logrus.Errorf("failed to write to memory buffer: %s", err.Error())
+		}
 	}
 	return buffer.String()
 }
