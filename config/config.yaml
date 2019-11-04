@@ -1,5 +1,8 @@
 http:
     addr: ":8080"
+    username: admin
+    password: cheese
+    chartPath: "charts"
 
 storage:
     enabled: false
