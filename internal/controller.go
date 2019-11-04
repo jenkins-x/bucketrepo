@@ -2,16 +2,16 @@ package main
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path"
 	"path/filepath"
-	"strings"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"k8s.io/helm/pkg/chartutil"
 	helm_chart "k8s.io/helm/pkg/proto/hapi/chart"
@@ -23,14 +23,21 @@ const (
 
 	// the folder relative to the `index.yaml` file where we store charts for a repository
 	ChartFolder = "files"
+
+	// DefaultWritePermissions default permissions for new folders
+	DefaultWritePermissions = 0760
 )
 
 // FileController controller which handles the artifacts files serving and updating
 type FileController struct {
-	cache        Storage
-	cloudStorage Storage
-	repositories []Repository
-	chartsPath   string
+	config           Config
+	cache            Storage
+	cloudStorage     Storage
+	repositories     []Repository
+	chartsPath       string
+	chartsDir        string
+	chartIndexer     *ChartIndexer
+	operationChannel chan string
 }
 
 var (
@@ -41,23 +48,37 @@ entries:`
 )
 
 // NewFileController creates a new file controller
-func NewFileController(cache Storage, storage Storage, repositories []Repository, chartsPath string) *FileController {
+func NewFileController(cache Storage, storage Storage, repositories []Repository, config Config) (*FileController, error) {
+	chartsPath := config.HTTP.ChartPath
 	ctrl := &FileController{
+		config:       config,
 		cache:        cache,
 		cloudStorage: storage,
 		repositories: repositories,
 		chartsPath:   chartsPath,
 	}
 	if chartsPath != "" {
-		ctrl.ensureChartIndex(filepath.Join(chartsPath, "index.yaml"))
+		ctrl.chartsDir = filepath.Join(config.Cache.BaseDir, chartsPath)
+		ctrl.operationChannel = make(chan string)
+		err := os.MkdirAll(ctrl.chartsDir, DefaultWritePermissions)
+		if err != nil {
+			return nil, errors.Wrapf(err, "failed to create charts dir %s", ctrl.chartsDir)
+		}
+
+		ctrl.chartIndexer = &ChartIndexer{BaseCacheDir: config.Cache.BaseDir}
+
+		go ctrl.backgroundOperations()
+
+		log.Debugf("now triggering a background reindex")
+		ctrl.operationChannel <- "reindex"
 	}
-	return ctrl
+	return ctrl, nil
 }
 
 // GetFile handlers which returns an artifacts file either from the local file cache, cloud storage or
 // central repository
 func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	filename := ps.ByName("filename")
+	filename := ps.ByName("filepath")
 	log.Debugf("GetFile, filename: %s", filename)
 	err := ctrl.readFileFromCache(w, filename, r.Method != "HEAD")
 	if err == nil {
@@ -85,7 +106,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 
 // PutFile handler which stores an artifact file either into a local file cache or cloud storage
 func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	filename := ps.ByName("filename")
+	filename := ps.ByName("filepath")
 	log.Debugf("PutFile, filename: %s\n", filename)
 	err := ctrl.writeFileToCache(filename, r.Body)
 	if err != nil {
@@ -162,8 +183,10 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 		w.WriteHeader(500)
 		log.Error(msg)
 		fmt.Fprint(w, msg)
-		return
 	}
+
+	// trigger a reindex
+	ctrl.operationChannel <- "reindex"
 
 	w.WriteHeader(200)
 }
@@ -210,7 +233,7 @@ func (ctrl *FileController) updateCloudStorage(filepath string) error {
 }
 
 func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath string, writeBody bool) error {
-	log.Debugf("Read file form cache: %s\n", filepath)
+	log.Debugf("Read file from cache: %s\n", filepath)
 	file, err := ctrl.cache.ReadFile(filepath)
 	if err != nil {
 		return fmt.Errorf("reading file from cache: %v", err)
@@ -236,7 +259,7 @@ func (ctrl *FileController) readFileFromCloudStorage(filepath string) (io.ReadCl
 		log.Debugf("Read file from cloud storage: %s", filepath)
 		return ctrl.cloudStorage.ReadFile(filepath)
 	}
-	return nil, errors.New("no cloud storage availalbe")
+	return nil, errors.New("no cloud storage available")
 }
 
 func (ctrl *FileController) writeFileToCloudStorage(filepath string, file io.ReadCloser) error {
@@ -248,7 +271,7 @@ func (ctrl *FileController) writeFileToCloudStorage(filepath string, file io.Rea
 }
 
 func (ctrl *FileController) downloadFile(filepath string) (io.ReadCloser, error) {
-	log.Debugf("Read file form repository: %s", filepath)
+	log.Debugf("Read file from repository: %s", filepath)
 	for _, r := range ctrl.repositories {
 		log.Debugf("Trying to download from repository: %s", r.BaseURL())
 		b, err := r.DownloadFile(filepath)
@@ -260,16 +283,24 @@ func (ctrl *FileController) downloadFile(filepath string) (io.ReadCloser, error)
 	return nil, fmt.Errorf("unable to download %s from any configured repository", filepath)
 }
 
-func (ctrl *FileController) ensureChartIndex(filepath string) error {
-	// ignore errors if no cloud storage
-	ctrl.updateCache(filepath)
+func (ctrl *FileController) chartReindex() error {
+	dir := ctrl.chartsDir
+	filename := filepath.Join(dir, "index.yaml")
 
-	file, err := ctrl.cache.ReadFile(filepath)
+	err := ctrl.updateCache(filename)
 	if err != nil {
-		log.Infof("no charts file %s so generating it", filepath)
-		return ctrl.cache.WriteFile(filepath, ioutil.NopCloser(strings.NewReader(defaultChartIndex)))
+		if ctrl.cloudStorage == nil {
+			log.Debugf("no cloud storage so failed to update cache for %s: %s", filename, err.Error())
+		} else {
+			log.Errorf("failed to update cache for %s: %s", filename, err.Error())
+		}
 	}
-	defer file.Close()
+
+	err = ctrl.chartIndexer.Reindex(dir, filename, ctrl.cache, ctrl.cloudStorage)
+	if err != nil {
+		log.Errorf("failed to reindex the charts: %s", err.Error())
+		return err
+	}
 	return nil
 }
 
@@ -282,6 +313,19 @@ func (ctrl *FileController) chartPackageFilenameFromContent(content []byte) (str
 	meta := chart.Metadata
 	filename := fmt.Sprintf("%s-%s.%s", meta.Name, meta.Version, ChartPackageFileExtension)
 	return filename, nil
+}
+
+func (ctrl *FileController) backgroundOperations() {
+	for {
+		<-ctrl.operationChannel
+
+		log.Debugf("reindexing charts")
+
+		err := ctrl.chartReindex()
+		if err != nil {
+			log.Errorf("failed to reindex charts: %s", err.Error())
+		}
+	}
 }
 
 func chartFromContent(content []byte) (*helm_chart.Chart, error) {
