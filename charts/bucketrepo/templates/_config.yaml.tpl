@@ -2,6 +2,7 @@ http:
     addr: ":{{ .Values.service.internalPort }}"
     username: "{{ .Values.config.auth.username }}"
     password: "{{ .Values.config.auth.password }}"
+    chartPath: "{{ .Values.config.charts.path}}"
 
 storage:
     enabled: {{ .Values.config.storage.enabled }}

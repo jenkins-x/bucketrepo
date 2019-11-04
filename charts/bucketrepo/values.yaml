@@ -42,6 +42,8 @@ config:
     username: ""
     password: ""
   path: /config
+  charts:
+    path: "charts"
   storage:
     enabled: false
     bucketUrl: gs://bucketrepo

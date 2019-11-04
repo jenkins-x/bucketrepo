@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
 type flags struct {
@@ -31,7 +33,12 @@ func main() {
 	for i, r := range config.Repositories {
 		repositories[i] = NewRepository(r)
 	}
-	controller := NewFileController(cache, storage, repositories)
 
+	controller, err := NewFileController(cache, storage, repositories, config)
+	if err != nil {
+		logrus.Fatalf("failed to initalise controller: %s", err.Error())
+	}
+
+	logrus.Infof("serving http")
 	InitHTTP(config.HTTP, controller)
 }

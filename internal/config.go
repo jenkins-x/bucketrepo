@@ -6,7 +6,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	yaml "gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 )
 
 func initConfig(configPath string) {
@@ -26,6 +26,7 @@ type HTTPConfig struct {
 	Key         string `mapstructure:"key"`
 	Username    string `mapstructure:"username"`
 	Password    string `mapstructure:"password"`
+	ChartPath   string `mapstructure:"chartPath"`
 }
 
 // StorageConfig keeps configuration for cloud storage backend
