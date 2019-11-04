@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// UrlJoin joins the given paths so that there is only ever one '/' character between the paths
-func UrlJoin(paths ...string) string {
+// URLJoin joins the given paths so that there is only ever one '/' character between the paths
+func URLJoin(paths ...string) string {
 	var buffer bytes.Buffer
 	last := len(paths) - 1
 	for i, path := range paths {

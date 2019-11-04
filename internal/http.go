@@ -49,7 +49,7 @@ func InitHTTP(config HTTPConfig, controller *FileController) {
 
 	// handle charts
 	if config.ChartPath != "" {
-		router.POST(UrlJoin("/bucketrepo", config.ChartPath, "/api/charts"), auth(controller.PostChart, config))
+		router.POST(URLJoin("/bucketrepo", config.ChartPath, "/api/charts"), auth(controller.PostChart, config))
 	}
 
 	log.Infof("Starting http server on %q", config.Address)

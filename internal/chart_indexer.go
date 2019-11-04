@@ -13,6 +13,7 @@ import (
 	"k8s.io/helm/pkg/repo"
 )
 
+// ChartIndexer indexes the charts
 type ChartIndexer struct {
 	BaseCacheDir string
 	BaseURL      string

@@ -21,7 +21,7 @@ const (
 	// ChartPackageFileExtension is the file extension used for chart packages
 	ChartPackageFileExtension = "tgz"
 
-	// the folder relative to the `index.yaml` file where we store charts for a repository
+	// ChartFolder the folder relative to the `index.yaml` file where we store charts for a repository
 	ChartFolder = "files"
 
 	// DefaultWritePermissions default permissions for new folders
