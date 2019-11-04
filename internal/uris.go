@@ -7,11 +7,11 @@ import (
 
 // URLJoin joins the given paths so that there is only ever one '/' character between the paths
 func URLJoin(paths ...string) string {
+	/* #nosec */
 	var buffer bytes.Buffer
 	last := len(paths) - 1
 	for i, path := range paths {
 		p := path
-		/* #nosec */
 		if i > 0 {
 			buffer.WriteString("/")
 			p = strings.TrimPrefix(p, "/")
