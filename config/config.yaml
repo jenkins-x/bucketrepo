@@ -5,9 +5,6 @@ storage:
     enabled: false
     bucket_url: "gs://bucketrepo"
 
-charts:
-    path: "charts"
-
 cache:
     base_dir: "/tmp/bucketrepo"
 

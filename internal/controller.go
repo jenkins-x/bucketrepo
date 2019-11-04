@@ -1,16 +1,28 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"path"
 	"path/filepath"
 	"strings"
 
 	"github.com/julienschmidt/httprouter"
 	log "github.com/sirupsen/logrus"
+	"k8s.io/helm/pkg/chartutil"
+	helm_chart "k8s.io/helm/pkg/proto/hapi/chart"
+)
+
+const (
+	// ChartPackageFileExtension is the file extension used for chart packages
+	ChartPackageFileExtension = "tgz"
+
+	// the folder relative to the `index.yaml` file where we store charts for a repository
+	ChartFolder = "files"
 )
 
 // FileController controller which handles the artifacts files serving and updating
@@ -18,6 +30,7 @@ type FileController struct {
 	cache        Storage
 	cloudStorage Storage
 	repositories []Repository
+	chartsPath   string
 }
 
 var (
@@ -33,6 +46,7 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 		cache:        cache,
 		cloudStorage: storage,
 		repositories: repositories,
+		chartsPath:   chartsPath,
 	}
 	if chartsPath != "" {
 		ctrl.ensureChartIndex(filepath.Join(chartsPath, "index.yaml"))
@@ -43,14 +57,14 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 // GetFile handlers which returns an artifacts file either from the local file cache, cloud storage or
 // central repository
 func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	filepath := ps.ByName("filepath")
-	log.Debugf("GetFile, filepath: %s", filepath)
-	err := ctrl.readFileFromCache(w, filepath, r.Method != "HEAD")
+	filename := ps.ByName("filename")
+	log.Debugf("GetFile, filename: %s", filename)
+	err := ctrl.readFileFromCache(w, filename, r.Method != "HEAD")
 	if err == nil {
 		return
 	}
 
-	err = ctrl.updateCache(filepath)
+	err = ctrl.updateCache(filename)
 	if err != nil {
 		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when downlaoding the file: %s", err)
@@ -59,7 +73,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 		return
 	}
 
-	err = ctrl.readFileFromCache(w, filepath, r.Method != "HEAD")
+	err = ctrl.readFileFromCache(w, filename, r.Method != "HEAD")
 	if err != nil {
 		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when serving the file from cache: %s", err)
@@ -71,9 +85,9 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 
 // PutFile handler which stores an artifact file either into a local file cache or cloud storage
 func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	filepath := ps.ByName("filepath")
-	log.Debugf("PutFile, filepath: %s\n", filepath)
-	err := ctrl.writeFileToCache(filepath, r.Body)
+	filename := ps.ByName("filename")
+	log.Debugf("PutFile, filename: %s\n", filename)
+	err := ctrl.writeFileToCache(filename, r.Body)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
 		w.WriteHeader(500)
@@ -82,7 +96,67 @@ func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps h
 		return
 	}
 
-	err = ctrl.updateCloudStorage(filepath)
+	err = ctrl.updateCloudStorage(filename)
+	if err != nil {
+		msg := fmt.Sprintf("Error when saving the file into cloud storage: %s", err)
+		w.WriteHeader(500)
+		log.Error(msg)
+		fmt.Fprint(w, msg)
+		return
+	}
+
+	w.WriteHeader(200)
+}
+
+// PostChart handler which stores an artifact file either into a local file cache or cloud storage
+func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	repo := ps.ByName("repo")
+	log.Debugf("PostChart, repo: %s\n", repo)
+
+	content, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		msg := fmt.Sprintf("Failed to load payload: %s", err)
+		w.WriteHeader(500)
+		log.Error(msg)
+		fmt.Fprint(w, msg)
+		return
+	}
+
+	filename, err := ctrl.chartPackageFilenameFromContent(content)
+	if err != nil {
+		msg := fmt.Sprintf("Failed to extract chart from payload: %s", err)
+		w.WriteHeader(500)
+		log.Error(msg)
+		fmt.Fprint(w, msg)
+		return
+	}
+
+	if path.Base(filename) != filename {
+		// Name wants to break out of current directory
+		msg := fmt.Sprintf("%s is improperly formattedd ", filename)
+		w.WriteHeader(400)
+		log.Error(msg)
+		fmt.Fprint(w, msg)
+		return
+	}
+
+	folder := ctrl.chartsPath
+	if repo != "" {
+		folder = filepath.Join(folder, repo)
+	}
+	filename = filepath.Join(folder, ChartFolder, filename)
+	log.Debugf("PostChart, filename: %s\n", filename)
+
+	err = ctrl.writeFileToCache(filename, ioutil.NopCloser(bytes.NewReader(content)))
+	if err != nil {
+		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
+		w.WriteHeader(500)
+		log.Error(msg)
+		fmt.Fprint(w, msg)
+		return
+	}
+
+	err = ctrl.updateCloudStorage(filename)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cloud storage: %s", err)
 		w.WriteHeader(500)
@@ -197,4 +271,20 @@ func (ctrl *FileController) ensureChartIndex(filepath string) error {
 	}
 	defer file.Close()
 	return nil
+}
+
+// ChartPackageFilenameFromContent returns a chart filename from binary content
+func (ctrl *FileController) chartPackageFilenameFromContent(content []byte) (string, error) {
+	chart, err := chartFromContent(content)
+	if err != nil {
+		return "", err
+	}
+	meta := chart.Metadata
+	filename := fmt.Sprintf("%s-%s.%s", meta.Name, meta.Version, ChartPackageFileExtension)
+	return filename, nil
+}
+
+func chartFromContent(content []byte) (*helm_chart.Chart, error) {
+	chart, err := chartutil.LoadArchive(bytes.NewBuffer(content))
+	return chart, err
 }

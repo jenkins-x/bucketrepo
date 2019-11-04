@@ -32,7 +32,7 @@ func main() {
 		repositories[i] = NewRepository(r)
 	}
 
-	controller := NewFileController(cache, storage, repositories, config.Charts.Path)
+	controller := NewFileController(cache, storage, repositories, config.HTTP.ChartPath)
 
 	InitHTTP(config.HTTP, controller)
 }

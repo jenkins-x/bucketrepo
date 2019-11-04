@@ -26,6 +26,7 @@ type HTTPConfig struct {
 	Key         string `mapstructure:"key"`
 	Username    string `mapstructure:"username"`
 	Password    string `mapstructure:"password"`
+	ChartPath   string `mapstructure:"chartPath"`
 }
 
 // StorageConfig keeps configuration for cloud storage backend
@@ -34,11 +35,6 @@ type StorageConfig struct {
 	BucketURL string        `mapstructure:"bucket_url"`
 	Timeout   time.Duration `mapstructure:"timeout"`
 	Prefix    string        `mapstructure:"prefix"`
-}
-
-// ChartsConfig the configuration of charts support
-type ChartsConfig struct {
-	Path string `mapstructure:"path"`
 }
 
 // CacheConfig keeps the configuration for local file system cache
@@ -58,7 +54,6 @@ type Config struct {
 	HTTP         HTTPConfig         `mapstructure:"http"`
 	Storage      StorageConfig      `mapstructure:"storage"`
 	Cache        CacheConfig        `mapstructure:"cache"`
-	Charts       ChartsConfig       `mapstructure:"charts"`
 	Repositories []RepositoryConfig `mapstructure:"repositories"`
 }
 
