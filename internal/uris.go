@@ -11,6 +11,7 @@ func URLJoin(paths ...string) string {
 	last := len(paths) - 1
 	for i, path := range paths {
 		p := path
+		/* #nosec */
 		if i > 0 {
 			buffer.WriteString("/")
 			p = strings.TrimPrefix(p, "/")
