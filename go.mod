@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/TV4/logrus-stackdriver-formatter v0.1.0
 	github.com/cyphar/filepath-securejoin v0.2.2 // indirect
 	github.com/ghodss/yaml v1.0.0
 	github.com/gobwas/glob v0.2.3 // indirect
