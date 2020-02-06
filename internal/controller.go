@@ -58,11 +58,12 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 		chartsPath:   chartsPath,
 	}
 	if chartsPath != "" {
-		ctrl.chartsDir = filepath.Join(config.Cache.BaseDir, chartsPath)
+		ctrl.chartsDir = chartsPath
+		cacheDir := filepath.Join(config.Cache.BaseDir, chartsPath)
 		ctrl.operationChannel = make(chan string)
-		err := os.MkdirAll(ctrl.chartsDir, DefaultWritePermissions)
+		err := os.MkdirAll(cacheDir, DefaultWritePermissions)
 		if err != nil {
-			return nil, errors.Wrapf(err, "failed to create charts dir %s", ctrl.chartsDir)
+			return nil, errors.Wrapf(err, "failed to create charts dir %s", cacheDir)
 		}
 
 		ctrl.chartIndexer = &ChartIndexer{BaseCacheDir: config.Cache.BaseDir}
@@ -88,7 +89,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 	err = ctrl.updateCache(filename)
 	if err != nil {
 		w.WriteHeader(404)
-		msg := fmt.Sprintf("Error when downlaoding the file: %s", err)
+		msg := fmt.Sprintf("Error when downloading the file: %s", err)
 		log.Error(msg)
 		fmt.Fprint(w, msg)
 		return
