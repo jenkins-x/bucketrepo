@@ -64,6 +64,10 @@ http:
 ```
 Note that the basic authentication is turned off when HTTPS is disabled.
 
+### Supported Artifacts
+
+This repository has been tested with `maven` and `helm` tools, but it can also store other artifacts.
+
 ### Installing
 
 #### Kubernetes
