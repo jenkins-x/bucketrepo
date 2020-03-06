@@ -36,7 +36,7 @@ func main() {
 
 	controller, err := NewFileController(cache, storage, repositories, config)
 	if err != nil {
-		logrus.Fatalf("failed to initalise controller: %s", err.Error())
+		logrus.Fatalf("failed to initialise controller: %s", err.Error())
 	}
 
 	logrus.Infof("serving http")

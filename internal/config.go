@@ -76,7 +76,7 @@ func NewConfig(configPath string) Config {
 	}
 
 	if len(config.Repositories) == 0 {
-		config.Repositories = []RepositoryConfig{RepositoryConfig{"https://repo1.maven.org/maven2", 1 * time.Minute, nil}}
+		config.Repositories = []RepositoryConfig{{"https://repo1.maven.org/maven2", 1 * time.Minute, nil}}
 	}
 	for i := range config.Repositories {
 		if config.Repositories[i].Timeout == 0 {

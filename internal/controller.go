@@ -88,7 +88,7 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 	err = ctrl.updateCache(filename)
 	if err != nil {
 		w.WriteHeader(404)
-		msg := fmt.Sprintf("Error when downlaoding the file: %s", err)
+		msg := fmt.Sprintf("Error when downloading the file: %s", err)
 		log.Error(msg)
 		fmt.Fprint(w, msg)
 		return
@@ -232,7 +232,7 @@ func (ctrl *FileController) updateCloudStorage(filepath string) error {
 	return ctrl.writeFileToCloudStorage(filepath, file)
 }
 
-func (ctrl *FileController) readFileFromCache(w http.ResponseWriter, filepath string, writeBody bool) error {
+func (ctrl *FileController) readFileFromCache(w io.Writer, filepath string, writeBody bool) error {
 	log.Debugf("Read file from cache: %s\n", filepath)
 	file, err := ctrl.cache.ReadFile(filepath)
 	if err != nil {
