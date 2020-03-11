@@ -1,12 +1,14 @@
 http:
     addr: ":{{ .Values.service.internalPort }}"
-    username: "{{ .Values.config.auth.username }}"
-    password: "{{ .Values.config.auth.password }}"
+    username: "{{ .Values.config.auth.username | default .Values.secrets.adminUser.username }}"
+    password: "{{ .Values.config.auth.password | default .Values.secrets.adminUser.password }}"
     chartPath: "{{ .Values.config.charts.path}}"
 
 storage:
-    enabled: {{ .Values.config.storage.enabled }}
-    bucket_url: "{{ .Values.config.storage.bucketUrl }}"
+{{- if .Values.config.storage.bucketUrl .Values.jxRequirements.storage.repository.url }}
+    enabled: true
+{{- end }}
+    bucket_url: "{{ .Values.config.storage.bucketUrl | default .Values.jxRequirements.storage.repository.url }}"
 
 cache:
     base_dir: "{{ .Values.config.cache.dir }}"

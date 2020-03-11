@@ -62,3 +62,14 @@ config:
     jitpack: "https://jitpack.io/"
     npm: "https://registry.npmjs.org/"
 
+# standard YAML files for jx boot:
+jxRequirements:
+  storage:
+    repository:
+      enabled: false
+      url: ""
+
+secrets:
+  adminUser:
+    username: "admin"
+    password: ""
