@@ -5,7 +5,7 @@ http:
     chartPath: "{{ .Values.config.charts.path}}"
 
 storage:
-{{- if .Values.config.storage.bucketUrl .Values.jxRequirements.storage.repository.url }}
+{{- if or .Values.config.storage.bucketUrl .Values.jxRequirements.storage.repository.url }}
     enabled: true
 {{- end }}
     bucket_url: "{{ .Values.config.storage.bucketUrl | default .Values.jxRequirements.storage.repository.url }}"
