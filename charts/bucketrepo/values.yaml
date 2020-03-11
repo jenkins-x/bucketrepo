@@ -46,7 +46,7 @@ config:
     path: "charts"
   storage:
     enabled: false
-    bucketUrl: gs://bucketrepo
+    bucketUrl: ""
   cache:
     dir: /tmp/bucketrepo
   repositories:
