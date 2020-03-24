@@ -65,6 +65,10 @@ config:
 
 # standard YAML files for jx boot:
 jxRequirements:
+  cluster:
+    clusterName: ""
+    project: ""
+    provider: ""
   storage:
     repository:
       enabled: false
