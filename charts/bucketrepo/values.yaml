@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repo: gcr.io/jenkinsxio/bucketrepo
-  tag: 0.1.5
+  tag: 0.1.37
   pullPolicy: IfNotPresent
 service:
   name: bucketrepo
