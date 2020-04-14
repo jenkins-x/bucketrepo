@@ -18,6 +18,7 @@ service:
 serviceaccount:
   enabled: true
 
+env: {}
 resources:
   limits:
     cpu: 100m
