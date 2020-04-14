@@ -29,6 +29,8 @@ spec:
         args:
         - "-config-path={{ .Values.config.path }}"
         - "-log-level=info"
+        env:
+{{ toYaml .Values.env | indent 10 }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
