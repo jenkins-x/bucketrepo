@@ -18,7 +18,9 @@ service:
 serviceaccount:
   enabled: true
 
+# define environment variables here as a map of key: value
 env: {}
+
 resources:
   limits:
     cpu: 100m
@@ -65,6 +67,10 @@ config:
 
 # standard YAML files for jx boot:
 jxRequirements:
+  cluster:
+    clusterName: ""
+    project: ""
+    provider: ""
   storage:
     repository:
       enabled: false
