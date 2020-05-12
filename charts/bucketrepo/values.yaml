@@ -18,7 +18,9 @@ service:
 serviceaccount:
   enabled: true
 
+# define environment variables here as a map of key: value
 env: {}
+
 resources:
   limits:
     cpu: 100m

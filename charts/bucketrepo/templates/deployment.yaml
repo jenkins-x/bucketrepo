@@ -30,7 +30,10 @@ spec:
         - "-config-path={{ .Values.config.path }}"
         - "-log-level=info"
         env:
-{{ toYaml .Values.env | indent 10 }}
+{{- range $pkey, $pval := .Values.env }}
+        - name: {{ $pkey }}
+          value: {{ quote $pval }}
+{{- end }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
