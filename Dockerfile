@@ -1,5 +1,4 @@
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
-COPY ./config/config.yaml /
-COPY ./bin/ /
-ENTRYPOINT ["/bucketrepo"]
+FROM gcr.io/distroless/base:nonroot
+COPY ./config/config.yaml /home/nonroot/
+COPY ./bin /home/nonroot/
+CMD ["/home/nonroot/bucketrepo"]
