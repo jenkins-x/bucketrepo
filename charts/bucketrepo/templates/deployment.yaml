@@ -25,7 +25,7 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["/bucketrepo"]
+        command: ["/home/nonroot/bucketrepo"]
         args:
         - "-config-path={{ .Values.config.path }}"
         - "-log-level=info"
