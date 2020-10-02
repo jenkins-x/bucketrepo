@@ -191,29 +191,34 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 	w.WriteHeader(200)
 }
 
-func (ctrl *FileController) updateCache(filepath string) error {
-	file, err := ctrl.downloadFile(filepath)
+func (ctrl *FileController) updateCache(path string) error {
+	relativePath, err := filepath.Rel(ctrl.config.Cache.BaseDir, path)
+	if err != nil {
+		return errors.Wrapf(err, "failed to calculate relative path for %s relative to %s", path, ctrl.config.Cache.BaseDir)
+	}
+
+	file, err := ctrl.downloadFile(relativePath)
 	updateCloud := false
 	if err != nil {
-		file, err = ctrl.readFileFromCloudStorage(filepath)
+		file, err = ctrl.readFileFromCloudStorage(relativePath)
 		if err != nil {
 			return fmt.Errorf("reading file from cloud storage: %v", err)
 		}
 		updateCloud = true
 	}
 	defer file.Close()
-	err = ctrl.writeFileToCache(filepath, file)
+	err = ctrl.writeFileToCache(relativePath, file)
 	if err != nil {
 		return fmt.Errorf("writing file to cache: %v", err)
 	}
 
 	if updateCloud && ctrl.cloudStorage != nil {
-		file, err := ctrl.cache.ReadFile(filepath)
+		file, err := ctrl.cache.ReadFile(relativePath)
 		if err != nil {
 			return fmt.Errorf("reading file from cache: %v", err)
 		}
 		defer file.Close()
-		err = ctrl.writeFileToCloudStorage(filepath, file)
+		err = ctrl.writeFileToCloudStorage(relativePath, file)
 		if err != nil {
 			log.Warnf("Error when storing the file into cloud storage: %s", err)
 			return nil
@@ -250,7 +255,7 @@ func (ctrl *FileController) readFileFromCache(w io.Writer, filepath string, writ
 }
 
 func (ctrl *FileController) writeFileToCache(filepath string, file io.ReadCloser) error {
-	log.Debugf("Write file to cache: %s\n", filepath)
+	log.Debugf("Write file to cache: %s", filepath)
 	return ctrl.cache.WriteFile(filepath, file)
 }
 
