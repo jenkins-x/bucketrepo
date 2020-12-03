@@ -4,11 +4,18 @@ http:
     password: "{{ .Values.config.auth.password | default .Values.secrets.adminUser.password }}"
     chartPath: "{{ .Values.config.charts.path}}"
 
+{{- if or .Values.config.storage.bucketUrl .Values.jxRequirements.storage }}
 storage:
-{{- if or .Values.config.storage.bucketUrl .Values.jxRequirements.storage.repository.url }}
-    enabled: true
+{{- if .Values.config.storage.bucketUrl }}
+    bucket_url: "{{ .Values.config.storage.bucketUrl }}"
+{{- else if .Values.jxRequirements.storage }}
+{{- range $key, $val := .Values.jxRequirements.storage }}
+{{- if eq "repository" $val.name }}
+    bucket_url: "{{ $val.url }}"
 {{- end }}
-    bucket_url: "{{ .Values.config.storage.bucketUrl | default .Values.jxRequirements.storage.repository.url }}"
+{{- end }}
+{{- end }}
+{{- end }}
 
 cache:
     base_dir: "{{ .Values.config.cache.dir }}"
@@ -16,8 +23,8 @@ cache:
 repositories:
 {{- if .Values.config.repositories }}
 {{- range $key, $value := .Values.config.repositories }}
-  {{- if $value }}
+{{- if $value }}
     - url: {{ $value | quote }}
-  {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}

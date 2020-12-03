@@ -48,7 +48,6 @@ config:
   charts:
     path: "charts"
   storage:
-    enabled: false
     bucketUrl: ""
   cache:
     dir: /tmp/bucketrepo
@@ -71,10 +70,6 @@ jxRequirements:
     clusterName: ""
     project: ""
     provider: ""
-  storage:
-    repository:
-      enabled: false
-      url: ""
 
 secrets:
   adminUser:
