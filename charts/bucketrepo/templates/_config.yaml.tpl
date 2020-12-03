@@ -8,7 +8,7 @@ http:
 storage:
 {{- if .Values.config.storage.bucketUrl }}
     bucket_url: "{{ .Values.config.storage.bucketUrl }}"
-{{- else if .Values.jxRequirements.storage }}
+{{- else if and (hasKey .Values.jxRequirements "storage") ( .Values.jxRequirements.storage)  }}
 {{- range $key, $val := .Values.jxRequirements.storage }}
 {{- if eq "repository" $val.name }}
     bucket_url: "{{ $val.url }}"
