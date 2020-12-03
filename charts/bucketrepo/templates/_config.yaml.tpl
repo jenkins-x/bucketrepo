@@ -4,7 +4,6 @@ http:
     password: "{{ .Values.config.auth.password | default .Values.secrets.adminUser.password }}"
     chartPath: "{{ .Values.config.charts.path}}"
 
-{{- if or .Values.config.storage.bucketUrl .Values.jxRequirements.storage }}
 storage:
 {{- if .Values.config.storage.bucketUrl }}
     bucket_url: "{{ .Values.config.storage.bucketUrl }}"
@@ -14,7 +13,8 @@ storage:
     bucket_url: "{{ $val.url }}"
 {{- end }}
 {{- end }}
-{{- end }}
+{{- else }}
+    bucket_url: ""
 {{- end }}
 
 cache:
