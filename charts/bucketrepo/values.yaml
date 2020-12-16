@@ -21,6 +21,16 @@ serviceaccount:
 # define environment variables here as a map of key: value
 env: {}
 
+# define environment variables that will be stored in a secret namd 'jenkins-x-bucketrepo-env'
+#
+# example
+#
+# envSecrets:
+#   AWS_ACCESS_KEY: xxx
+#   AWS_SECRET_KEY: yyy
+#
+envSecrets: {}
+
 resources:
   limits:
     cpu: 100m
