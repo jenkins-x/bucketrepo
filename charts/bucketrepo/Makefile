@@ -4,7 +4,7 @@ NAME := bucketrepo
 OS := $(shell uname)
 
 init: 
-	helm init --client-only
+	helm init --client-only --stable-repo-url https://charts.helm.sh/stable
 
 setup: init
 	helm repo add jenkinsxio https://storage.googleapis.com/chartmuseum.jenkins-x.io
