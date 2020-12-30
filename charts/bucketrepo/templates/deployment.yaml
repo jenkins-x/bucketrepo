@@ -34,6 +34,15 @@ spec:
         - name: {{ $pkey }}
           value: {{ quote $pval }}
 {{- end }}
+{{- if .Values.envSecrets }}
+{{- range $pkey, $pval := .Values.envSecrets }}
+        - name: {{ $pkey }}
+          valueFrom:
+            secretKeyRef:
+              name: jenkins-x-bucketrepo-env
+              key: {{ $pkey }}
+{{- end }}
+{{- end }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
