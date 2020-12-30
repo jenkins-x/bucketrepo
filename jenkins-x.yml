@@ -130,7 +130,7 @@ pipelineConfig:
             args: ['init','--client-only', '--stable-repo-url', 'https://charts.helm.sh/stable']
 
           - name: make-all
-            image: gcr.io/jenkinsxio/builder-go:2.1.155
+            image: gcr.io/jenkinsxio/builder-go:2.1.155-778
             command: make
             args:
             - all
