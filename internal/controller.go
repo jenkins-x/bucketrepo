@@ -13,8 +13,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
-	"k8s.io/helm/pkg/chartutil"
-	helm_chart "k8s.io/helm/pkg/proto/hapi/chart"
+	"helm.sh/helm/v3/pkg/chart"
+	"helm.sh/helm/v3/pkg/chart/loader"
 )
 
 const (
@@ -328,7 +328,7 @@ func (ctrl *FileController) backgroundOperations() {
 	}
 }
 
-func chartFromContent(content []byte) (*helm_chart.Chart, error) {
-	chart, err := chartutil.LoadArchive(bytes.NewBuffer(content))
+func chartFromContent(content []byte) (*chart.Chart, error) {
+	chart, err := loader.LoadArchive(bytes.NewBuffer(content))
 	return chart, err
 }
