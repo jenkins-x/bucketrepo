@@ -54,10 +54,10 @@ pipelineConfig:
           - name: init-helm
             image: alpine/helm:2.12.3
             command: helm
-            args: ['init','--client-only']
+            args: ['init','--client-only', '--stable-repo-url', 'https://charts.helm.sh/stable']
 
           - name: release
-            image: gcr.io/jenkinsxio/builder-go:0.1.734
+            image: gcr.io/jenkinsxio/builder-go:2.1.155-778
             command: make
             args:
             - all
@@ -73,14 +73,14 @@ pipelineConfig:
             - --cache-dir=/workspace
 
           - name: release-charts
-            image: gcr.io/jenkinsxio/builder-go:0.1.734
+            image: gcr.io/jenkinsxio/builder-go:2.1.155-778
             dir: /workspace/source/charts/bucketrepo
             command: make
             args:
             - release
 
           - name: release-app
-            image: gcr.io/jenkinsxio/builder-go:0.1.734
+            image: gcr.io/jenkinsxio/builder-go:2.1.155-778
             dir: /workspace/source/charts/jx-app-bucketrepo
             command: make
             args:
