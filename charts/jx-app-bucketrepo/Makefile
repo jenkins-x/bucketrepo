@@ -26,7 +26,7 @@ clean:
 	rm -rf charts
 	rm -rf ${NAME}*.tgz
 
-release: clean
+release: clean setup
 	sed -i -e "s/version:.*/version: $(VERSION)/" Chart.yaml
 	echo "  version: $(VERSION)" >> requirements.yaml
 	helm dependency build
