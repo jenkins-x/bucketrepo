@@ -2,7 +2,7 @@ CHART_REPO := http://jenkins-x-chartmuseum:8080
 NAME := jx-app-bucketrepo
 
 init: 
-	helm init --client-only
+	helm init --client-only --stable-repo-url https://charts.helm.sh/stable
 
 setup: init
 	helm repo add jenkinsxio https://storage.googleapis.com/chartmuseum.jenkins-x.io
