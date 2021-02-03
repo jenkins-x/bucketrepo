@@ -74,6 +74,8 @@ config:
     jitpack: "https://jitpack.io/"
     npm: "https://registry.npmjs.org/"
 
+logLevel: info
+
 # standard YAML files for jx boot:
 jxRequirements:
   cluster:

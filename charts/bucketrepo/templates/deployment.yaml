@@ -28,7 +28,7 @@ spec:
         command: ["/home/nonroot/bucketrepo"]
         args:
         - "-config-path={{ .Values.config.path }}"
-        - "-log-level=info"
+        - "-log-level={{ .Values.logLevel }}"
         env:
 {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}
@@ -66,6 +66,8 @@ spec:
           readOnly: true
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+      securityContext:
+        fsGroup: 65534
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- if .Values.serviceaccount.enabled }}
       serviceAccountName: {{ template "fullname" . }}
