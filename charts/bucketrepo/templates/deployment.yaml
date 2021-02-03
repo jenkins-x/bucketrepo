@@ -66,6 +66,8 @@ spec:
           readOnly: true
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+      securityContext:
+        fsGroup: 65534
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- if .Values.serviceaccount.enabled }}
       serviceAccountName: {{ template "fullname" . }}
