@@ -28,7 +28,7 @@ spec:
         command: ["/home/nonroot/bucketrepo"]
         args:
         - "-config-path={{ .Values.config.path }}"
-        - "-log-level=info"
+        - "-log-level={{ .Values.logLevel }}"
         env:
 {{- range $pkey, $pval := .Values.env }}
         - name: {{ $pkey }}
