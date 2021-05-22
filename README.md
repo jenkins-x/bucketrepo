@@ -1,6 +1,6 @@
 [![MIT License][license-image]][license-url]
 
-# Bucketrepo
+# Bucket Repo
 
 This is a lightweight artifacts repository with low memory footprint which can be used as a minimal replacement for 
 [Nexus](https://www.sonatype.com/nexus-repository-sonatype). It is able to cache artifacts from a remote repository
