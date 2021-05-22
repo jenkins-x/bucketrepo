@@ -1,22 +1,15 @@
-CHART_REPO := http://jenkins-x-chartmuseum:8080
-CURRENT=$(pwd)
-NAME := bucketrepo
-OS := $(shell uname)
+CHART_REPO := gs://jenkinsxio/charts
+NAME := jx-build-controller
 
-init: 
-	helm init --client-only --stable-repo-url https://charts.helm.sh/stable
-
-setup: init
-	helm repo add jenkinsxio https://storage.googleapis.com/chartmuseum.jenkins-x.io
-
-build: clean setup
+build: clean
+	rm -rf Chart.lock
 	helm dependency build
 	helm lint
 
-install: clean setup build
+install: clean build
 	helm install . --name ${NAME}
 
-upgrade: clean setup build
+upgrade: clean build
 	helm upgrade ${NAME} .
 
 delete:
@@ -25,19 +18,11 @@ delete:
 clean:
 	rm -rf charts
 	rm -rf ${NAME}*.tgz
-	rm -rf requirements.lock
 
-release: clean build
-ifeq ($(OS),Darwin)
-	sed -i "" -e "s/version:.*/version: $(VERSION)/" Chart.yaml
-	sed -i "" -e "s/tag:.*/tag: $(VERSION)/" values.yaml
-
-else ifeq ($(OS),Linux)
-	sed -i -e "s/version:.*/version: $(VERSION)/" Chart.yaml
-	sed -i -e "s/tag:.*/tag: $(VERSION)/" values.yaml
-else
-	exit -1
-endif
+release: clean
+	helm dependency build
+	helm lint
 	helm package .
-	curl --fail -u $(CHARTMUSEUM_USER):$(CHARTMUSEUM_PASS) --data-binary "@$(NAME)-$(VERSION).tgz" $(CHART_REPO)/api/charts
-	rm -rf ${NAME}*.tgz
+	helm repo add jx $(CHART_REPO)
+	helm gcs push ${NAME}*.tgz jx --public
+	rm -rf ${NAME}*.tgz%
