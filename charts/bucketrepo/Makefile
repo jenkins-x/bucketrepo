@@ -1,5 +1,5 @@
 CHART_REPO := gs://jenkinsxio/charts
-NAME := jx-build-controller
+NAME := bucketrepo
 
 build: clean
 	rm -rf Chart.lock
