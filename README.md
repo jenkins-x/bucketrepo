@@ -83,6 +83,27 @@ You can now install the chart with:
 helm install jenkins-x/bucketrepo --name bucketrepo
 ```
 
+##### S3 compatible buckets
+
+When using an S3 compatible bucket deployed locally (like Minio, Ceph...) you might need to configure bucketrepo to trust the SSL certificate for the bucket.
+
+In order to that, you can add `AWS_CA_BUNDLE` to envSecrets with path of the CA file, and mount that file using extraConfig that looks like this:
+```
+extraConfig:
+  ca-certificates.crt: |
+    -----BEGIN CERTIFICATE-----
+    ...
+```
+the certificate can be retrieved using:
+```
+kubectl -n minio get secrets minio1-tls -o yaml | ksd (public.crt)
+```
+
+the bucketUrl should look like this:
+```
+"s3://bucketrepo?endpoint=https://minio.minio.svc.cluster.local&s3ForcePathStyle=true&region=us-east-1"
+```
+
 #### Locally
 The repository can be started in a docker container usinged the [latest released](https://github.com/jenkins-x/bucketrepo/releases) image:
 ```bash

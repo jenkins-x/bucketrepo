@@ -26,8 +26,9 @@ env: {}
 # example
 #
 # envSecrets:
-#   AWS_ACCESS_KEY: xxx
-#   AWS_SECRET_KEY: yyy
+#   AWS_ACCESS_KEY_ID: xxx
+#   AWS_SECRET_ACCESS_KEY: yyy
+#   AWS_CA_BUNDLE: /config/ca-certificates.crt (when using a private s3 compatible repo with self signed cert)
 #
 envSecrets: {}
 
@@ -87,3 +88,8 @@ secrets:
   adminUser:
     username: "admin"
     password: ""
+
+extraConfig: {}
+
+
+
