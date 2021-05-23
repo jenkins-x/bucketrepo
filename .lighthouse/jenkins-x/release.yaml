@@ -29,8 +29,7 @@ spec:
           resources: {}
         - name: chart-docs
           resources: {}
-        - image: gcr.io/jenkinsxio/helm-release:0.0.1
-          name: release-chart
+        - name: release-chart
           resources: {}
           script: |
             #!/usr/bin/env sh
@@ -41,13 +40,6 @@ spec:
           resources: {}
 #        - name: upload-binaries
 #          resources: {}
-        - image: gcr.io/jenkinsxio/builder-go:2.1.142-761
-          name: promote-release
-          resources: {}
-          script: |
-            #!/bin/bash
-            source .jx/variables.sh
-            ./promote.sh
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s
