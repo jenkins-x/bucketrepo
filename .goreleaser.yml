@@ -9,7 +9,7 @@ builds:
   - id: bucketrepo
     # Path to main.go file or main package.
     # Default is `.`.
-    main: ./internal/main.go
+    main: ./internal
 
     # Binary name.
     # Can be a path (e.g. `bin/app`) to wrap the binary in a directory.
