@@ -29,6 +29,10 @@ spec:
           resources: {}
         - name: chart-docs
           resources: {}
+        - name: changelog
+          resources: {}
+        - name: upload-binaries
+          resources: {}
         - name: release-chart
           resources: {}
           script: |
@@ -36,10 +40,6 @@ spec:
             if [ -d "/workspace/source/charts/$REPO_NAME" ]; then source .jx/variables.sh
             cd /workspace/source/charts/$REPO_NAME
             make release; else echo no charts; fi
-        - name: changelog
-          resources: {}
-#        - name: upload-binaries
-#          resources: {}
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s
