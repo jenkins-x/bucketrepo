@@ -53,6 +53,9 @@ sec: sec_install
 	@echo "SECURITY SCANNING"
 	$(GOSEC) -fmt=csv ./...
 
+.PHONY: release
+release: clean linux test
+
 linux:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
