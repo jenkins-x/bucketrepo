@@ -65,6 +65,12 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 			return nil, errors.Wrapf(err, "failed to create charts dir %s", ctrl.chartsDir)
 		}
 
+		chartIndexFile := filepath.Join(ctrl.chartsDir, "index.yaml")
+		err = ctrl.updateCache(chartIndexFile)
+		if err != nil {
+			log.Warnf("could not find chart index file %s due to: %s", chartIndexFile, err.Error())
+		}
+
 		ctrl.chartIndexer = &ChartIndexer{BaseCacheDir: config.Cache.BaseDir}
 
 		go ctrl.backgroundOperations()
