@@ -1,6 +1,6 @@
 module github.com/jenkins-x/bucketrepo
 
-go 1.12
+go 1.15
 
 require (
 	github.com/TV4/logrus-stackdriver-formatter v0.1.0

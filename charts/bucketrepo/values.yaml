@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repo: gcr.io/jenkinsxio/bucketrepo
-  tag: 0.1.5
+  repo: ghcr.io/jenkins-x/bucketrepo
+  tag: latest
   pullPolicy: IfNotPresent
 service:
   name: bucketrepo
