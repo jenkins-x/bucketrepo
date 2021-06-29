@@ -33,13 +33,9 @@ spec:
           resources: {}
         - name: upload-binaries
           resources: {}
-        - name: release-chart
+        - name: promote-helm-release
           resources: {}
-          script: |
-            #!/usr/bin/env sh
-            if [ -d "/workspace/source/charts/$REPO_NAME" ]; then source .jx/variables.sh
-            cd /workspace/source/charts/$REPO_NAME
-            make release; else echo no charts; fi
+          image: uses:jenkins-x/jx3-pipeline-catalog/tasks/helm/release.yaml@versionStream
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

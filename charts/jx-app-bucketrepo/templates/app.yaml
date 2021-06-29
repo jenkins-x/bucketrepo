@@ -1,7 +1,0 @@
-apiVersion: jenkins.io/v1
-kind: App
-metadata:
-  name: {{ template "fullname" . }}
-  labels:
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-spec:
