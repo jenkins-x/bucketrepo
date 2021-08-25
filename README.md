@@ -75,7 +75,7 @@ This repository has been tested with `maven` and `helm` tools, but it can also s
 The repository service can be installed in a Kubernetes cluster using helm. First, you need to add the jenkins-x chart repository to your helm repositories:
 
 ```sh
-helm repo add jx3 https://storage.googleapis.com/jenkinsxio/charts
+helm repo add jx3 https://jenkins-x-charts.github.io/repo
 helm repo update
 ```
 You can now install the chart with:
