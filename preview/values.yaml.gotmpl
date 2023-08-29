@@ -1,0 +1,3 @@
+image:
+  repository: "{{ requiredEnv "DOCKER_REGISTRY" }}/{{ requiredEnv "DOCKER_REGISTRY_ORG" }}/{{ requiredEnv "APP_NAME" }}"
+  tag: "{{ requiredEnv "VERSION" }}"
