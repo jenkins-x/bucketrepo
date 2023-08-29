@@ -30,6 +30,13 @@ spec:
           resources: {}
         - name: build-container-build
           resources: {}
+        - image: ghcr.io/jenkins-x-plugins/jx-preview:0.2.3
+          name: promote-jx-preview
+          resources: {}
+          script: |
+            #!/usr/bin/env sh
+            source .jx/variables.sh
+            jx preview create
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s
