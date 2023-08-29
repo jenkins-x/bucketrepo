@@ -24,7 +24,11 @@ repositories:
 {{- if .Values.config.repositories }}
 {{- range $key, $value := .Values.config.repositories }}
 {{- if $value }}
+{{- if kindIs "string" $value }}
     - url: {{ $value | quote }}
+{{- else }}
+    - {{ toYaml $value | nindent 7 }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

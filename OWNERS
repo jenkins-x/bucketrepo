@@ -1,14 +1,4 @@
 approvers:
-- rawlingsj
-- jstrachan
-- rajdavies
-- ccojocar
-- garethjevans
-- pmuir
+- maintainers
 reviewers:
-- rawlingsj
-- jstrachan
-- rajdavies
-- ccojocar
-- garethjevans
-- pmuir
+- maintainers

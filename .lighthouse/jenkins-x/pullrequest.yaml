@@ -14,22 +14,30 @@ spec:
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/go-plugin/pullrequest.yaml@versionStream
           name: ""
           resources:
-            requests:
-              cpu: 400m
-              memory: 600Mi
+            limits: {}
           workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@versionStream
           name: ""
           resources: {}
         - name: jx-variables
-          resources: {}
+          resources:
+            requests:
+              cpu: 400m
+              memory: 600Mi
         - name: build-make-linux
           resources: {}
         - name: build-make-test
           resources: {}
         - name: build-container-build
           resources: {}
+        - image: ghcr.io/jenkins-x-plugins/jx-preview:0.2.3
+          name: promote-jx-preview
+          resources: {}
+          script: |
+            #!/usr/bin/env sh
+            source .jx/variables.sh
+            jx preview create
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

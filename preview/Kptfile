@@ -1,0 +1,18 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: preview
+upstream:
+  type: git
+  git:
+    repo: https://github.com/jenkins-x/jx3-pipeline-catalog
+    directory: /helm/preview
+    ref: master
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/jenkins-x/jx3-pipeline-catalog
+    directory: /helm/preview
+    ref: master
+    commit: fabe46fec8552300ab438de48d19510255cf70f9
