@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"net/url"
 	"path"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // Repository artifacts repository
@@ -50,11 +53,26 @@ func (r *HTTPRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 		}
 	}
 	resp, err := r.client.Do(request)
+	l := log.WithField("requestUrl", u).
+		WithField("requestHeaders", r.header)
 	if err != nil {
+		l.WithError(err).Debugf("Failed to download file")
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		err := resp.Body.Close()
+		if log.IsLevelEnabled(log.DebugLevel) {
+			if resp.Body != nil {
+				var bout strings.Builder
+				_, err = io.Copy(&bout, resp.Body)
+				if err != nil {
+					l = l.WithError(err)
+				} else {
+					l = l.WithField("responseBody", bout.String())
+				}
+			}
+			l.WithField("responseStatus", resp.Status).Debugf("Failed to download file")
+		}
+		err = resp.Body.Close()
 		if err != nil {
 			return nil, fmt.Errorf("status: %s, closing body err: %s", resp.Status, err)
 		}
