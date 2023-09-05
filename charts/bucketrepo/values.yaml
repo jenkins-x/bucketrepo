@@ -51,6 +51,10 @@ readinessProbe:
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
 
+# could typically be used to add persistence for cache
+extraVolumeMounts:
+extraVolumes:
+
 config:
   auth:
     username: ""
