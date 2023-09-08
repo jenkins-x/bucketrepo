@@ -25,7 +25,6 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["/home/nonroot/bucketrepo"]
         args:
         - "-config-path={{ .Values.config.path }}"
         - "-log-level={{ .Values.logLevel }}"
@@ -64,6 +63,9 @@ spec:
         - name: config
           mountPath: {{ .Values.config.path }}
           readOnly: true
+{{- with .Values.extraVolumeMounts }}
+{{ toYaml . | indent 8 }}
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
       securityContext:
@@ -76,3 +78,6 @@ spec:
       - name: config
         secret:
           secretName: bucketrepo-config
+{{- with .Values.extraVolumes }}
+{{ toYaml .Values.extraVolumes | indent 6 }}
+{{- end }}
