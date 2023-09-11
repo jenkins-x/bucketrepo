@@ -8,6 +8,7 @@ spec:
     tasks:
     - name: from-build-pack
       resources: {}
+      timeout: 240h0m0s
       taskSpec:
         metadata: {}
         stepTemplate:
