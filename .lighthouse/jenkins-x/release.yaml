@@ -8,19 +8,24 @@ spec:
     tasks:
     - name: chart
       resources: {}
+      timeout: 240h0m0s
       taskSpec:
         metadata: {}
         stepTemplate:
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/go-plugin/release.yaml@versionStream
           name: ""
-          resources: {}
+          resources:
+            limits: {}
           workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
           resources: {}
         - name: next-version
-          resources: {}
+          resources:
+            requests:
+              cpu: 400m
+              memory: 600Mi
         - name: jx-variables
           resources: {}
         - name: release-binary
