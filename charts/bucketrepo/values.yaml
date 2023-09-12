@@ -4,8 +4,9 @@
 replicaCount: 1
 image:
   repo: ghcr.io/jenkins-x/bucketrepo
-  tag: latest
+  tag: 0.4.1
   pullPolicy: IfNotPresent
+  repository: ghcr.io/jenkins-x/bucketrepo
 service:
   name: bucketrepo
   type: ClusterIP
@@ -14,13 +15,10 @@ service:
   annotations:
     fabric8.io/expose: "true"
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
-
 serviceaccount:
   enabled: true
-
 # define environment variables here as a map of key: value
 env: {}
-
 # define environment variables that will be stored in a secret namd 'jenkins-x-bucketrepo-env'
 #
 # example
@@ -31,7 +29,6 @@ env: {}
 #   AWS_CA_BUNDLE: /config/ca-certificates.crt (when using a private s3 compatible repo with self signed cert)
 #
 envSecrets: {}
-
 resources:
   limits:
     cpu: 100m
@@ -50,11 +47,9 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
-
 # could typically be used to add persistence for cache
 extraVolumeMounts:
 extraVolumes:
-
 config:
   auth:
     username: ""
@@ -78,22 +73,15 @@ config:
     jenkins-releases: "https://repo.jenkins-ci.org/releases/"
     jitpack: "https://jitpack.io/"
     npm: "https://registry.npmjs.org/"
-
 logLevel: info
-
 # standard YAML files for jx boot:
 jxRequirements:
   cluster:
     clusterName: ""
     project: ""
     provider: ""
-
 secrets:
   adminUser:
     username: "admin"
     password: ""
-
 extraConfig: {}
-
-
-
