@@ -79,5 +79,5 @@ spec:
         secret:
           secretName: bucketrepo-config
 {{- with .Values.extraVolumes }}
-{{ toYaml .Values.extraVolumes | indent 6 }}
+{{ toYaml . | indent 6 }}
 {{- end }}
