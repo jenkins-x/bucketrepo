@@ -39,7 +39,9 @@ type StorageConfig struct {
 
 // CacheConfig keeps the configuration for local file system cache
 type CacheConfig struct {
-	BaseDir string `mapstructure:"base_dir"`
+	BaseDir       string        `mapstructure:"base_dir"`
+	CacheTime     time.Duration `mapstructure:"cache_time"`
+	CleanInterval time.Duration `mapstructure:"clean_interval"`
 }
 
 // RepositoryConfig keeps the configuration for remote artifacts repository
@@ -73,6 +75,10 @@ func NewConfig(configPath string) Config {
 
 	if config.Cache.BaseDir == "" {
 		config.Cache.BaseDir = "./.bucketrepo"
+	}
+
+	if config.Cache.CleanInterval == 0 {
+		config.Cache.CleanInterval = 24 * time.Hour
 	}
 
 	if len(config.Repositories) == 0 {
