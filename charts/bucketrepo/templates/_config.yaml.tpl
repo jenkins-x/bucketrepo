@@ -6,10 +6,12 @@ http:
 
 storage:
 {{- if .Values.config.storage.bucketUrl }}
+    enabled: true
     bucket_url: "{{ .Values.config.storage.bucketUrl }}"
 {{- else if and (hasKey .Values.jxRequirements "storage") ( .Values.jxRequirements.storage)  }}
 {{- range $key, $val := .Values.jxRequirements.storage }}
 {{- if eq "repository" $val.name }}
+    enabled: true
     bucket_url: "{{ $val.url }}"
 {{- end }}
 {{- end }}
