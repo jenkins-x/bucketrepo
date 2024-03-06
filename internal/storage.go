@@ -10,6 +10,8 @@ type Storage interface {
 	ReadFile(path string) (io.ReadCloser, error)
 	// WriteFile wrietes a file into the storage
 	WriteFile(path string, file io.ReadCloser) error
+	// RemoveUnusedArtifacts cleans away artifacts that have not been used for configurable amount of time
+	RemoveUnusedArtifacts(*FileController)
 }
 
 // NewStorage creates a new storage

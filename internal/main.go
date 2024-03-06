@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -37,6 +38,19 @@ func main() {
 	controller, err := NewFileController(cache, storage, repositories, config)
 	if err != nil {
 		logrus.Fatalf("failed to initialise controller: %s", err.Error())
+	}
+
+	if config.Cache.CacheTime != 0 {
+		ticker := time.NewTicker(config.Cache.CleanInterval)
+		go func(ticker *time.Ticker) {
+			cache.RemoveUnusedArtifacts(controller)
+			for {
+				select {
+				case <-ticker.C:
+					cache.RemoveUnusedArtifacts(controller)
+				}
+			}
+		}(ticker)
 	}
 
 	logrus.Infof("serving http")

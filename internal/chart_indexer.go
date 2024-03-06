@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 
@@ -53,13 +53,13 @@ func (ci *ChartIndexer) Reindex(dir string, out string, cache Storage, cloud Sto
 
 	logrus.Debugf("writing updated chart index at %s", relativePath)
 
-	err = cache.WriteFile(relativePath, ioutil.NopCloser(bytes.NewReader(data)))
+	err = cache.WriteFile(relativePath, io.NopCloser(bytes.NewReader(data)))
 	if err != nil {
 		return errors.Wrap(err, "failed to write helm index to cache")
 	}
 
 	if cloud != nil {
-		err = cloud.WriteFile(relativePath, ioutil.NopCloser(bytes.NewReader(data)))
+		err = cloud.WriteFile(relativePath, io.NopCloser(bytes.NewReader(data)))
 		if err != nil {
 			return errors.Wrap(err, "failed to write helm index to cloud")
 		}

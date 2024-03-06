@@ -16,6 +16,10 @@ type CloudStorage struct {
 	config StorageConfig
 }
 
+func (s *CloudStorage) RemoveUnusedArtifacts(*FileController) {
+	// We probably don't want this implemented
+}
+
 // NewCloudStorage creates a new cloud storage instance
 func NewCloudStorage(config StorageConfig) *CloudStorage {
 	return &CloudStorage{

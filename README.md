@@ -64,6 +64,24 @@ http:
 ```
 Note that the basic authentication is turned off when HTTPS is disabled.
 
+You can make artifacts not used in a while be removed from disk storage (cloud storage is not touched):
+
+```YAML
+cache:
+    base_dir: "/tmp/bucketrepo"
+    clean_interval: "24h"
+    cache_time: "720h"
+```
+
+The clean interval of 24 hours is the default, while the cache time doesn't have a default. This means
+that cleaning of the cache isn't enabled by default.
+
+> [!NOTE]
+> For this to work the access times needs to be recorded in the file system used for caching. Typically it is.
+
+If you do want cloud storage to be cleaned you can for example in the case of s3 add a lifecycle policy to
+the bucket.
+
 ### Supported Artifacts
 
 This repository has been tested with `maven` and `helm` tools, but it can also store other artifacts.
