@@ -16,6 +16,8 @@ require (
 	rsc.io/letsencrypt v0.0.3 // indirect
 )
 
+require github.com/djherbis/atime v1.1.0
+
 require (
 	cloud.google.com/go v0.72.0 // indirect
 	cloud.google.com/go/storage v1.12.0 // indirect

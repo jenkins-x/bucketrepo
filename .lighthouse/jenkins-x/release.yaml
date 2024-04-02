@@ -36,8 +36,6 @@ spec:
           resources: {}
         - name: changelog
           resources: {}
-        - name: upload-binaries
-          resources: {}
         - name: promote-helm-release
           resources: {}
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/helm/release.yaml@versionStream
