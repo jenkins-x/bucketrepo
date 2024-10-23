@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -11,7 +12,7 @@ import (
 	"path/filepath"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/pkg/errors"
+
 	log "github.com/sirupsen/logrus"
 	"helm.sh/helm/v3/pkg/chart"
 	"helm.sh/helm/v3/pkg/chart/loader"
@@ -62,7 +63,7 @@ func NewFileController(cache Storage, storage Storage, repositories []Repository
 		ctrl.operationChannel = make(chan string)
 		err := os.MkdirAll(ctrl.chartsDir, DefaultWritePermissions)
 		if err != nil {
-			return nil, errors.Wrapf(err, "failed to create charts dir %s", ctrl.chartsDir)
+			return nil, fmt.Errorf("failed to create charts dir %s: %w", ctrl.chartsDir, err)
 		}
 
 		chartIndexFile := filepath.Join(ctrl.chartsDir, "index.yaml")
