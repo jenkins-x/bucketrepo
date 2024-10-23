@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/ghodss/yaml"
-	"github.com/pkg/errors"
+
 	"github.com/sirupsen/logrus"
 	"helm.sh/helm/v3/pkg/repo"
 )
@@ -43,25 +43,25 @@ func (ci *ChartIndexer) Reindex(dir string, out string, cache Storage, cloud Sto
 
 	data, err := yaml.Marshal(i)
 	if err != nil {
-		return errors.Wrap(err, "failed to marshal helm index")
+		return fmt.Errorf("failed to marshal helm index: %w", err)
 	}
 
 	relativePath, err := filepath.Rel(ci.BaseCacheDir, out)
 	if err != nil {
-		return errors.Wrapf(err, "failed to calculate relative path for %s relative to %s", out, ci.BaseCacheDir)
+		return fmt.Errorf("failed to calculate relative path for %s relative to %s: %w", out, ci.BaseCacheDir, err)
 	}
 
 	logrus.Debugf("writing updated chart index at %s", relativePath)
 
 	err = cache.WriteFile(relativePath, io.NopCloser(bytes.NewReader(data)))
 	if err != nil {
-		return errors.Wrap(err, "failed to write helm index to cache")
+		return fmt.Errorf("failed to write helm index to cache: %w", err)
 	}
 
 	if cloud != nil {
 		err = cloud.WriteFile(relativePath, io.NopCloser(bytes.NewReader(data)))
 		if err != nil {
-			return errors.Wrap(err, "failed to write helm index to cloud")
+			return fmt.Errorf("failed to write helm index to cloud: %w", err)
 		}
 	}
 	return nil
