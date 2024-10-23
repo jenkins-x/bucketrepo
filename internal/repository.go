@@ -47,6 +47,9 @@ func (r *HTTPRepository) DownloadFile(filePath string) (io.ReadCloser, error) {
 	u.Path = path.Join(u.Path, filePath)
 
 	request, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 	for key, values := range r.header {
 		for _, value := range values {
 			request.Header.Add(key, value)

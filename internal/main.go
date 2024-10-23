@@ -44,11 +44,8 @@ func main() {
 		ticker := time.NewTicker(config.Cache.CleanInterval)
 		go func(ticker *time.Ticker) {
 			cache.RemoveUnusedArtifacts(controller)
-			for {
-				select {
-				case <-ticker.C:
-					cache.RemoveUnusedArtifacts(controller)
-				}
+			for range ticker.C {
+				cache.RemoveUnusedArtifacts(controller)
 			}
 		}(ticker)
 	}

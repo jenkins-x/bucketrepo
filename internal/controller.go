@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path"
@@ -40,13 +39,6 @@ type FileController struct {
 	chartIndexer     *ChartIndexer
 	operationChannel chan string
 }
-
-var (
-	// defaultChartIndex an empty chart index
-	defaultChartIndex = `apiVersion: v1
-generated: "2019-11-01T17:04:16Z"
-entries:`
-)
 
 // NewFileController creates a new file controller
 func NewFileController(cache Storage, storage Storage, repositories []Repository, config Config) (*FileController, error) {
@@ -141,7 +133,7 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 	repo := ps.ByName("repo")
 	log.Debugf("PostChart, repo: %s\n", repo)
 
-	content, err := ioutil.ReadAll(r.Body)
+	content, err := io.ReadAll(r.Body)
 	if err != nil {
 		msg := fmt.Sprintf("Failed to load payload: %s", err)
 		w.WriteHeader(500)
@@ -175,7 +167,7 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 	filename = filepath.Join(folder, ChartFolder, filename)
 	log.Debugf("PostChart, filename: %s\n", filename)
 
-	err = ctrl.writeFileToCache(filename, ioutil.NopCloser(bytes.NewReader(content)))
+	err = ctrl.writeFileToCache(filename, io.NopCloser(bytes.NewReader(content)))
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
 		w.WriteHeader(500)
