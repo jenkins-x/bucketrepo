@@ -7,39 +7,23 @@ spec:
   pipelineSpec:
     tasks:
     - name: chart
-      resources: {}
       timeout: 240h0m0s
       taskSpec:
         metadata: {}
         stepTemplate:
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/go-plugin/release.yaml@versionStream
           name: ""
-          resources:
-            limits: {}
           workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
-          resources: {}
         - name: next-version
-          resources:
-            requests:
-              cpu: 400m
-              memory: 600Mi
         - name: jx-variables
-          resources: {}
         - name: release-binary
-          resources: {}
         - name: build-and-push-image
-          resources: {}
         - name: chart-docs
-          resources: {}
         - name: changelog
-          resources: {}
         - name: promote-helm-release
-          resources: {}
           image: uses:jenkins-x/jx3-pipeline-catalog/tasks/helm/release.yaml@versionStream
-  podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s
-status: {}
