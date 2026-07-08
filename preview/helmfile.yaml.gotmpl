@@ -2,6 +2,7 @@ environments:
   default:
     values:
     - jx-values.yaml
+---
 repositories:
 - name: jx3
   url: https://jenkins-x-charts.github.io/repo
@@ -29,3 +30,4 @@ releases:
     - "secret.jenkins-x.io/replica-source=true"
     - --to
     - '{{ requiredEnv "PREVIEW_NAMESPACE" }}'
+
