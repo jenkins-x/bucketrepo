@@ -31,7 +31,7 @@ func noAuth(h httprouter.Handle, config HTTPConfig) httprouter.Handle {
 
 // health handles the health check requests
 func health(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "OK")
+	_, _ = fmt.Fprintf(w, "OK")
 }
 
 // InitHTTP initializes the HTTP server routes

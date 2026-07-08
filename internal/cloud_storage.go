@@ -62,7 +62,11 @@ func (s *CloudStorage) WriteFile(path string, file io.ReadCloser) error {
 	if err != nil {
 		return nil
 	}
-	defer writer.Close()
+	defer func() {
+		if cerr := writer.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
+	}()
 	_, err = io.Copy(writer, file)
 	if err != nil {
 		return err

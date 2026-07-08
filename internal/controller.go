@@ -86,19 +86,17 @@ func (ctrl *FileController) GetFile(w http.ResponseWriter, r *http.Request, ps h
 
 	err = ctrl.updateCache(filename)
 	if err != nil {
-		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when downloading the file: %s", err)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 404)
 		return
 	}
 
 	err = ctrl.readFileFromCache(w, filename, r.Method != "HEAD")
 	if err != nil {
-		w.WriteHeader(404)
 		msg := fmt.Sprintf("Error when serving the file from cache: %s", err)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 404)
 		return
 	}
 }
@@ -110,18 +108,16 @@ func (ctrl *FileController) PutFile(w http.ResponseWriter, r *http.Request, ps h
 	err := ctrl.writeFileToCache(filename, r.Body)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 		return
 	}
 
 	err = ctrl.updateCloudStorage(filename)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cloud storage: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 		return
 	}
 
@@ -136,27 +132,24 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 	content, err := io.ReadAll(r.Body)
 	if err != nil {
 		msg := fmt.Sprintf("Failed to load payload: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 		return
 	}
 
 	filename, err := ctrl.chartPackageFilenameFromContent(content)
 	if err != nil {
 		msg := fmt.Sprintf("Failed to extract chart from payload: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 		return
 	}
 
 	if path.Base(filename) != filename {
 		// Name wants to break out of current directory
 		msg := fmt.Sprintf("%s is improperly formattedd ", filename)
-		w.WriteHeader(400)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 400)
 		return
 	}
 
@@ -170,18 +163,16 @@ func (ctrl *FileController) PostChart(w http.ResponseWriter, r *http.Request, ps
 	err = ctrl.writeFileToCache(filename, io.NopCloser(bytes.NewReader(content)))
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cache: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 		return
 	}
 
 	err = ctrl.updateCloudStorage(filename)
 	if err != nil {
 		msg := fmt.Sprintf("Error when saving the file into cloud storage: %s", err)
-		w.WriteHeader(500)
 		log.Error(msg)
-		fmt.Fprint(w, msg)
+		http.Error(w, msg, 500)
 	}
 
 	// trigger a reindex
@@ -200,7 +191,7 @@ func (ctrl *FileController) updateCache(filepath string) error {
 		}
 		updateCloud = true
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 	err = ctrl.writeFileToCache(filepath, file)
 	if err != nil {
 		return fmt.Errorf("writing file to cache: %v", err)
@@ -211,7 +202,7 @@ func (ctrl *FileController) updateCache(filepath string) error {
 		if err != nil {
 			return fmt.Errorf("reading file from cache: %v", err)
 		}
-		defer file.Close()
+		defer func() { _ = file.Close() }()
 		err = ctrl.writeFileToCloudStorage(filepath, file)
 		if err != nil {
 			log.Warnf("Error when storing the file into cloud storage: %s", err)
@@ -226,7 +217,7 @@ func (ctrl *FileController) updateCloudStorage(filepath string) error {
 	if err != nil {
 		return fmt.Errorf("reading file from cache: %v", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	return ctrl.writeFileToCloudStorage(filepath, file)
 }
@@ -237,7 +228,7 @@ func (ctrl *FileController) readFileFromCache(w io.Writer, filepath string, writ
 	if err != nil {
 		return fmt.Errorf("reading file from cache: %v", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 	if !writeBody {
 		return nil
 	}

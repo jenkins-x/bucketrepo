@@ -9,7 +9,6 @@ GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 BUILDFLAGS := ''
 CGO_ENABLED = 0
 GOSEC := GO111MODULE=on $(GOPATH)/bin/gosec
-GOLINT := GO111MODULE=on $(GOPATH)/bin/golint
 
 all: build fmt lint sec test
 
@@ -35,15 +34,9 @@ fmt:
 clean:
 	rm -rf bin release
 
-lint_install:
-	$(GO_NOMOD) get -u golang.org/x/lint/golint
-
 .PHONY: lint
-lint: lint_install
-	@echo "LINTING"
-	$(GOLINT) -set_exit_status ./... 
-	@echo "VETTING"
-	$(GO) vet ./... 
+lint:
+	./hack/linter.sh
 
 sec_install:
 	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec

@@ -35,7 +35,7 @@ func (ci *ChartIndexer) Reindex(dir string, out string, cache Storage, cloud Sto
 	} else {
 		i2, err = repo.LoadIndexFile(out)
 		if err != nil {
-			return fmt.Errorf("Merge failed: %s", err)
+			return fmt.Errorf("merge failed: %s", err)
 		}
 	}
 	i.Merge(i2)

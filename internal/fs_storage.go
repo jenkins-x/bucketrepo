@@ -45,7 +45,7 @@ func (fs *FileSystemStorage) WriteFile(path string, file io.ReadCloser) error {
 	if err != nil {
 		return err
 	}
-	defer outFile.Close() // #nosec
+	defer func() { _ = outFile.Close() }() // #nosec
 	_, err = io.Copy(outFile, file)
 	return err
 }
