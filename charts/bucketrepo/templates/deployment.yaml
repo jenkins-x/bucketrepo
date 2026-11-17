@@ -68,8 +68,10 @@ spec:
 {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+{{ with .Values.securityContext }}
       securityContext:
-        fsGroup: 65534
+{{ toYaml . | indent 8 }}
+{{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- if .Values.serviceaccount.enabled }}
       serviceAccountName: {{ template "fullname" . }}

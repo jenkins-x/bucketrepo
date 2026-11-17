@@ -39,6 +39,9 @@ resources:
   requests:
     cpu: 80m
     memory: 128Mi
+securityContext:
+  fsGroup: 65534
+  fsGroupChangePolicy: OnRootMismatch
 probePath: /healthz
 livenessProbe:
   initialDelaySeconds: 60
